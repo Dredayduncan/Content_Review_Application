@@ -29,6 +29,11 @@
         //Make necessary info globally accessible
         session_start();
         $_SESSION['username'] = $user['username'];
+        $_SESSION['role'] = 'user';
+
+        if ($user['user_role'] == 'CREATOR'){
+            $_SESSION['role'] = 'creator';
+        }
         
         //Reroute to email page
         header("Location: ../index.php");

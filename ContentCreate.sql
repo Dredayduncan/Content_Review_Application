@@ -15,7 +15,7 @@ create table Users(
 );
 
 create table Creators(
-	creator_id bigint primary key ,
+	creator_id bigint auto_increment primary key ,
     email varchar(255),
     foreign key(email) references Users(email),
     avi varchar(255) NOT NULL
@@ -23,7 +23,7 @@ create table Creators(
 );
 
 create table Content(
-	creator_id bigint NOT NULL,
+	creator_id bigint,
     foreign key(creator_id) references Creators(creator_id),
     content varchar(255) NOT NULL,
     contentName varchar(100) NOT NULL,
@@ -35,14 +35,14 @@ create table Favorites(
 	email varchar(255),
     foreign key(email) references Users(email),
     favorite_id mediumint NOT NULL,
-    DandT timestamp
+    time timestamp
 );
 
 create table SearchHistory(
 	email varchar(255),
     foreign key(email) references Users(email),
     history_id mediumint NOT NULL,
-    DandT timestamp
+    time timestamp
     
 );
 

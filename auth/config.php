@@ -2,7 +2,7 @@
     $servername = "localhost";  
     $username = "root";  
     $password = "";  
-    $dbname = "Multistore";
+    $dbname = "ContentCreate";
 
     //Establish the link to the database using mysqli_connect(server name, dbusername, dbpassword, dbname)
     $conn = mysqli_connect($servername, $username, $password, $dbname);
