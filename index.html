@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>TheEvent Bootstrap Template - Index</title>
+  <title>The Creator Discovery</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -45,11 +45,11 @@
           <li class="menu-active"><a href="index.html">Home</a></li>
           <li><a href="#hr">Highest Rated</a></li>
           <li><a href="#mr">Most Trending</a></li>
-          <li><a href="#venue">Venue</a></li>
-          <li><a href="#hotels">Hotels</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#supporters">Sponsors</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#hs">History</a></li>
+          <li><a href="#fav">Favourites</a></li>
+          <li><a href=""></a></li>
+          <li><a href=""></a></li>
+          <li><button type="button" class="btn btn-outline-success ">User</button></li>
           
         </ul>
       </nav><!-- #nav-menu-container -->
@@ -84,7 +84,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="100">
               <img src="assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Brenden Legros</a></h3>
+                <h3><a href="userprofile.html">Brenden Legros</a></h3>
                 <p>Quas alias incidunt</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>

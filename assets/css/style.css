@@ -42,6 +42,19 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 70px;
 }
 
+.bg-image {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+}
+
+@media (max-width: 1024px) {
+  .bg-image {
+    background-attachment: scroll;
+  }
+}
+
 /* Prelaoder */
 #preloader {
   position: fixed;
