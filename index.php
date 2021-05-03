@@ -84,7 +84,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="100">
               <img src="assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
               <div class="details">
-                <h3><a href="userprofile.html">Brenden Legros</a></h3>
+                <h3><a href="userprofile.php">Brenden Legros</a></h3>
                 <p>Quas alias incidunt</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -99,7 +99,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="200">
               <img src="assets/img/speakers/2.jpg" alt="Speaker 2" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Hubert Hirthe</a></h3>
+                <h3><a href="speaker-details.php">Hubert Hirthe</a></h3>
                 <p>Consequuntur odio aut</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -114,7 +114,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="300">
               <img src="assets/img/speakers/3.jpg" alt="Speaker 3" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Cole Emmerich</a></h3>
+                <h3><a href="speaker-details.php">Cole Emmerich</a></h3>
                 <p>Fugiat laborum et</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -129,7 +129,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="100">
               <img src="assets/img/speakers/4.jpg" alt="Speaker 4" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Jack Christiansen</a></h3>
+                <h3><a href="speaker-details.php">Jack Christiansen</a></h3>
                 <p>Debitis iure vero</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -144,7 +144,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="200">
               <img src="assets/img/speakers/5.jpg" alt="Speaker 5" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Alejandrin Littel</a></h3>
+                <h3><a href="speaker-details.php">Alejandrin Littel</a></h3>
                 <p>Qui molestiae natus</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -159,7 +159,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="300">
               <img src="assets/img/speakers/6.jpg" alt="Speaker 6" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Willow Trantow</a></h3>
+                <h3><a href="speaker-details.php">Willow Trantow</a></h3>
                 <p>Non autem dicta</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -188,7 +188,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="100">
               <img src="assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Brenden Legros</a></h3>
+                <h3><a href="speaker-details.php">Brenden Legros</a></h3>
                 <p>Quas alias incidunt</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -203,7 +203,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="200">
               <img src="assets/img/speakers/2.jpg" alt="Speaker 2" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Hubert Hirthe</a></h3>
+                <h3><a href="speaker-details.php">Hubert Hirthe</a></h3>
                 <p>Consequuntur odio aut</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -218,7 +218,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="300">
               <img src="assets/img/speakers/3.jpg" alt="Speaker 3" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Cole Emmerich</a></h3>
+                <h3><a href="speaker-details.php">Cole Emmerich</a></h3>
                 <p>Fugiat laborum et</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -233,7 +233,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="100">
               <img src="assets/img/speakers/4.jpg" alt="Speaker 4" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Jack Christiansen</a></h3>
+                <h3><a href="speaker-details.php">Jack Christiansen</a></h3>
                 <p>Debitis iure vero</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -248,7 +248,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="200">
               <img src="assets/img/speakers/5.jpg" alt="Speaker 5" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Alejandrin Littel</a></h3>
+                <h3><a href="speaker-details.php">Alejandrin Littel</a></h3>
                 <p>Qui molestiae natus</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -263,7 +263,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="300">
               <img src="assets/img/speakers/6.jpg" alt="Speaker 6" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Willow Trantow</a></h3>
+                <h3><a href="speaker-details.php">Willow Trantow</a></h3>
                 <p>Non autem dicta</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -279,31 +279,8 @@
 
     </section><!-- End Speakers Section -->
 
-    
-    <!-- ======= Gallery Section ======= -->
-    <section id="gallery">
 
-      <div class="container" data-aos="fade-up">
-        <div class="section-header">
-          <h2>Gallery</h2>
-          <p>Check our gallery from the recent events</p>
-        </div>
-      </div>
-
-      <div class="owl-carousel gallery-carousel" data-aos="fade-up" data-aos-delay="100">
-        <a href="assets/img/gallery/1.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/1.jpg" alt=""></a>
-        <a href="assets/img/gallery/2.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/2.jpg" alt=""></a>
-        <a href="assets/img/gallery/3.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/3.jpg" alt=""></a>
-        <a href="assets/img/gallery/4.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/4.jpg" alt=""></a>
-        <a href="assets/img/gallery/5.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/5.jpg" alt=""></a>
-        <a href="assets/img/gallery/6.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/6.jpg" alt=""></a>
-        <a href="assets/img/gallery/7.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/7.jpg" alt=""></a>
-        <a href="assets/img/gallery/8.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/8.jpg" alt=""></a>
-      </div>
-
-    </section><!-- End Gallery Section -->
-
-      </main><!-- End #main -->
+  </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">

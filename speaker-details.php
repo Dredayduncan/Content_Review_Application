@@ -9,9 +9,6 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-
-  
-
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
 
@@ -41,15 +38,11 @@
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="index.html">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#speakers">Speakers</a></li>
-          <li><a href="#schedule">Schedule</a></li>
-          <li><a href="#venue">Venue</a></li>
-          <li><a href="#hotels">Hotels</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#supporters">Sponsors</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li class="menu-active"><a href="index.php">Home</a></li>
+          <li><a href="index.php#hr">Highest Rated</a></li>
+          <li><a href="index.php#mr">Most Trending</a></li>
+          <li><a href="index.php#hs">History</a></li>
+          <li><a href="index.php#fav">Favourites</a></li>
           
         </ul>
       </nav><!-- #nav-menu-container -->
@@ -92,6 +85,29 @@
       </div>
 
     </section>
+
+        <!-- ======= Gallery Section ======= -->
+        <section id="gallery">
+
+          <div class="container" data-aos="fade-up">
+            <div class="section-header">
+              <h2>Gallery</h2>
+              <p>Check our gallery from the recent events</p>
+            </div>
+          </div>
+    
+          <div class="owl-carousel gallery-carousel" data-aos="fade-up" data-aos-delay="100">
+            <a href="assets/img/gallery/1.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/1.jpg" alt=""></a>
+            <a href="assets/img/gallery/2.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/2.jpg" alt=""></a>
+            <a href="assets/img/gallery/3.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/3.jpg" alt=""></a>
+            <a href="assets/img/gallery/4.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/4.jpg" alt=""></a>
+            <a href="assets/img/gallery/5.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/5.jpg" alt=""></a>
+            <a href="assets/img/gallery/6.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/6.jpg" alt=""></a>
+            <a href="assets/img/gallery/7.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/7.jpg" alt=""></a>
+            <a href="assets/img/gallery/8.jpg" class="venobox" data-gall="gallery-carousel"><img src="assets/img/gallery/8.jpg" alt=""></a>
+          </div>
+    
+        </section><!-- End Gallery Section -->
 
   </main><!-- End #main -->
 
