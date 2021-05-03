@@ -39,10 +39,9 @@
       <nav id="nav-menu-container">
         <ul class="nav-menu">
           <li class="menu-active"><a href="index.php">Home</a></li>
-          <li><a href="index.php#hr">Highest Rated</a></li>
-          <li><a href="index.php#mr">Most Trending</a></li>
-          <li><a href="index.php#hs">History</a></li>
-          <li><a href="index.php#fav">Favourites</a></li>
+          <li><a href="#speakers-details">Creator Details</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#videos">Videos</a></li>
           
         </ul>
       </nav><!-- #nav-menu-container -->
@@ -55,8 +54,8 @@
     <section id="speakers-details">
       <div class="container">
         <div class="section-header">
-          <h2>Speaker Details</h2>
-          <p>Praesentium ut qui possimus sapiente nulla.</p>
+          <h2>Creator Details</h2>
+          <p>Content Type.</p>
         </div>
 
         <div class="row">
@@ -86,6 +85,7 @@
 
     </section>
 
+
         <!-- ======= Gallery Section ======= -->
         <section id="gallery">
 
@@ -108,6 +108,45 @@
           </div>
     
         </section><!-- End Gallery Section -->
+
+        <section id="videos">
+          <div class="container" data-aos="fade-up">
+            <div class="section-header">
+              <h2>Videos</h2>
+              <p>Check Out My Videos</p>
+            </div>
+          </div>
+
+          <div class="container">
+            <div class="row">
+              <iframe class="embed-responsive-item col-lg-4 col-md-6" src="https://www.youtube.com/embed/PwGv6qhOlvI" style="margin-bottom: 2%; height: 20vw;" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+              </iframe>
+
+              <iframe class="embed-responsive-item col-lg-4 col-md-6" src="https://www.youtube.com/embed/7eLfmimPs4E" style="margin-bottom: 2%; height: 20vw;" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+              </iframe>
+
+              <iframe class="embed-responsive-item col-lg-4 col-md-6" src="https://www.youtube.com/embed/14TzFWrhsms" style="margin-bottom: 2%; height: 20vw;" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+              </iframe>
+
+              <iframe class="embed-responsive-item col-lg-4 col-md-6" src="https://www.youtube.com/embed/cvV28xzjclA" style="margin-bottom: 2%; height: 20vw;" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+              </iframe>
+    
+              <iframe class="embed-responsive-item col-lg-4 col-md-6" style="margin-bottom: 2%; height: 20vw;" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" src="https://www.dailymotion.com/embed/video/x8103m5"  allowfullscreen> 
+              </iframe> 
+ 
+            </div>  
+          </div>
+        </section>    
 
   </main><!-- End #main -->
 
