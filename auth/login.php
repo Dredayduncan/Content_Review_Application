@@ -37,14 +37,14 @@
 									</p>
 								</div>
 			      	</div>
-							<form action="#" class="signin-form">
+							<form action="loginBack.php" class="signin-form" method="POST">
 			      		<div class="form-group mb-3">
-			      			<label class="label" for="name">Username</label>
-			      			<input type="text" class="form-control" placeholder="Username" required>
+			      			<label class="label" for="name">Email</label>
+			      			<input type="text" name='email' class="form-control" placeholder="Email" required>
 			      		</div>
 		            <div class="form-group mb-3">
 		            	<label class="label" for="password">Password</label>
-		              <input type="password" class="form-control" placeholder="Password" required>
+		              <input type="password" name='password' class="form-control" placeholder="Password" required>
 		            </div>
 		            <div class="form-group">
 		            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
@@ -61,9 +61,9 @@
 									</div>
 		            </div>
 		          </form>
-		          <p class="text-center">Sign up as  <a data-toggle="tab" href="Signup.html">a user</a></p>
+		          <p class="text-center">Sign up as  <a data-toggle="tab" href="signup.php?role=user">a user</a></p>
 				  <h6 class="text-center"> OR</h6>
-				  <p class="text-center">Sign up  <a data-toggle="tab" href="Signup.html">as a creator</a></p>
+				  <p class="text-center">Sign up  <a data-toggle="tab" href="signup.php?role=creator">as a creator</a></p>
 		        </div>
 		      </div>
 				</div>
