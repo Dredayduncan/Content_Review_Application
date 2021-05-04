@@ -45,8 +45,8 @@
           <li class="menu-active"><a href="index.php">Home</a></li>
           <li><a href="#hr">Highest Rated</a></li>
           <li><a href="#mr">Most Trending</a></li>
-          <li><a href="#hs">History</a></li>
-          <li><a href="#fav">Favourites</a></li>
+          <li><a href="views/history.php">History</a></li>
+          <li><a href="views/favourites.php">Favourites</a></li>
           <li><a href=""></a></li>
           <li><a href=""></a></li>
           <li><button type="button" class="btn btn-outline-success ">User</button></li>
@@ -84,7 +84,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="100">
               <img src="assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
               <div class="details">
-                <h3><a href="userprofile.php">Brenden Legros</a></h3>
+                <h3><a href="views/creator-details.php">Brenden Legros</a></h3>
                 <p>Quas alias incidunt</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -99,7 +99,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="200">
               <img src="assets/img/speakers/2.jpg" alt="Speaker 2" class="img-fluid">
               <div class="details">
-                <h3><a href="creator-details.php">Hubert Hirthe</a></h3>
+                <h3><a href="views/creator-details.php">Hubert Hirthe</a></h3>
                 <p>Consequuntur odio aut</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -114,7 +114,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="300">
               <img src="assets/img/speakers/3.jpg" alt="Speaker 3" class="img-fluid">
               <div class="details">
-                <h3><a href="creator-details.php">Cole Emmerich</a></h3>
+                <h3><a href="views/creator-details.php">Cole Emmerich</a></h3>
                 <p>Fugiat laborum et</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -129,7 +129,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="100">
               <img src="assets/img/speakers/4.jpg" alt="Speaker 4" class="img-fluid">
               <div class="details">
-                <h3><a href="creator-details.php">Jack Christiansen</a></h3>
+                <h3><a href="views/creator-details.php">Jack Christiansen</a></h3>
                 <p>Debitis iure vero</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -144,7 +144,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="200">
               <img src="assets/img/speakers/5.jpg" alt="Speaker 5" class="img-fluid">
               <div class="details">
-                <h3><a href="creator-details.php">Alejandrin Littel</a></h3>
+                <h3><a href="views/creator-details.php">Alejandrin Littel</a></h3>
                 <p>Qui molestiae natus</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -159,7 +159,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="300">
               <img src="assets/img/speakers/6.jpg" alt="Speaker 6" class="img-fluid">
               <div class="details">
-                <h3><a href="creator-details.php">Willow Trantow</a></h3>
+                <h3><a href="views/creator-details.php">Willow Trantow</a></h3>
                 <p>Non autem dicta</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -188,7 +188,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="100">
               <img src="assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
               <div class="details">
-                <h3><a href="creator-details.php">Brenden Legros</a></h3>
+                <h3><a href="views/creator-details.php">Brenden Legros</a></h3>
                 <p>Quas alias incidunt</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -203,7 +203,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="200">
               <img src="assets/img/speakers/2.jpg" alt="Speaker 2" class="img-fluid">
               <div class="details">
-                <h3><a href="creator-details.php">Hubert Hirthe</a></h3>
+                <h3><a href="views/creator-details.php">Hubert Hirthe</a></h3>
                 <p>Consequuntur odio aut</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -218,7 +218,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="300">
               <img src="assets/img/speakers/3.jpg" alt="Speaker 3" class="img-fluid">
               <div class="details">
-                <h3><a href="creator-details.php">Cole Emmerich</a></h3>
+                <h3><a href="views/creator-details.php">Cole Emmerich</a></h3>
                 <p>Fugiat laborum et</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -233,7 +233,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="100">
               <img src="assets/img/speakers/4.jpg" alt="Speaker 4" class="img-fluid">
               <div class="details">
-                <h3><a href="creator-details.php">Jack Christiansen</a></h3>
+                <h3><a href="views/creator-details.php">Jack Christiansen</a></h3>
                 <p>Debitis iure vero</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -248,7 +248,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="200">
               <img src="assets/img/speakers/5.jpg" alt="Speaker 5" class="img-fluid">
               <div class="details">
-                <h3><a href="creator-details.php">Alejandrin Littel</a></h3>
+                <h3><a href="views/creator-details.php">Alejandrin Littel</a></h3>
                 <p>Qui molestiae natus</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -263,7 +263,7 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="300">
               <img src="assets/img/speakers/6.jpg" alt="Speaker 6" class="img-fluid">
               <div class="details">
-                <h3><a href="creator-details.php">Willow Trantow</a></h3>
+                <h3><a href="views/creator-details.php">Willow Trantow</a></h3>
                 <p>Non autem dicta</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -281,12 +281,6 @@
 
 
   </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-
-
-  </footer><!-- End  Footer -->
 
   <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
