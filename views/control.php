@@ -44,7 +44,7 @@
             $email = $_POST['email'];
             $fav_id = $_POST['creatorid'];
 
-            $sql = 'DELETE from Favourites WHERE email = "'.$email.'" and favorite_id = "'.$fav_id.'"';
+            $sql = 'DELETE from Favorites WHERE email = "'.$email.'" and favorite_id = "'.$fav_id.'"';
 
             // execute query
             $result = mysqli_query($conn, $sql);
@@ -59,7 +59,7 @@
             $email = $_POST['email'];
             $history_id = $_POST['creatorid'];
 
-            $sql = 'DELETE from History WHERE username = "'.$email.'" and name = "'.$history_id.'" ';
+            $sql = 'DELETE from SearchHistory WHERE username = "'.$email.'" and name = "'.$history_id.'" ';
 
             // execute query
             $result = mysqli_query($conn, $sql);

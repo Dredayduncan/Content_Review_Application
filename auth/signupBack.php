@@ -74,6 +74,7 @@
                     die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
                 }
 
+                // initialize sessions for important variables
                 $_SESSION['avi'] = $fileName;
                 $_SESSION['role'] = 'creator';
             }
