@@ -35,6 +35,7 @@ create table Favorites(
 	email varchar(255),
     foreign key(email) references Users(email),
     favorite_id mediumint NOT NULL,
+    foreign key(favorite_id) references Creators(creater_id),
     time timestamp
 );
 
@@ -42,6 +43,7 @@ create table SearchHistory(
 	email varchar(255),
     foreign key(email) references Users(email),
     history_id mediumint NOT NULL,
+    foreign key(history_id) references Creators(creator_id)
     time timestamp
     
 );
