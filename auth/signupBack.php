@@ -34,12 +34,12 @@
 
         if ($result){
             session_start();
-            $_SESSION['email'] = $email;
+            $_SESSION['userEmail'] = $email;
             
 
             // Check if the user is a creator and insert the record into the creator table
             if ($role == 'creator'){
-
+                
                 //Get Image Upload path
                 $targetDir = "../assets/avis/";
                 $fileName = basename($_FILES["file"]["name"]);
@@ -65,7 +65,7 @@
 
                 // insert record into creator table
                 $sql = "INSERT into Creators (email, avi)
-                VALUES ('$email', '$targetFilePath')";
+                VALUES ('$email', '$fileName')";
 
                 // execute query
                 $res = mysqli_query($conn, $sql);
@@ -74,7 +74,8 @@
                     die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
                 }
 
-                $_SESSION['avi'] = $avi;
+                $_SESSION['avi'] = $fileName;
+                $_SESSION['role'] = 'creator';
             }
             else{
                 $_SESSION['role'] = 'user';

@@ -32,7 +32,8 @@ create table CreatorSocial(
     LinkedIn varchar(255),
     Facebook varchar(255),
     Youtube varchar(255),
-    Twitch varchar(255)
+    Twitch varchar(255),
+    Twitter varchar(255)
 );
 
 create table Content(

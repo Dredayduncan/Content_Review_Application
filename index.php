@@ -10,7 +10,7 @@
       $menu = '<li><a href="views/history.php">History</a></li>
                 <li><a href="views/favorites.php">Favourites</a></li>';
 
-      $fav = '<a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
+      $fav = '<a class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                 <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                 width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -20,7 +20,7 @@
 
       $info = '<li style="margin-top: -2%;"><a href=""> 
                   <div class="img-log-div">
-                    <img src="assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid img-log">
+                    <img src="assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log">
                   </div>
                 </a></li>';
     }
@@ -28,7 +28,7 @@
       $menu = '<li><a href="views/history.php">History</a></li>
                 <li><a href="views/favorites.php">Favourites</a></li>';
 
-      $fav = '<a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
+      $fav = '<a href="'.session_destroy().'" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                 <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                 width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -138,7 +138,7 @@
               <div class="details">
                 <h3><a class='select' href="views/creator-details.php">Hubert Hirthe</a></h3>
                 <p>Consequuntur odio aut</p>
-                <p class='code' hidden>Creator id</p>
+                <p class='code' hidden>5</p>
                 <div class="social">
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
@@ -449,7 +449,7 @@
 		
 		$.post("views/control.php", {choice: 'favorite', email: <?=json_encode($_SESSION['userEmail']);?>,
         creatorid: creator}, function(data){
-			alert(data);
+			  alert(data);
 		});
 	});
 

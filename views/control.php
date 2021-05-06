@@ -3,14 +3,13 @@
 	include '../auth/config.php';
     session_start();
 
-    switch ($_GET['choice']) {
-        case 'favourite':
+    switch ($_POST['choice']) {
+        case 'favorite':
             
             $email = $_POST['email'];
             $fav_id = $_POST['creatorid'];
-            
 
-            $sql = 'INSERT into Favourites (time, email, favorite_id)
+            $sql = 'INSERT into Favorites (time, email, favorite_id)
                   VALUES (CURRENT_TIMESTAMP, "'.$email.'", "'.$fav_id.'")';
 
             // execute query
@@ -20,7 +19,6 @@
                 echo "Item has been added to favourites";
             }
             else{
-                echo $email;
                 die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
             }
 
@@ -31,7 +29,7 @@
             $history_id = $_POST['creatorid'];
            
 
-            $sql = 'INSERT into History (time, email, history_id)
+            $sql = 'INSERT into SearchHistory (time, email, history_id)
                   VALUES (CURRENT_TIMESTAMP, "'.$email.'", "'.$history_id.'")';
 
             // execute query
@@ -44,9 +42,9 @@
             break;
         case 'fav_delete':
             $email = $_POST['email'];
-            $fav_id = $_POST['creatorid']
+            $fav_id = $_POST['creatorid'];
 
-            $sql = 'DELETE from Favourites WHERE email = "'.$email.'" and favorite_id = "'.$fav_id.'" ';
+            $sql = 'DELETE from Favourites WHERE email = "'.$email.'" and favorite_id = "'.$fav_id.'"';
 
             // execute query
             $result = mysqli_query($conn, $sql);
@@ -74,6 +72,8 @@
         
         default:
             # code...
+            echo "beans";
+            die;
             break;
     }
 ?>
