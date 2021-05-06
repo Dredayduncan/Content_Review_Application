@@ -2,6 +2,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
 drop database if exists ContentCreate;
 create database ContentCreate;
 use ContentCreate;
@@ -46,7 +47,7 @@ create table Content(
 create table Favorites(
 	email varchar(255),
     foreign key(email) references Users(email),
-    favorite_id mediumint NOT NULL,
+    favorite_id bigint NOT NULL,
     foreign key(favorite_id) references Creators(creator_id),
     time timestamp
 );
@@ -54,8 +55,8 @@ create table Favorites(
 create table SearchHistory(
 	email varchar(255),
     foreign key(email) references Users(email),
-    history_id mediumint NOT NULL,
-    foreign key(history_id) references Creators(creator_id)
+    history_id bigint NOT NULL,
+    foreign key(history_id) references Creators(creator_id),
     time timestamp
     
 );
