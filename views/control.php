@@ -6,8 +6,8 @@
     switch ($_GET['choice']) {
         case 'favourite':
             
-            $email = $_GET['email'];
-            $fav_id = $_GET['creator_id']
+            $email = $_POST['email'];
+            $fav_id = $_POST['creatorid'];
             
 
             $sql = 'INSERT into Favourites (time, email, favorite_id)
@@ -27,8 +27,8 @@
             break;
 
         case 'history':
-            $email = $_GET['email'];
-            $history_id = $_GET['creator_id'];
+            $email = $_POST['email'];
+            $history_id = $_POST['creatorid'];
            
 
             $sql = 'INSERT into History (time, email, history_id)
@@ -43,8 +43,8 @@
 
             break;
         case 'fav_delete':
-            $email = $_GET['email'];
-            $fav_id = $_GET['creator_id']
+            $email = $_POST['email'];
+            $fav_id = $_POST['creatorid']
 
             $sql = 'DELETE from Favourites WHERE email = "'.$email.'" and favorite_id = "'.$fav_id.'" ';
 
@@ -58,8 +58,8 @@
             break;
         
         case 'hist_delete':
-            $email = $_GET['email'];
-            $history_id = $_GET['creator_id'];
+            $email = $_POST['email'];
+            $history_id = $_POST['creatorid'];
 
             $sql = 'DELETE from History WHERE username = "'.$email.'" and name = "'.$history_id.'" ';
 
