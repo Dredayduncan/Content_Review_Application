@@ -38,7 +38,7 @@
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="index.php">Home</a></li>
+          <li class="menu-active"><a href="../index.php">Home</a></li>
           <li><a href="#speakers-details">Creator Details</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#videos">Videos</a></li>
