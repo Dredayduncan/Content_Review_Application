@@ -18,8 +18,20 @@ create table Creators(
 	creator_id bigint auto_increment primary key ,
     email varchar(255),
     foreign key(email) references Users(email),
-    avi varchar(255) NOT NULL
+    avi varchar(255) NOT NULL,
+    numClicks mediumint
     
+);
+
+create table CreatorSocial(
+    creator_id bigint,
+    foreign key(creator_id) references Creators(creator_id),
+    PWebsite1 varchar(255),
+    PWebsite2 varchar(255),
+    LinkedIn varchar(255),
+    Facebook varchar(255),
+    Youtube varchar(255),
+    Twitch varchar(255)
 );
 
 create table Content(
@@ -35,7 +47,7 @@ create table Favorites(
 	email varchar(255),
     foreign key(email) references Users(email),
     favorite_id mediumint NOT NULL,
-    foreign key(favorite_id) references Creators(creater_id),
+    foreign key(favorite_id) references Creators(creator_id),
     time timestamp
 );
 
