@@ -7,6 +7,9 @@ drop database if exists ContentCreate;
 create database ContentCreate;
 use ContentCreate;
 
+--User table
+
+
 create table Users(
 	fname varchar(255) NOT NULL,
     lname varchar(255) NOT NULL,
@@ -15,15 +18,30 @@ create table Users(
     user_role enum('CREATOR','USER')
 );
 
+
+--Creator table 
 create table Creators(
-	creator_id bigint auto_increment primary key ,
+	creator_id bigint auto_increment primary key,
     email varchar(255),
     foreign key(email) references Users(email),
     avi varchar(255) NOT NULL,
-    numClicks mediumint
-    
+    numClicks mediumint,
+    totalRates bigint,
+    rating tinyint check (rating > 0 and rating < 6),
+    numRates bigint default 0
 );
 
+--Rating table that accumulates the rating 
+
+create table Rating(
+    creator_id bigint,
+    foreign key(creator_id) references Creators(creator_id),
+    ratorid varchar(255),
+    rating tinyint check (rating > 0 and rating < 6)
+
+);
+
+-- Table that contains links to each creator's social media links as well as website links
 create table CreatorSocial(
     creator_id bigint,
     foreign key(creator_id) references Creators(creator_id),
@@ -36,6 +54,7 @@ create table CreatorSocial(
     Twitter varchar(255)
 );
 
+-- Table that stores the content of each creator
 create table Content(
 	creator_id bigint,
     foreign key(creator_id) references Creators(creator_id),
@@ -45,6 +64,7 @@ create table Content(
     keyword varchar(255)
 );
 
+--Table that keeps track of the favorites of a user
 create table Favorites(
 	email varchar(255),
     foreign key(email) references Users(email),
@@ -53,6 +73,7 @@ create table Favorites(
     time timestamp
 );
 
+--Table that stores the search history of every user
 create table SearchHistory(
 	email varchar(255),
     foreign key(email) references Users(email),
