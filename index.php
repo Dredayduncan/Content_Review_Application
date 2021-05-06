@@ -1,4 +1,56 @@
- <!DOCTYPE html>
+<?php
+  session_start();
+
+  $menu = '';
+  $fav = '';
+  $info = '<li ><a href="auth/login.php" class="btn btn-outline-success">Login</a></li>';
+
+  if (isset($_SESSION['role'])){
+    if ($_SESSION['role'] == 'creator'){
+      $menu = '<li><a href="views/history.php">History</a></li>
+                <li><a href="views/favorites.php">Favourites</a></li>';
+
+      $fav = '<a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
+                <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
+                width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                </svg>
+                </i>
+              </a>';
+
+      $info = '<li style="margin-top: -2%;"><a href=""> 
+                  <div class="img-log-div">
+                    <img src="assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid img-log">
+                  </div>
+                </a></li>';
+    }
+    elseif($_SESSION['role'] == 'user'){
+      $menu = '<li><a href="views/history.php">History</a></li>
+                <li><a href="views/favorites.php">Favourites</a></li>';
+
+      $fav = '<a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
+                <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
+                width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                </svg>
+                </i>
+              </a>';
+
+      $info = '<li>
+                <button type="button" class="btn btn-link ">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" 
+                    fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 
+                    7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 
+                    7 0 0 0 8 1z"/>
+                  </svg>
+                </button>
+              </li>';
+    }
+  }
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -45,26 +97,11 @@
           <li class="menu-active"><a href="index.php">Home</a></li>
           <li><a href="#hr">Highest Rated</a></li>
           <li><a href="#mr">Most Trending</a></li>
-          <li><a href="views/history.php">History</a></li>
-          <li><a href="views/favorites.php">Favourites</a></li>
-          <li ><a href="auth/login.php" class="btn btn-outline-success">Login</a></li>
-          <li style="margin-top: -2%;"><a href=""> 
-            <div class="img-log-div">
-              <img src="../assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid img-log">
-            </div>
-          </a></li>
-          <li>
-            <button type="button" class="btn btn-link ">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" 
-                fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 
-                7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 
-                7 0 0 0 8 1z"/>
-              </svg>
-            </button>
-          </li>
+          <?php 
+            echo $menu;
+            echo $info; 
           
+          ?>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
@@ -94,6 +131,26 @@
         </div>
 
         <div class="row">
+          
+          <div class="col-lg-4 col-md-6">
+            <div class="speaker" data-aos="fade-up" data-aos-delay="200">
+              <a href="views/creator-details.php"><img src="assets/img/speakers/2.jpg" alt="Speaker 2" class="img-fluid select"></a>
+              <div class="details">
+                <h3><a class='select' href="views/creator-details.php">Hubert Hirthe</a></h3>
+                <p>Consequuntur odio aut</p>
+                <p class='code' hidden>Creator id</p>
+                <div class="social">
+                  <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
+                  <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
+                  <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
+                  <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
+                  
+                  <?php echo $fav; ?>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="col-lg-4 col-md-6 speak-col" style="margin-bottom: 100px;">
             <div class="speaker" data-aos="fade-up" data-aos-delay="100">
               <img src="assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
@@ -106,7 +163,7 @@
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
 
-                  <a href="" class="btn btn-outline-secondary" style="margin-left: 125px;">
+                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                     <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                      width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -118,29 +175,7 @@
               </div>
             </div>
           </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker" data-aos="fade-up" data-aos-delay="200">
-              <img src="assets/img/speakers/2.jpg" alt="Speaker 2" class="img-fluid">
-              <div class="details">
-                <h3><a href="views/creator-details.php">Hubert Hirthe</a></h3>
-                <p>Consequuntur odio aut</p>
-                <div class="social">
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary" style="margin-left: 125px;">
-                    <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
-                     width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                     </svg>
-                    </i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          
           <div class="col-lg-4 col-md-6">
             <div class="speaker" data-aos="fade-up" data-aos-delay="300">
               <img src="assets/img/speakers/3.jpg" alt="Speaker 3" class="img-fluid">
@@ -152,7 +187,7 @@
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary" style="margin-left: 125px;">
+                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                     <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                      width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -174,7 +209,7 @@
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary" style="margin-left: 125px;">
+                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                     <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                      width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -196,7 +231,7 @@
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary" style="margin-left: 125px;">
+                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                     <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                      width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -218,7 +253,7 @@
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary" style="margin-left: 125px;">
+                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                     <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                      width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -254,7 +289,7 @@
                   <a href="" class="btn btn-outline-danger "><i class="fa fa-facebook"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary" style="margin-left: 125px;">
+                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                     <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                      width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -276,7 +311,7 @@
                   <a href=""class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary" style="margin-left: 125px;">
+                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                     <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                      width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -298,7 +333,7 @@
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary" style="margin-left: 125px;">
+                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                     <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                      width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -320,7 +355,7 @@
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary" style="margin-left: 125px;">
+                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                     <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                      width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -342,7 +377,7 @@
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary" style="margin-left: 125px;">
+                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                     <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                      width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -359,12 +394,13 @@
               <div class="details">
                 <h3><a href="views/creator-details.php">Willow Trantow</a></h3>
                 <p>Non autem dicta</p>
+                <p hidden>creator ID</p>
                 <div class="social">
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary" style="margin-left: 125px;">
+                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                     <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                      width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -405,6 +441,30 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    // Add item to favorites when favorites button has been clicked
+    $(".speaker .fav").on('click', function(){
+		var creator = $(this).parent().prev().html();
+		
+		$.post("views/control.php", {choice: 'favorite', email: <?=json_encode($_SESSION['userEmail']);?>,
+        creatorid: creator}, function(data){
+			alert(data);
+		});
+	});
+
+	// Add to history
+	$( ".select" ).click(function( event ) {
+    var creator = $(this).parent().parent().find(".code").html();
+
+    $.post("views/control.php", {choice: 'history',  email: <?=json_encode($_SESSION['userEmail']);?>, 
+      creatorid: creator}, function(data){
+      return data;
+    });
+  });
+		
+  
+  </script>
 
 </body>
 

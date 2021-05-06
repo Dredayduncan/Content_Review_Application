@@ -35,6 +35,7 @@
         if ($result){
             session_start();
             $_SESSION['email'] = $email;
+            
 
             // Check if the user is a creator and insert the record into the creator table
             if ($role == 'creator'){
@@ -74,6 +75,9 @@
                 }
 
                 $_SESSION['avi'] = $avi;
+            }
+            else{
+                $_SESSION['role'] = 'user';
             }
 
             // Return to login page
