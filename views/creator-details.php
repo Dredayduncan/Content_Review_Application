@@ -188,8 +188,13 @@
               <div class="social">
                 <a href=""><i class="fa fa-twitter"></i></a>
                 <a href=""><i class="fa fa-facebook"></i></a>
-                <a href=""><i class="fa fa-google-plus"></i></a>
                 <a href=""><i class="fa fa-linkedin"></i></a>
+                <a href=""> <i class="fa fa-youtube"></i></a>
+                <a href=""> <i class="fa fa-twitch"></i></a>
+                <a href=""> <i class="fa fa-facebook"></i></a>
+                <a href=""> <i class="fa fa-desktop"></i></a>
+                <a href=""> <i class="fa fa-desktop"></i></a>
+               
               </div>
               <p>Voluptatem perferendis sed assumenda voluptatibus. Laudantium molestiae sint. Doloremque odio dolore dolore sit. Quae labore alias ea omnis ex expedita sapiente molestias atque. Optio voluptas et.</p>
 
