@@ -136,14 +136,9 @@
             <div class="speaker" data-aos="fade-up" data-aos-delay="200">
               <a href="views/creator-details.php"><img src="assets/img/speakers/2.jpg" alt="Speaker 2" class="img-fluid select"></a>
               <div class="details">
-<<<<<<< HEAD
-                <h3><a href="views/creator-details.php">Brenden Legros</a></h3>
-                <p>Quas alias incidunt</p>
-=======
                 <h3><a class='select' href="views/creator-details.php">Hubert Hirthe</a></h3>
                 <p>Consequuntur odio aut</p>
                 <p class='code' hidden>5</p>
->>>>>>> 3ff75fd5f1817cbddb1879986b1ffccbddc24e1f
                 <div class="social">
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
