@@ -37,6 +37,7 @@ create table Rating(
     creator_id bigint,
     foreign key(creator_id) references Creators(creator_id),
     ratorid varchar(255),
+    foreign key(ratorid) references Users(email),
     rating tinyint check (rating > 0 and rating < 6)
 
 );

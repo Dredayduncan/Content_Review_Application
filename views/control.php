@@ -75,28 +75,34 @@
             $rating = $_POST['rating'];
             $ratorid = $_POST['ratorid'];
             
-            $sql1 = "SELECT totalRates,numRates from Creators where creator_id = '$creatorid'";
+            $sql1 = "SELECT totalRates, numRates from Creators where creator_id = '$creatorid'";
             $result = mysqli_query($conn, $sql1);
 
             if(mysqli_num_rows($result) == 1){
                 $row = mysqli_fetch_assoc($result);
-                //Finding the average 
-                $row['totalRates'] += $rating;
-                $row['numRates'] += 1;
-                $newRating = $row['totalRates'] / $row['numRates'];
 
+                //Finding the average 
+                $rates = $row['totalRates'] + $rating;
+                $rateNum = $row['numRates'] + 1;
+                $newRating = $rates / $rateNum;
+
+                // Insert the rating details into the Rating table
                 $raterTable = 'INSERT INTO Rating(creator_id, ratorid, rating) values 
                                 ("'.$creatorid.'", "'.$ratorid.'", "'.$rating.'") ';
+
                 //execute the insert query
                 if(!mysqli_query($conn, $raterTable))
                     die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
 
+                // Update creator rating details 
                 $update = 'UPDATE Creators
-                            SET totalRates = "'.$row['totalRates'].'", numRates = "'.$row['numRates'].'", rating = "'.$newRating.'"  
+                            SET totalRates = "'.$rates.'", numRates = "'.$rateNum.'", rating = "'.$newRating.'"  
                             WHERE creator_id = "'.$creatorid.'" ';
                 //execute the update query
                 if(!mysqli_query($conn, $update) )
                     die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
+            }else{
+                die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
             }
 
 
@@ -104,8 +110,6 @@
 
         default:
             # code...
-            echo "beans";
-            die;
             break;
     }
 ?>
