@@ -306,7 +306,6 @@
                       '<label class="col-md-4 col-form-label text-left" for="' + socials[item] + '">'+ socials[item] +'</label>' +
                       '<div class="col-md-8">' +
                           '<input type="text" id="' + socials[item] + '" name="' + socials[item] + '" class="form-control">' +
-                          '<input type="number" id="' + socials[item] + 'ID" name="' + socials[item] + 'ID" class="form-control" style="display:none;"> ' +
                       '</div>' +
                     '</div>';
 
