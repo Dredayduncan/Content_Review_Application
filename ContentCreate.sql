@@ -7,7 +7,7 @@ drop database if exists ContentCreate;
 create database ContentCreate;
 use ContentCreate;
 
---User table
+
 
 
 create table Users(
@@ -19,7 +19,7 @@ create table Users(
 );
 
 
---Creator table 
+
 create table Creators(
 	creator_id bigint auto_increment primary key,
     email varchar(255),
@@ -31,7 +31,7 @@ create table Creators(
     numRates bigint default 0
 );
 
---Rating table that accumulates the rating 
+
 
 create table Rating(
     creator_id bigint,
@@ -65,7 +65,7 @@ create table Content(
     keyword varchar(255)
 );
 
---Table that keeps track of the favorites of a user
+
 create table Favorites(
 	email varchar(255),
     foreign key(email) references Users(email),
@@ -74,7 +74,7 @@ create table Favorites(
     time timestamp
 );
 
---Table that stores the search history of every user
+
 create table SearchHistory(
 	email varchar(255),
     foreign key(email) references Users(email),
