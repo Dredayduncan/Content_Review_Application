@@ -38,7 +38,7 @@
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="index.php">Home</a></li>
+          <li class="menu-active"><a href="../index.php">Home</a></li>
           <li><a href="#speakers-details">Creator Details</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#videos">Videos</a></li>
@@ -54,7 +54,37 @@
     <section id="speakers-details">
       <div class="container">
         <div class="section-header">
-          <h2>Creator Details</h2>
+          <div class="row">
+            <div class=" col-10 d-flex justify-content-center">
+            <h2>Creator Details</h2>
+            </div>
+            <div class=" col-2">
+            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#EditProfile">Edit Profile</button> 
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#EditProfile">Edit Profile</button>
+          <!-- Edit User Profile Modal -->
+          <div class="modal" tabindex="-1" id="EditProfile" >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Modal title</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+        </div>
+          
+       
+          
           <p>Content Type.</p>
         </div>
 
