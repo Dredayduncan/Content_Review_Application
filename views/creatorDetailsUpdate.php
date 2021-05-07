@@ -13,13 +13,13 @@
     $bio = $_POST['lname'];
 
     # Get Socials
-    $twitch = $_POST['lname'];
-    $fb = $_POST['lname'];
-    $yt = $_POST['lname'];
-    $linkedin = $_POST['lname'];
-    $twitter = $_POST['lname'];
-    $pw1 = $_POST['lname'];
-    $pw2 = $_POST['lname'];
+    $twitch = $_POST['twitch'];
+    $fb = $_POST['fb'];
+    $yt = $_POST['yt'];
+    $linkedin = $_POST['linkedin'];
+    $twitter = $_POST['twitter'];
+    $pw1 = $_POST['pw1'];
+    $pw2 = $_POST['pw2'];
 
     
 ?>

@@ -58,8 +58,6 @@
           <p>Content Type.</p>
         </div>
 
-<<<<<<< HEAD
-=======
         <!-- Edit Profile Modal -->
         <div class="modal fade" tabindex="-1" id="EditProfile" aria-hidden="true">]
               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -165,7 +163,6 @@
               </div> 
 
 
->>>>>>> 888d26fbcc699e6ed66e3830ab48a5d711b5134a
         <div class="row">
           <div class="col-md-6">
             <img src="../assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
