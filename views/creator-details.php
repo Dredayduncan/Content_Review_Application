@@ -117,8 +117,8 @@
                       <div id="social0" class="form-group row no-gutters mb-1">
                         <label class="col-md-4 col-form-label text-left" for="twitch">Twitch</label>
                         <div class="col-md-8">
-                            <input type="text" id="name" name="creatortwitch" class="form-control">
-                            <input type="number" id="twitchID" name="twitchID" class="form-control" style="display:none;">
+                            <input type="text" id="name" name="twitch" class="form-control">
+
                         </div>
                       </div>
 
