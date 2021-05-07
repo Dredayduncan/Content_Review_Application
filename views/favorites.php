@@ -254,6 +254,10 @@
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
 
+  <script>
+      
+  </script>
+
 </body>
 
 </html>
