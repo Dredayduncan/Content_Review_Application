@@ -28,9 +28,8 @@
             $email = $_POST['email'];
             $history_id = $_POST['creatorid'];
            
-
-            $sql = 'INSERT into SearchHistory (time, email, history_id)
-                  VALUES (CURRENT_TIMESTAMP, "'.$email.'", "'.$history_id.'")';
+            $sql = 'INSERT into SearchHistory (email, history_id, time)
+                  VALUES ("'.$email.'", "'.$history_id.'", CURRENT_TIMESTAMP)';
 
             // execute query
             $result = mysqli_query($conn, $sql);
@@ -53,13 +52,15 @@
                 die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
             }
 
+            echo "Creator has been removed from favorites";
             break;
         
         case 'hist_delete':
             $email = $_POST['email'];
             $history_id = $_POST['creatorid'];
+            $timedate = $_POST['timedate'];
 
-            $sql = 'DELETE from SearchHistory WHERE username = "'.$email.'" and name = "'.$history_id.'" ';
+            $sql = 'DELETE from SearchHistory WHERE email = "'.$email.'" and history_id = "'.$history_id.'" and time = "'.$timedate.'";';
 
             // execute query
             $result = mysqli_query($conn, $sql);
@@ -67,6 +68,8 @@
             if (!$result){
                 die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
             }
+
+            echo "Creator has been removed from history";
 
             break;
         case 'rating':
