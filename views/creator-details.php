@@ -58,6 +58,114 @@
           <p>Content Type.</p>
         </div>
 
+<<<<<<< HEAD
+=======
+        <!-- Edit Profile Modal -->
+        <div class="modal fade" tabindex="-1" id="EditProfile" aria-hidden="true">]
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                <div class="modal-body">
+
+                  <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="form-group row no-gutters mb-4">
+                        <label class="col-md-4 col-form-label text-left" for="fname">First Name</label>
+                        <div class="col-md-8">
+                            <input type="text" id="fname" name="creatorfname" class="form-control">
+                            <input type="number" id="fnameID" name="fnameID" class="form-control" style="display:none;">
+                        </div>
+                      </div>
+
+                      <div class="form-group row no-gutters mb-4">
+                        <label class="col-md-4 col-form-label text-left" for="lname">Last Name</label>
+                        <div class="col-md-8">
+                            <input type="text" id="lname" name="creatorlname" class="form-control">
+                            <input type="number" id="lnameID" name="lnameID" class="form-control" style="display:none;">
+                        </div>
+                      </div>
+
+                      <div class="form-group row no-gutters mb-4">
+                        <label class="col-md-4 col-form-label text-left" for="content">Choose content</label>
+                        <div class="col-md-8">
+                        <select id="content" name="content">
+                          <option value="gaming">Gaming</option>
+                          <option value="photography">Photography</option>
+                          <option value="videography">Videography</option>
+                          <option value="basketball">Basketball</option>
+                          <option value="football">Football</option>
+                          <option value="swimming">Swimming</option>
+                          <option value="art">Art</option>
+                          <option value="comedy">Comedy</option>
+                          <option value="gym">Gym</option>
+                          <option value="vlog">Vlog</option>
+                          <option value="music">Music</option>
+                          <option value="other">Other</option>
+                        </select>
+                            <input type="number" id="lnameID" name="lnameID" class="form-control" style="display:none;">
+                        </div>
+                      </div>
+
+                      <div class="form-group row no-gutters mb-4">
+                        <label class="col-md-4 col-form-label text-left" for="bio">Bio</label>
+                        <div class="col-md-8">
+                          <textarea cols="36" rows="5"></textarea>
+                          <input type="number" id="bioID" name="bioID" class="form-control" style="display:none;">
+                        </div>
+                      </div>
+
+                      <div id="social0" class="form-group row no-gutters mb-1">
+                        <label class="col-md-4 col-form-label text-left" for="twitch">Twitch</label>
+                        <div class="col-md-8">
+                            <input type="text" id="name" name="creatortwitch" class="form-control">
+                            <input type="number" id="twitchID" name="twitchID" class="form-control" style="display:none;">
+                        </div>
+                      </div>
+
+                    <div class="container d-flex justify-content-center mb-4" >
+                        <div class="contain">
+                          <div class="add-button btn btn-outline-success" > 
+                            <svg  xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" 
+                                class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                          </div>
+
+                          <div class="remove-button btn btn-outline-danger" > 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
+                          </div>
+                        </div>
+                      
+                      </div>
+
+                      <div class="form-group mb-3" style="background-color: transparent;">
+                        <input type="file" id="picture" onchange="pictureInput(event)" style="display: none;" name="file" />
+                        <input id="pic-btn" type="button" class="form-control btn btn-primary rounded submit " 
+                          value="Select Profile Picture..."/>
+                      </div>
+                      
+                      <div class="d-flex justify-content-center">
+                        <img id="pic" height="200" style="margin-top: -3%; margin-bottom: 1%; border-radius: 50px;">
+                      </div>
+
+                      </div>
+                      <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                  </form>`
+              </div> 
+
+
+>>>>>>> 888d26fbcc699e6ed66e3830ab48a5d711b5134a
         <div class="row">
           <div class="col-md-6">
             <img src="../assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
