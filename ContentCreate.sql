@@ -62,7 +62,9 @@ create table Content(
     content varchar(255) NOT NULL,
     contentName varchar(100) NOT NULL,
     contentType enum('gaming', 'photography', 'videography', 'basketball', 'football', 'swimming', 'art', 'comedy', 'gym', 'vlog', 'music', 'other'),
-    keyword varchar(255)
+    keyword varchar(255),
+    ContentSpec enum('image', 'video'),
+    contentLink varchar(255)
 );
 
 --Table that keeps track of the favorites of a user
