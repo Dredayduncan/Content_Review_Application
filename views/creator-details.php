@@ -168,6 +168,48 @@
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
 
+  <script>
+    var item = 0;
+    var socials = ['Twitter', 'Facebook', 'LinkedIn', 'Youtube', 'Personal Website 1', 'Personal Website 2'];
+
+    // When the add button is clicked
+    $('.add-button').on("click", function(){
+      html = '';
+
+      // Add new social field
+      $('#dynamic_container').append(html);
+
+      // Display remove button
+      $('#remove_more').fadeIn(function(){
+		  		 $(this).show();
+		  });
+
+      // Increment item
+      item++;
+    });
+  
+    // When the remove button is clicked 
+    $('.remove-button').on('click', function(){
+	         
+            // Remove the recently added social field 
+           $('#append_no_'+item).removeClass('bounceInLeft').addClass('bounceOutRight')
+              .fadeOut(function(){
+                $(this).remove();
+              });
+
+              // decrement item
+              item--;
+
+              // Remove remove button if the social fields are only one
+              if(item == 0){
+                $('.remove-button').fadeOut(function(){
+                  $(this).hide()
+                });
+              }
+         });
+    });
+  </script>
+
 </body>
 
 </html>
