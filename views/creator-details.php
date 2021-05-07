@@ -73,7 +73,7 @@
                         <label class="col-md-4 col-form-label text-left" for="fname">First Name</label>
                         <div class="col-md-8">
                             <input type="text" id="fname" name="creatorfname" class="form-control">
-                            <input type="number" id="fnameID" name="fnameID" class="form-control" style="display:none;">
+                            <input type="number" id="fnameID" name="fname" class="form-control" style="display:none;">
                         </div>
                       </div>
 
@@ -81,7 +81,7 @@
                         <label class="col-md-4 col-form-label text-left" for="lname">Last Name</label>
                         <div class="col-md-8">
                             <input type="text" id="lname" name="creatorlname" class="form-control">
-                            <input type="number" id="lnameID" name="lnameID" class="form-control" style="display:none;">
+                            <input type="number" id="lnameID" name="lname" class="form-control" style="display:none;">
                         </div>
                       </div>
 
@@ -102,7 +102,7 @@
                           <option value="music">Music</option>
                           <option value="other">Other</option>
                         </select>
-                            <input type="number" id="lnameID" name="lnameID" class="form-control" style="display:none;">
+                            <input type="number" id="lnameID" name="lname" class="form-control" style="display:none;">
                         </div>
                       </div>
 
@@ -110,7 +110,7 @@
                         <label class="col-md-4 col-form-label text-left" for="bio">Bio</label>
                         <div class="col-md-8">
                           <textarea cols="36" rows="5"></textarea>
-                          <input type="number" id="bioID" name="bioID" class="form-control" style="display:none;">
+                          <input type="number" id="bioID" name="bio" class="form-control" style="display:none;">
                         </div>
                       </div>
 
@@ -272,6 +272,95 @@
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
+
+  <script>
+    var item = 0;
+    
+    $(document).ready(function(){
+      var socials = ['Twitter', 'Facebook', 'LinkedIn', 'Youtube', 'Personal Website 1', 'Personal Website 2'];
+
+      // When the add button is clicked
+      $('.add-button').on("click", function(){
+        html = '<div id="social'+ (item + 1) +'" class="form-group row no-gutters mb-1 animated bounceInLeft">' +
+                      '<label class="col-md-4 col-form-label text-left" for="' + socials[item] + '">'+ socials[item] +'</label>' +
+                      '<div class="col-md-8">' +
+                          '<input type="text" id="' + socials[item] + '" name="' + socials[item] + '" class="form-control">' +
+                      '</div>' +
+                    '</div>';
+
+       
+
+        // Add new social field
+        var el = '#social' + item;
+        $(html).insertAfter(el);
+
+        // Display remove button
+        $('.remove-button').fadeIn(function(){
+            $(this).show();
+        });
+
+        // Increment item
+        item++;
+
+        // Remove add button if the social fields are full
+        if(item > 5){
+          $('.add-button').fadeOut(function(){
+            $(this).hide()
+          });
+        }
+        
+      });
+    
+      // When the remove button is clicked 
+      $('.remove-button').on('click', function(){
+
+        // Remove the recently added social field 
+        $('#social'+ (item)).removeClass('bounceInLeft').addClass('bounceOutRight')
+          .fadeOut(function(){
+            $(this).remove();
+        });
+
+        // decrement item
+        item--;
+
+        // Remove remove button if the social fields are only one
+        if(item == 0){
+          $('.remove-button').fadeOut(function(){
+            $(this).hide()
+          });
+        }else{
+          $('.add-button').fadeIn(function(){
+            $(this).show();
+        });
+        }
+      });
+    });
+    
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+
+  <!-- Update the avi -->
+  <script>
+		function pictureInput(event){
+      var input = document.getElementById('picture');
+
+      var reader = new FileReader();
+      reader.onload = function(){
+        var dataURL = reader.result;
+        var output = document.getElementById('pic');
+        output.src = dataURL;
+      };
+      reader.readAsDataURL(input.files[0]);
+
+      return false;
+      }
+
+		$('#pic-btn').on('click', function(){
+			$('#picture').click();
+		});
+	</script>
 
 </body>
 

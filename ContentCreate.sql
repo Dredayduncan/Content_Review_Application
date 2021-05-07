@@ -8,8 +8,6 @@ create database ContentCreate;
 use ContentCreate;
 
 
-
-
 create table Users(
 	fname varchar(255) NOT NULL,
     lname varchar(255) NOT NULL,
@@ -19,10 +17,10 @@ create table Users(
 );
 
 
-
 create table Creators(
 	creator_id bigint auto_increment primary key,
     email varchar(255),
+    bio mediumtext,
     foreign key(email) references Users(email),
     avi varchar(255) NOT NULL,
     numClicks mediumint,
@@ -39,7 +37,6 @@ create table Rating(
     ratorid varchar(255),
     foreign key(ratorid) references Users(email),
     rating tinyint check (rating > 0 and rating < 6)
-
 );
 
 -- Table that contains links to each creator's social media links as well as website links
@@ -69,7 +66,7 @@ create table Content(
 create table Favorites(
 	email varchar(255),
     foreign key(email) references Users(email),
-    favorite_id bigint NOT NULL,
+    favorite_id bigint NOT NULL UNIQUE,
     foreign key(favorite_id) references Creators(creator_id),
     time timestamp
 );
