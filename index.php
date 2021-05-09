@@ -138,7 +138,7 @@
               <div class="details">
                 <h3><a class='select' href="views/creator-details.php">Hubert Hirthe</a></h3>
                 <p>Consequuntur odio aut</p>
-                <p class='code' hidden>5</p>
+                <p class='code' hidden>1</p>
                 <div class="social">
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
                   <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
@@ -456,10 +456,10 @@
 	// Add to history
 	$( ".select" ).click(function( event ) {
     var creator = $(this).parent().parent().find(".code").html();
-
+   
     $.post("views/control.php", {choice: 'history',  email: <?=json_encode($_SESSION['userEmail']);?>, 
       creatorid: creator}, function(data){
-      return data;
+      alert(data);
     });
   });
 		

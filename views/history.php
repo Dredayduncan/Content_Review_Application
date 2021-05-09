@@ -271,6 +271,23 @@
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
 
+  <script>
+      // Delete item to history when favorites button has been clicked
+    $(".delete-button").on('click', function(){
+		var creator = $(this).prev().html();
+        var timedate = $(this).prev().prev().find(".text-muted").html();
+		
+		$.post("../views/control.php", {choice: 'hist_delete', email: <?=json_encode($_SESSION['userEmail']);?>,
+        creatorid: creator, timedate: timedate}, function(data){
+			  alert(data);
+		});
+
+        $(this).parent().parent().parent().parent().parent().remove();
+
+
+	});
+  </script>
+
 </body>
 
 </html>
