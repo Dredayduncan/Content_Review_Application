@@ -49,7 +49,7 @@
                 $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
                 //Check if file is an image and upload it to the server
-                $allowTypes = array('jpg', 'JPG', 'png','jpeg');
+                $allowTypes = array('jpg', 'JPG', 'png','jpeg', 'JPEG', 'PNG');
 
                 if(in_array($fileType, $allowTypes)){
 

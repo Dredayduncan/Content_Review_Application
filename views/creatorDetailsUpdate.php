@@ -8,9 +8,11 @@
     # Get creator name
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
-    $creatorid = $_GET['cid'];
+    //$creatorid = $_GET['cid'];
+    $creatorid = 1;
     # Get Bio
     $bio = $_POST['bio'];
+    $email = 'kwakuayemang.2000@gmail.com';
 
     $content = $_POST['content'];
 
@@ -19,7 +21,7 @@
         $twitch = $_POST['twitch'];
     else 
         $twitch = NULL;
-    if(isset($_POST['twitch']))
+    if(isset($_POST['Facebook']))
         $fb = $_POST['Facebook'];
     else
         $fb = NULL;
@@ -44,7 +46,12 @@
     else
         $pw2 = NULL;
 
-
+    function IsSet($var1, $var2){
+        if(isset($var1))
+            $var2 = $var1;
+        else
+            
+    }
     
 
     if(isset( $_POST["file"])){
@@ -84,12 +91,14 @@
         }
     }
 
-    $userTable = "UPDATE User
-                SET fname = '$fname', lname= '$lname', bio = '$bio'
+    $userTable = "UPDATE Users
+                SET fname = '$fname', lname= '$lname''
                 where email = '$email'";
     
     if(!mysqli_query($conn, $userTable))
         die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
+
+    
 
     
     $contentTable = "UPDATE Content

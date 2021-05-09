@@ -54,7 +54,13 @@
     <section id="speakers-details">
       <div class="container">
         <div class="section-header">
-          <h2>Creator Details</h2>
+          <div class="row">
+            <div class=" col-10 d-flex justify-content-center">
+            <h2>Creator Details</h2>
+            </div>
+            <div class=" col-2">
+              <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#EditProfile">Edit Profile</button>
+            </div>
           <p>Content Type.</p>
         </div>
 
@@ -68,7 +74,7 @@
                   </div>
                 <div class="modal-body">
 
-                  <form action="" method="POST" enctype="multipart/form-data">
+                  <form action="creatorDetailsUpdate.php" id = "update" method="POST" enctype="multipart/form-data">
                     <div class="form-group row no-gutters mb-4">
                         <label class="col-md-4 col-form-label text-left" for="fname">First Name</label>
                         <div class="col-md-8">
@@ -155,7 +161,7 @@
                       </div>
                       <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="submit" form = "update" class="btn btn-primary">Save changes</button>
                       </div>
                     </div>
                   </div>
