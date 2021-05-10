@@ -348,6 +348,11 @@ h6, .h6 {
   font-weight: 300;
   line-height: 1.2; }
 
+/* .searchbar{
+  margin-left: 50%;
+  margin-right: 50%;
+} */
+
 hr {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -2278,7 +2283,7 @@ fieldset:disabled a.btn {
     background-color: #007bff;
     border-color: #007bff; }
   .btn-outline-primary:focus, .btn-outline-primary.focus {
-    -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(2, 124, 255, 0.5);
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); }
   .btn-outline-primary.disabled, .btn-outline-primary:disabled {
     color: #007bff;

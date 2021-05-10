@@ -115,7 +115,33 @@
       <!-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a> -->
       
     </div>
+
+
+    
+
   </section><!-- End Intro Section -->
+
+      <!-- <nav class="navbar navbar-dark bg-dark"> -->
+        <div class="container-fluid searchbar" >
+          <form class="d-flex justify-content-center">
+            <input id='search' style="margin-right:10px; width:500px;" class="form-control " type="search" placeholder="Search" aria-label="Search">
+            <button id="searchButton" style="margin-right:10px;" class="btn btn-outline-success">Search</button>
+
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Filter
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </div>
+
+          </form>
+
+        
+      <!-- </nav> -->
 
   <main id="main">
 
@@ -123,7 +149,7 @@
   
 
     <!-- ======= Speakers Section ======= -->
-    <section id="hr">
+    <section id="hr" style="margin-top:100px;">
       <div class="container" data-aos="fade-up">
         <div class="section-header">
           <h2>Highest Rated</h2>
@@ -420,12 +446,6 @@
 
   </main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-
-
-  </footer><!-- End  Footer -->
-
   <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
   <!-- Vendor JS Files -->
@@ -461,6 +481,16 @@
       creatorid: creator}, function(data){
       alert(data);
     });
+  });
+
+  $('#searchButton').on("click", function(){
+    var filter = 'gaming';
+
+    $.post("views/control.php", {choice: 'search',  value: $('#search').val(), filter: filter}, function(data){
+      $('#main').html(data);
+    });
+
+    return false;
   });
 		
   

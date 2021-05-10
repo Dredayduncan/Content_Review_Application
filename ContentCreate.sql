@@ -23,6 +23,7 @@ create table Creators(
     bio mediumtext,
     foreign key(email) references Users(email),
     avi varchar(255) NOT NULL,
+    contentType enum('gaming', 'photography', 'videography', 'basketball', 'football', 'swimming', 'art', 'comedy', 'gym', 'vlog', 'music', 'other'),
     numClicks mediumint,
     totalRates bigint,
     rating tinyint check (rating > 0 and rating < 6),
@@ -58,7 +59,6 @@ create table Content(
     foreign key(creator_id) references Creators(creator_id),
     content varchar(255),
     contentName varchar(100),
-    contentType enum('gaming', 'photography', 'videography', 'basketball', 'football', 'swimming', 'art', 'comedy', 'gym', 'vlog', 'music', 'other'),
     keyword varchar(255)
 );
 

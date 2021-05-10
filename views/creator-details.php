@@ -1,3 +1,19 @@
+<?php
+    // Begin session
+    session_start();
+
+    $edit = '';
+
+    if (isset($_SESSION['role'])){
+        if (!$_SESSION['role'] == 'creator'){
+
+            $edit = '<div class=" col-2">
+                      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" 
+                      data-bs-target="#EditProfile">Edit Profile</button>
+                      </div> ';
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,25 +72,48 @@
         <div class="section-header">
           <div class="row">
             <div class=" col-10 d-flex justify-content-center">
-            <h2>Creator Details</h2>
-            
+              <h2>Creator Details</h2>
             </div>
             <div class=" col-2">
               <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#EditProfile">Edit Profile</button>
             </div> 
+          </div>
+          <p>Content Type.</p>
         </div>
-        <p>Content Type.</p>
+
+        <div class="row">
+          <div class="col-md-6">
+            <img src="../assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
+          </div>
+
+          <div class="col-md-6">
+            <div class="details">
+              <h2>Brenden Legros</h2>
+              <div class="social">
+                <a href=""><i class="fa fa-twitter"></i></a>
+                <a href=""><i class="fa fa-facebook"></i></a>
+                <a href=""><i class="fa fa-google-plus"></i></a>
+                <a href=""><i class="fa fa-linkedin"></i></a>
+              </div>
+              <p>Voluptatem perferendis sed assumenda voluptatibus. Laudantium molestiae sint. Doloremque odio dolore dolore sit. Quae labore alias ea omnis ex expedita sapiente molestias atque. Optio voluptas et.</p>
+
+              <p>Aboriosam inventore dolorem inventore nam est esse. Aperiam voluptatem nisi molestias laborum ut. Porro dignissimos eum. Tempore dolores minus unde est voluptatum incidunt ut aperiam.</p>
+
+              <p>Et dolore blanditiis officiis non quod id possimus. Optio non commodi alias sint culpa sapiente nihil ipsa magnam. Qui eum alias provident omnis incidunt aut. Eius et officia corrupti omnis error vel quia omnis velit. In qui debitis autem aperiam voluptates unde sunt et facilis.</p>
+            </div>
+          </div>
+        </div>
 
         <!-- Edit Profile Modal -->
-        <div class="modal fade" tabindex="-1" id="EditProfile" aria-hidden="true">]
+        <div class="modal fade" tabindex="-1" id="EditProfile" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title">Edit Profile</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                <div class="modal-body">
 
+                <div class="modal-body">
                   <form action="creatorDetailsUpdate.php" id = "update" method="POST" enctype="multipart/form-data">
                     <div class="form-group row no-gutters mb-4">
                         <label class="col-md-4 col-form-label text-left" for="fname">First Name</label>
@@ -167,33 +206,10 @@
                     </div>
                   </div>
                   </form>`
-              </div> 
-
-
-        <div class="row">
-          <div class="col-md-6">
-            <img src="../assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
-          </div>
-
-          <div class="col-md-6">
-            <div class="details">
-              <h2>Brenden Legros</h2>
-              <div class="social">
-                <a href=""><i class="fa fa-twitter"></i></a>
-                <a href=""><i class="fa fa-facebook"></i></a>
-                <a href=""><i class="fa fa-google-plus"></i></a>
-                <a href=""><i class="fa fa-linkedin"></i></a>
               </div>
-              <p>Voluptatem perferendis sed assumenda voluptatibus. Laudantium molestiae sint. Doloremque odio dolore dolore sit. Quae labore alias ea omnis ex expedita sapiente molestias atque. Optio voluptas et.</p>
-
-              <p>Aboriosam inventore dolorem inventore nam est esse. Aperiam voluptatem nisi molestias laborum ut. Porro dignissimos eum. Tempore dolores minus unde est voluptatum incidunt ut aperiam.</p>
-
-              <p>Et dolore blanditiis officiis non quod id possimus. Optio non commodi alias sint culpa sapiente nihil ipsa magnam. Qui eum alias provident omnis incidunt aut. Eius et officia corrupti omnis error vel quia omnis velit. In qui debitis autem aperiam voluptates unde sunt et facilis.</p>
             </div>
           </div>
-
         </div>
-      </div>
 
     </section>
 
@@ -220,6 +236,41 @@
           </div>
     
         </section><!-- End Gallery Section -->
+
+        <div class="container ">
+          <div class="button d-flex justify-content-center mb-5">
+          <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Editgallery">Edit Gallery</button>
+          </div>
+        
+
+        <div class="modal fade" tabindex="-1" id="Editgallery" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+
+                  <div class="form-group row no-gutters mb-4">
+                    <label class="col-md-4 col-form-label text-left" for="fname">First Name</label>
+                    <div class="col-md-8">
+                        <input type="text" id="fname" name="creatorfname" class="form-control">
+                        <input type="number" id="fnameID" name="fnameID" class="form-control" style="display:none;">
+                    </div>
+                  </div>
+
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
+        </div>
+
+
+        
 
         <section id="videos">
           <div class="container" data-aos="fade-up">
@@ -258,6 +309,38 @@
  
             </div>  
           </div>
+
+          <div class="container ">
+          <div class="button d-flex justify-content-center mb-5">
+          <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Editvids">Edit Videos</button>
+          </div>
+        
+
+        <div class="modal fade" tabindex="-1" id="Editvids" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Edit Videos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+
+                  <div class="form-group row no-gutters mb-4">
+                    <label class="col-md-4 col-form-label text-left" for="fname">First Video</label>
+                    <div class="col-md-8">
+                        <input type="text" id="fname" name="creatorfname" class="form-control">
+                        <input type="number" id="fnameID" name="fnameID" class="form-control" style="display:none;">
+                    </div>
+                  </div>
+
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
+        </div>
         </section>    
 
   </main><!-- End #main -->

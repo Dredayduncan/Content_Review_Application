@@ -47,20 +47,7 @@
     else
         $pw2 = NULL;
 
-
-    //function IsSet($var1, $var2){
-        //if(isset($var1))
-            //$var2 = $var1;
-        //else
-            
-    //}
-<<<<<<< HEAD
-=======
-    
-    
-            
->>>>>>> bbe1ff60b8cef12afd3b9ac714d0d731da199567
-
+    // Check for the avi input  
     if(isset($_FILES["file"]["name"])){
         //Get Image Upload path
         $targetDir = "../assets/avis/";
