@@ -95,6 +95,13 @@
                 // initialize sessions for important variables
                 $_SESSION['avi'] = $fileName;
                 $_SESSION['role'] = 'creator';
+
+                // Get Creator ID
+                $cid = "SELECT creator_id FROM Creators WHERE email = '$email'";
+
+                if(!mysqli_query($conn, $creatorSocials))
+                    die("ERROR: Could not able to execute $creatorSocials. " . mysqli_error($conn));
+                    
                 $_SESSION['cid'] = getCid($email, $conn);
             }
             else{

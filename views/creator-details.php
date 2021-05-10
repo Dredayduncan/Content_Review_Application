@@ -72,22 +72,28 @@
     if ($twitch != null){
         $socials .= '<a href="'.$twitch.'"><i class="fa fa-twitch"></i></a>';
     }
-    elseif ($fb != null){
+
+    if ($fb != null){
         $socials .= '<a href="'.$fb.'"><i class="fa fa-facebook"></i></a>';
     }
-    elseif ($yt != null){
+    
+    if ($yt != null){
         $socials .= '<a href="'.$yt.'"><i class="fa fa-youtube-play"></i></a>';
     }
-    elseif ($twitter != null){
+
+    if ($twitter != null){
         $socials .= '<a href="'.$twitter.'"><i class="fa fa-twitter"></i></a>';
     }
-    elseif ($linkedIn != null){
+
+    if ($linkedIn != null){
         $socials .= '<a href="'.$linkedIn.'"><i class="fa fa-linkedin"></i></a>';
     }
-    elseif ($pw1 != null){
+
+    if ($pw1 != null){
         $socials .= '<a href="'.$pw1.'"><i class="fa fa-globe"></i></a>';
     }
-    elseif ($pw2 != null){
+
+    if ($pw2 != null){
         $socials .= '<a href="'.$pw2.'"><i class="fas fa-globe"></i></a>';
     }
 
@@ -160,9 +166,7 @@
             <div class=" col-10 d-flex justify-content-center mx-auto">
               <h2>Creator Details</h2>
             </div>
-            <div class=" col-2">
-              <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#EditProfile">Edit Profile</button>
-            </div> 
+            <?php echo $edit; ?>
           </div>
           <p>
             <?php 

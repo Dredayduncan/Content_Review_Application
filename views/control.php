@@ -158,22 +158,28 @@
         if ($twitch != null){
             $socials .= '<a href="'.$twitch.'" class="btn btn-outline-danger"><i class="fa fa-twitch"></i></a>';
         }
-        elseif ($fb != null){
+
+        if ($fb != null){
             $socials .= '<a href="'.$fb.'" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>';
         }
-        elseif ($yt != null){
+
+        if ($yt != null){
             $socials .= '<a href="'.$yt.'" class="btn btn-outline-danger"><i class="fa fa-youtube-play"></i></a>';
         }
-        elseif ($twitter != null){
+
+        if ($twitter != null){
             $socials .= '<a href="'.$twitter.'" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>';
         }
-        elseif ($linkedIn != null){
+
+        if ($linkedIn != null){
             $socials .= '<a href="'.$linkedIn.'" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>';
         }
-        elseif ($pw1 != null){
+
+        if ($pw1 != null){
             $socials .= '<a href="'.$pw1.'" class="btn btn-outline-danger"><i class="fa fa-globe"></i></a>';
         }
-        elseif ($pw2 != null){
+
+        if ($pw2 != null){
             $socials .= '<a href="'.$pw2.'" class="btn btn-outline-danger"><i class="fas fa-globe"></i></a>';
         }
 
@@ -191,14 +197,27 @@
                         // Add item to favorites when favorites button has been clicked
                         $(".speaker .fav").on("click", function(){
                             var creator = $(this).parent().prev().html();
-
-                            alert("beans");
                             
                             $.post("views/control.php", {choice: "favorite", email:"'.$_SESSION["userEmail"].'",
                             creatorid: creator}, function(data){
                                 alert(data);
                             });
                         });
+
+                        // Add to history
+                        $(".select").on("click", function() {
+                            var creator = $(this).parent().parent().find(".code").html();
+                        
+                            $.post("views/control.php", {choice: "history", email:"'.$_SESSION["userEmail"].'", 
+                                creatorid: creator}, function(data){
+                                alert(data);
+                                return false;
+                            });
+
+                            
+
+                        });
+
                         </script>';
         }
         else{

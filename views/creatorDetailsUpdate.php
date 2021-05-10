@@ -69,7 +69,7 @@
                 $innerjoin = "UPDATE Creators 
                         INNER JOIN Content on Creators.creator_id = Content.creator_id 
                         INNER JOIN Users on Users.email = Creators.email
-                        SET Creators.bio = '".$bio."', Content.content = '".$content."', Creators.avi = '$fileName', fname = '$fname', lname = '$lname'
+                        SET Creators.bio = '".$bio."', Creators.contentType = '".$content."', Creators.avi = '$fileName', fname = '$fname', lname = '$lname'
                         WHERE Creators.creator_id = $creatorid ";
 
                 if(!mysqli_query($conn, $innerjoin)){
@@ -92,6 +92,9 @@
 
         if(!mysqli_query($conn, $socials)){
             die("ERROR: Could not able to execute $socials. " . mysqli_error($conn));
+        }
+        else{
+            header("Location: creator-details.php?cid=".$_SESSION['cid']);
         }
     }
     else{

@@ -149,9 +149,9 @@
           
           <div class="col-lg-4 col-md-6">
             <div class="speaker" data-aos="fade-up" data-aos-delay="200">
-              <a href="views/creator-details.php"><img src="assets/img/speakers/2.jpg" alt="Speaker 2" class="img-fluid select"></a>
+              <a href="views/creator-details.php?cid=1"><img src="assets/img/speakers/2.jpg" alt="Speaker 2" class="img-fluid select"></a>
               <div class="details">
-                <h3><a class='select' href="views/creator-details.php">Hubert Hirthe</a></h3>
+                <h3><a class='select' href="views/creator-details.php?cid=1">Hubert Hirthe</a></h3>
                 <p>Consequuntur odio aut</p>
                 <p class='code' hidden>1</p>
                 <div class="social">
@@ -463,7 +463,7 @@
 	});
 
 	// Add to history
-	$( ".select" ).click(function( event ) {
+	$( ".select" ).on("click", function() {
     var creator = $(this).parent().parent().find(".code").html();
    
     $.post("views/control.php", {choice: 'history',  email: <?=json_encode($_SESSION['userEmail']);?>, 
