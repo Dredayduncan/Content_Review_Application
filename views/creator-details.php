@@ -172,61 +172,6 @@
                   <div class="d-flex justify-content-center">
                     <img id="pic" height="200" style="margin-top: -3%; margin-bottom: 1%; border-radius: 50px;">
                   </div>
-                  
-
-                  <!-- <div class="form-group row no-gutters mb-4">
-                    <label class="col-md-4 col-form-label text-left" for="twitter">Twitter</label>
-                    <div class="col-md-8">
-                        <input type="text" id="twitter" name="creatortwitter" class="form-control">
-                        <input type="number" id="twitterID" name="twitterID" class="form-control" style="display:none;">
-                    </div>
-                  </div>
-
-                  <div class="form-group row no-gutters mb-4">
-                    <label class="col-md-4 col-form-label text-left" for="youtube">Youtube</label>
-                    <div class="col-md-8">
-                        <input type="text" id="ytb" name="creatorytb" class="form-control">
-                        <input type="number" id="ytbID" name="ytbID" class="form-control" style="display:none;">
-                    </div>
-                  </div>
-
-                  <div class="form-group row no-gutters mb-4">
-                    <label class="col-md-4 col-form-label text-left" for="facebook">Facebook</label>
-                    <div class="col-md-8">
-                        <input type="text" id="fb" name="creatorfb" class="form-control">
-                        <input type="number" id="fbID" name="fbID" class="form-control" style="display:none;">
-                    </div>
-                  </div>
-
-                  <div class="form-group row no-gutters mb-4">
-                    <label class="col-md-4 col-form-label text-left" for="linkedin">LinkedIn</label>
-                    <div class="col-md-8">
-                        <input type="text" id="linkedin" name="creatorlinkedin" class="form-control">
-                        <input type="number" id="linkedinID" name="linkedinID" class="form-control" style="display:none;">
-                    </div>
-                  </div>
-
-                  <div class="form-group row no-gutters mb-4">
-                    <label class="col-md-4 col-form-label text-left" for="website1">Website 1</label>
-                    <div class="col-md-8">
-                        <input type="url" id="website1" name="creatorwebsite1" placeholder="http://example.com" class="form-control">
-                        <input type="number" id="website1ID" name="website1ID" class="form-control" style="display:none;">
-                    </div>
-                  </div>
-
-                  <div class="form-group row no-gutters mb-4">
-                    <label class="col-md-4 col-form-label text-left" for="website2">Website 2</label>
-                    <div class="col-md-8">
-                        <input type="url" id="website2" name="creatorwebsite2" placeholder="http://example.com" class="form-control">
-                        <input type="number" id="website2ID" name="website2ID" class="form-control" style="display:none;">
-                    </div>
-                  </div>
-
-                 
-
-                   -->
-
-
                   </div>
                   <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -295,6 +240,41 @@
     
         </section><!-- End Gallery Section -->
 
+        <div class="container ">
+          <div class="button d-flex justify-content-center mb-5">
+          <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Editgallery">Edit Gallery</button>
+          </div>
+        
+
+        <div class="modal fade" tabindex="-1" id="Editgallery" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+
+                  <div class="form-group row no-gutters mb-4">
+                    <label class="col-md-4 col-form-label text-left" for="fname">First Name</label>
+                    <div class="col-md-8">
+                        <input type="text" id="fname" name="creatorfname" class="form-control">
+                        <input type="number" id="fnameID" name="fnameID" class="form-control" style="display:none;">
+                    </div>
+                  </div>
+
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
+        </div>
+
+
+        
+
         <section id="videos">
           <div class="container" data-aos="fade-up">
             <div class="section-header">
@@ -332,6 +312,38 @@
  
             </div>  
           </div>
+
+          <div class="container ">
+          <div class="button d-flex justify-content-center mb-5">
+          <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Editvids">Edit Videos</button>
+          </div>
+        
+
+        <div class="modal fade" tabindex="-1" id="Editvids" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Edit Videos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+
+                  <div class="form-group row no-gutters mb-4">
+                    <label class="col-md-4 col-form-label text-left" for="fname">First Video</label>
+                    <div class="col-md-8">
+                        <input type="text" id="fname" name="creatorfname" class="form-control">
+                        <input type="number" id="fnameID" name="fnameID" class="form-control" style="display:none;">
+                    </div>
+                  </div>
+
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
+        </div>
         </section>    
 
   </main><!-- End #main -->

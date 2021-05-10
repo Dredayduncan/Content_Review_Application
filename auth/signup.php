@@ -6,7 +6,7 @@
 		$role = 'creator';
 		$pic = '<div class="form-group mb-3" style="background-color: transparent;">
 		<input type="file" id="picture" onchange="pictureInput(event)" style="display: none;" name="file" />
-		<input id="pic-btn" type="button" class="form-control btn btn-primary rounded submit px-3" 
+		<input id="pic-btn" style="width:365px;" type="button" class=" btn btn-danger rounded submit px-3" 
 		value="Select Profile Picture..."/></div>
 		<div class="d-flex justify-content-center">
 			<img id="pic" height="200" style="margin-top: -3%; margin-bottom: 1%; border-radius: 50px;">
@@ -71,7 +71,7 @@
 						<?php echo $pic;?>
 						
 						<div class="form-group">
-							<button type="submit" form="signup" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
+							<button type="submit" form="signup" class=" btn btn-danger rounded submit px-3" style="width:365px;">Sign Up</button>
 						</div>
 		          </form>
 		          <p class="text-center">Already have an account? <a data-toggle="tab" href="login.php">Log in</a></p>
