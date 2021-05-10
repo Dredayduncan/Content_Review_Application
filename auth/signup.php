@@ -2,6 +2,11 @@
 	// Check if the user is a creator
 	$pic = "";
 	$role = "user";
+
+	if (!isset($_GET['role'])){
+		header("Location: login.php");
+	}
+
 	if ($_GET['role'] == 'creator'){
 		$role = 'creator';
 		$pic = '<div class="form-group mb-3" style="background-color: transparent;">
