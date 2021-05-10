@@ -10,7 +10,7 @@
     $fname = $_POST['creatorfname'];
     $lname = $_POST['creatorlname'];
     //$creatorid = $_GET['cid'];
-    $creatorid = 2;
+    $creatorid = 1;
     # Get Bio
     $bio = $_POST['bio'];
     $email = 'kwakuayemang.2000@gmail.com';
@@ -54,8 +54,6 @@
         //else
             
     //}
-    echo $bio;
-    echo $content;
 
     if(isset( $_POST["file"])){
         //Get Image Upload path

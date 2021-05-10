@@ -57,12 +57,13 @@
           <div class="row">
             <div class=" col-10 d-flex justify-content-center">
             <h2>Creator Details</h2>
+            
             </div>
             <div class=" col-2">
               <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#EditProfile">Edit Profile</button>
-            </div>
-          <p>Content Type.</p>
+            </div> 
         </div>
+        <p>Content Type.</p>
 
         <!-- Edit Profile Modal -->
         <div class="modal fade" tabindex="-1" id="EditProfile" aria-hidden="true">]
