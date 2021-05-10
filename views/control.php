@@ -138,14 +138,7 @@
                         <h3><a class="select" href="views/creator-details.php?cid='.$data['creator_id'].'">'.$data["fname"]. " " . $data["lname"] .'</a></h3>
                         <p>'.$data['contentType'].'</p>
                         <p class="code" hidden>'.$data['creator_id'].'</p>
-                        <div class="social">
-                          <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                          <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
-                          <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                          <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                          
-                          <?php echo $fav; ?>
-                        </div>
+                        '. socials($data['Twitch'], $data['Facebook'], $data['Youtube'], $data['Twitter'], $data['LinkedIn'], $data['PWebsite1'], $data['PWebsite2']).'
                       </div>
                     </div>
                   </div>';
@@ -156,5 +149,63 @@
         default:
             # code...
             break;
+    }
+
+
+    // Generate socials for existing social fields
+    function socials($twitch, $fb, $yt, $twitter, $linkedIn, $pw1, $pw2){
+        $socials = '<div class="social">';
+        if ($twitch != null){
+            $socials .= '<a href="'.$twitch.'" class="btn btn-outline-danger"><i class="fa fa-twitch"></i></a>';
+        }
+        elseif ($fb != null){
+            $socials .= '<a href="'.$fb.'" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>';
+        }
+        elseif ($yt != null){
+            $socials .= '<a href="'.$yt.'" class="btn btn-outline-danger"><i class="fa fa-youtube-play"></i></a>';
+        }
+        elseif ($twitter != null){
+            $socials .= '<a href="'.$twitter.'" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>';
+        }
+        elseif ($linkedIn != null){
+            $socials .= '<a href="'.$linkedIn.'" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>';
+        }
+        elseif ($pw1 != null){
+            $socials .= '<a href="'.$pw1.'" class="btn btn-outline-danger"><i class="fa fa-globe"></i></a>';
+        }
+        elseif ($pw2 != null){
+            $socials .= '<a href="'.$pw2.'" class="btn btn-outline-danger"><i class="fas fa-globe"></i></a>';
+        }
+
+        if ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'creator'){
+            $socials .= '<a class="btn btn-outline-secondary fav" style="margin-left: 125px;">
+                            <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
+                            width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                            </svg>
+                            </i>
+                        </a>
+                        </div>
+                        
+                        <script>
+                        // Add item to favorites when favorites button has been clicked
+                        $(".speaker .fav").on("click", function(){
+                            var creator = $(this).parent().prev().html();
+
+                            alert("beans");
+                            
+                            $.post("views/control.php", {choice: "favorite", email:"'.$_SESSION["userEmail"].'",
+                            creatorid: creator}, function(data){
+                                alert(data);
+                            });
+                        });
+                        </script>';
+        }
+        else{
+            $socials .= '</div>';
+        }
+       
+
+        return $socials;
     }
 ?>

@@ -1,18 +1,100 @@
 <?php
-    // Begin session
-    session_start();
+  //Establish Database Connection
+  include "../auth/config.php";
 
-    $edit = '';
+  // Begin session
+  session_start();
 
-    if (isset($_SESSION['role'])){
-        if (!$_SESSION['role'] == 'creator'){
+  $edit = '';
+  $menu = '';
+  $info = '';
 
-            $edit = '<div class=" col-2">
-                      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" 
-                      data-bs-target="#EditProfile">Edit Profile</button>
-                      </div> ';
-        }
+  if (isset($_SESSION['cid'])){
+    if ($_SESSION['cid'] == $_GET['cid']){
+      $edit = '<div class=" col-2">
+                  <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" 
+                  data-bs-target="#EditProfile">Edit Profile</button>
+                  </div> ';
     }
+  }
+
+  
+  if (isset($_SESSION['role'])){
+    $menu = '<li><a href="history.php">History</a></li>
+            <li><a href="favorites.php">Favourites</a></li>';
+
+    if ($_SESSION['role'] == 'creator'){
+      $info = '<li style="margin-top: -2%;"><a href=""> 
+        <div class="img-log-div">
+          <img src="../assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log">
+        </div>
+      </a></li>';
+    }
+    elseif ($_SESSION['role'] == 'user'){
+      $info = '<li>
+                <button type="button" class="btn btn-link ">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" 
+                    fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 
+                    7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 
+                    7 0 0 0 8 1z"/>
+                  </svg>
+                </button>
+              </li>';
+    }
+  }
+
+  // Get creator information
+  $sql = "SELECT * FROM Users
+  INNER JOIN Creators on Users.email = Creators.email
+  INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
+  WHERE Creators.creator_id = ".$_GET['cid'];
+
+  $creator = '';
+
+  // Execute the query 
+  $result = mysqli_query($conn, $sql);
+
+  //  Check if the query executes
+  if ($result){
+
+    // Get creator details
+    $creator = mysqli_fetch_assoc($result);
+  }
+  else{
+    die("ERROR: Could not able to execute $query. " . mysqli_error($conn));
+  }
+
+  // Generate socials for existing social fields
+  function socials($twitch, $fb, $yt, $twitter, $linkedIn, $pw1, $pw2){
+    $socials = '<div class="social">';
+    if ($twitch != null){
+        $socials .= '<a href="'.$twitch.'"><i class="fa fa-twitch"></i></a>';
+    }
+    elseif ($fb != null){
+        $socials .= '<a href="'.$fb.'"><i class="fa fa-facebook"></i></a>';
+    }
+    elseif ($yt != null){
+        $socials .= '<a href="'.$yt.'"><i class="fa fa-youtube-play"></i></a>';
+    }
+    elseif ($twitter != null){
+        $socials .= '<a href="'.$twitter.'"><i class="fa fa-twitter"></i></a>';
+    }
+    elseif ($linkedIn != null){
+        $socials .= '<a href="'.$linkedIn.'"><i class="fa fa-linkedin"></i></a>';
+    }
+    elseif ($pw1 != null){
+        $socials .= '<a href="'.$pw1.'"><i class="fa fa-globe"></i></a>';
+    }
+    elseif ($pw2 != null){
+        $socials .= '<a href="'.$pw2.'"><i class="fas fa-globe"></i></a>';
+    }
+
+    $socials .= '</div>';
+
+    return $socials;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,6 +140,10 @@
           <li><a href="#speakers-details">Creator Details</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#videos">Videos</a></li>
+          <?php
+            echo $menu;
+            echo $info;
+          ?>
           
         </ul>
       </nav><!-- #nav-menu-container -->
@@ -71,35 +157,47 @@
       <div class="container">
         <div class="section-header">
           <div class="row">
-            <div class=" col-10 d-flex justify-content-center">
+            <div class=" col-10 d-flex justify-content-center mx-auto">
               <h2>Creator Details</h2>
             </div>
             <div class=" col-2">
               <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#EditProfile">Edit Profile</button>
             </div> 
           </div>
-          <p>Content Type.</p>
+          <p>
+            <?php 
+              $cType = "Update the kind of content you produce!";
+
+              if (!empty($creator['contentType'])){
+                $cType = $creator['contentType'];
+              }
+
+              echo $cType;
+            ?>
+          </p>
         </div>
 
         <div class="row">
           <div class="col-md-6">
-            <img src="../assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
+            <img src="../assets/avis/<?php echo $_SESSION['avi']; ?>" alt="Creator" class="img-fluid">
           </div>
 
           <div class="col-md-6">
             <div class="details">
-              <h2>Brenden Legros</h2>
-              <div class="social">
-                <a href=""><i class="fa fa-twitter"></i></a>
-                <a href=""><i class="fa fa-facebook"></i></a>
-                <a href=""><i class="fa fa-google-plus"></i></a>
-                <a href=""><i class="fa fa-linkedin"></i></a>
-              </div>
-              <p>Voluptatem perferendis sed assumenda voluptatibus. Laudantium molestiae sint. Doloremque odio dolore dolore sit. Quae labore alias ea omnis ex expedita sapiente molestias atque. Optio voluptas et.</p>
+              <h2><?php echo $creator['fname'] . " " . $creator['lname']; ?></h2>
+              <?php 
+                echo socials($creator['Twitch'], $creator['Facebook'], $creator['Youtube'], $creator['Twitter'], $creator['LinkedIn'], $creator['PWebsite1'], $creator['PWebsite2']); 
 
-              <p>Aboriosam inventore dolorem inventore nam est esse. Aperiam voluptatem nisi molestias laborum ut. Porro dignissimos eum. Tempore dolores minus unde est voluptatum incidunt ut aperiam.</p>
+                $prebio = '<p>';
+                $bio = 'Update your bio, to tell people more about you!';
+                $probio = '</p>';
 
-              <p>Et dolore blanditiis officiis non quod id possimus. Optio non commodi alias sint culpa sapiente nihil ipsa magnam. Qui eum alias provident omnis incidunt aut. Eius et officia corrupti omnis error vel quia omnis velit. In qui debitis autem aperiam voluptates unde sunt et facilis.</p>
+                if (!empty($creator['bio'])){
+                  $bio = $creator['bio'];
+                }
+
+                echo $prebio . $bio . $probio;
+              ?>
             </div>
           </div>
         </div>

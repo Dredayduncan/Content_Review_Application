@@ -95,6 +95,7 @@
                 // initialize sessions for important variables
                 $_SESSION['avi'] = $fileName;
                 $_SESSION['role'] = 'creator';
+                $_SESSION['cid'] = getCid($email, $conn);
             }
             else{
                 $_SESSION['role'] = 'user';

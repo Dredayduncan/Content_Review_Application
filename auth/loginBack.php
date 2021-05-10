@@ -43,6 +43,7 @@
             if ($result){
                 $creator = mysqli_fetch_assoc($res);
                 $_SESSION['avi'] = $creator['avi'];
+                $_SESSION['cid'] = $creator['creator_id'];
             }
             else{
                 die("ERROR: Could not able to execute $query. " . mysqli_error($conn));

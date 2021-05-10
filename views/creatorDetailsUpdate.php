@@ -3,17 +3,18 @@
     //Establish Database Connection
     include "../auth/config.php";
 
+    session_start();
+
     #Get form data
 
     # Get creator name
-
     $fname = $_POST['creatorfname'];
     $lname = $_POST['creatorlname'];
-    //$creatorid = $_GET['cid'];
-    $creatorid = 1;
+    $creatorid = $_SESSION['cid'];
+
     # Get Bio
     $bio = $_POST['bio'];
-    $email = 'kwakuayemang.2000@gmail.com';
+    // $email = $_SESSION['userEmail'];
 
     $content = $_POST['content'];
 
@@ -70,8 +71,14 @@
                         INNER JOIN Users on Users.email = Creators.email
                         SET Creators.bio = '".$bio."', Content.content = '".$content."', Creators.avi = '$fileName', fname = '$fname', lname = '$lname'
                         WHERE Creators.creator_id = $creatorid ";
-                if(!mysqli_query($conn, $innerjoin))
+
+                if(!mysqli_query($conn, $innerjoin)){
                     die("ERROR: Could not able to execute $innerjoin " . mysqli_error($conn));
+                }
+                else{
+                    $_SESSION['avi'] = $fileName;
+                }
+                    
             }
             else{
                 echo "false";
@@ -79,17 +86,17 @@
             }
         }
 
-    $socials = "UPDATE CreatorSocial
-                SET PWebsite1 = '".$pw1."', PWebsite2 = '".$pw2."', LinkedIn = '".$linkedin."',Facebook = '".$fb."',Youtube = '".$yt."',Twitch = '".$twitch."' ,Twitter = '".$twitter."'
-                WHERE creator_id = $creatorid ";
+        $socials = "UPDATE CreatorSocial
+                    SET PWebsite1 = '".$pw1."', PWebsite2 = '".$pw2."', LinkedIn = '".$linkedin."',Facebook = '".$fb."',Youtube = '".$yt."',Twitch = '".$twitch."' ,Twitter = '".$twitter."'
+                    WHERE creator_id = $creatorid ";
 
-    if(!mysqli_query($conn, $socials))
-        die("ERROR: Could not able to execute $socials. " . mysqli_error($conn));
-    
-    
-    
-
-
+        if(!mysqli_query($conn, $socials)){
+            die("ERROR: Could not able to execute $socials. " . mysqli_error($conn));
+        }
+    }
+    else{
+        header("Location: creator-details.php?error=Update Failed&cid=".$_SESSION['cid']);
+    }
 
     
 ?>

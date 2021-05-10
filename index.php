@@ -6,11 +6,7 @@
   $info = '<li ><a href="auth/login.php" class="btn btn-outline-success">Login</a></li>';
 
   if (isset($_SESSION['role'])){
-    if ($_SESSION['role'] == 'creator'){
-      $menu = '<li><a href="views/history.php">History</a></li>
-                <li><a href="views/favorites.php">Favourites</a></li>';
-
-      $fav = '<a class="btn btn-outline-secondary fav" style="margin-left: 125px;">
+    $fav = '<a class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                 <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                 width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -18,6 +14,10 @@
                 </i>
               </a>';
 
+    $menu = '<li><a href="views/history.php">History</a></li>
+    <li><a href="views/favorites.php">Favourites</a></li>';
+
+    if ($_SESSION['role'] == 'creator'){
       $info = '<li style="margin-top: -2%;"><a href=""> 
                   <div class="img-log-div">
                     <img src="assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log">
@@ -25,17 +25,6 @@
                 </a></li>';
     }
     elseif($_SESSION['role'] == 'user'){
-      $menu = '<li><a href="views/history.php">History</a></li>
-                <li><a href="views/favorites.php">Favourites</a></li>';
-
-      $fav = '<a class="btn btn-outline-secondary fav" style="margin-left: 125px;">
-                <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
-                width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                </svg>
-                </i>
-              </a>';
-
       $info = '<li>
                 <button type="button" class="btn btn-link ">
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" 
