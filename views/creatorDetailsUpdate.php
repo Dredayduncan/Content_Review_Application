@@ -54,10 +54,11 @@
         //else
             
     //}
-    echo $bio;
-    echo $content;
+    
+    
+            
 
-    if(isset( $_POST["file"])){
+    if(isset($_FILES["file"]["name"])){
         //Get Image Upload path
         $targetDir = "../assets/avis/";
         $fileName = basename($_FILES["file"]["name"]);
@@ -73,46 +74,20 @@
 
             // Upload file to server
             if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-                echo "true";
+                //echo "true";
+                $innerjoin = "UPDATE Creators 
+                        INNER JOIN Content on Creators.creator_id = Content.creator_id 
+                        INNER JOIN Users on Users.email = Creators.email
+                        SET Creators.bio = '".$bio."', Content.content = '".$content."', Creators.avi = '$fileName', fname = '$fname', lname = '$lname'
+                        WHERE Creators.creator_id = $creatorid ";
+                if(!mysqli_query($conn, $innerjoin))
+                    die("ERROR: Could not able to execute $innerjoin " . mysqli_error($conn));
             }
             else{
                 echo "false";
                 die;
             }
         }
-
-        // insert record into creator table
-        $sql = "UPDATE Creators
-                SET avi = '$fileName'
-                where email = '$email'";
-
-        // execute query
-        $res = mysqli_query($conn, $sql);
-
-        if (!$res){
-            die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
-        }
-    }
-
-    $userTable = "UPDATE Users
-                SET fname = '".$fname."', lname= '".$lname."'
-                where email = '$email' ";
-    
-    if(!mysqli_query($conn, $userTable))
-        die("ERROR: Could not able to execute $userTable. " . mysqli_error($conn));
-
-    $innerjoin = "UPDATE Creators 
-                    INNER JOIN Content on Creators.creator_id = Content.creator_id
-                    SET Creators.bio = '".$bio."', Content.content = '".$content."'
-                    WHERE Creators.creator_id = $creatorid and Content.creator_id = $creatorid ";
-    if(!mysqli_query($conn, $innerjoin))
-        die("ERROR: Could not able to execute $innerjoin " . mysqli_error($conn));
-    
-    #$contentTable = "UPDATE Content
-                    #SET content = '$content'
-                    #where creatorid = '$creatorid'";
-    #if(!mysqli_query($conn, $contentTable))
-        #die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
 
     $socials = "UPDATE CreatorSocial
                 SET PWebsite1 = '".$pw1."', PWebsite2 = '".$pw2."', LinkedIn = '".$linkedin."',Facebook = '".$fb."',Youtube = '".$yt."',Twitch = '".$twitch."' ,Twitter = '".$twitter."'
