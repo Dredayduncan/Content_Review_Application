@@ -32,7 +32,7 @@ create table Creators(
 
 
 create table Rating(
-    creator_id bigint,
+    creator_id bigint ,
     foreign key(creator_id) references Creators(creator_id),
     ratorid varchar(255),
     foreign key(ratorid) references Users(email),
@@ -56,8 +56,8 @@ create table CreatorSocial(
 create table Content(
 	creator_id bigint,
     foreign key(creator_id) references Creators(creator_id),
-    content varchar(255) NOT NULL,
-    contentName varchar(100) NOT NULL,
+    content varchar(255),
+    contentName varchar(100),
     contentType enum('gaming', 'photography', 'videography', 'basketball', 'football', 'swimming', 'art', 'comedy', 'gym', 'vlog', 'music', 'other'),
     keyword varchar(255)
 );

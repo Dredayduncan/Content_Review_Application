@@ -74,6 +74,24 @@
                     die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
                 }
 
+                $content = "INSERT INTO Content(creator_id) 
+                Select creator_id 
+                    from Creators
+                    where email = '$email' ";
+                
+                if(!mysqli_query($conn, $content))
+                    die("ERROR: Could not able to execute $content. " . mysqli_error($conn));
+
+
+                $creatorSocials = "INSERT into CreatorSocial (creator_id) 
+                    Select creator_id 
+                    from Creators
+                    where email = '$email'";
+
+                if(!mysqli_query($conn, $creatorSocials))
+                    die("ERROR: Could not able to execute $creatorSocials. " . mysqli_error($conn));
+
+
                 // initialize sessions for important variables
                 $_SESSION['avi'] = $fileName;
                 $_SESSION['role'] = 'creator';

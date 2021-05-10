@@ -115,8 +115,8 @@
                       <div class="form-group row no-gutters mb-4">
                         <label class="col-md-4 col-form-label text-left" for="bio">Bio</label>
                         <div class="col-md-8">
-                          <textarea cols="36" rows="5"></textarea>
-                          <input type="number" id="bioID" name="bio" class="form-control" style="display:none;">
+                          <textarea name = "bio" cols="36" rows="5"></textarea>
+                          <input type="number" id="bioID" name="bio1" class="form-control" style="display:none;">
                         </div>
                       </div>
 

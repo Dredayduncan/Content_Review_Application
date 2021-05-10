@@ -6,10 +6,11 @@
     #Get form data
 
     # Get creator name
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
+
+    $fname = $_POST['creatorfname'];
+    $lname = $_POST['creatorlname'];
     //$creatorid = $_GET['cid'];
-    $creatorid = 1;
+    $creatorid = 2;
     # Get Bio
     $bio = $_POST['bio'];
     $email = 'kwakuayemang.2000@gmail.com';
@@ -46,13 +47,15 @@
     else
         $pw2 = NULL;
 
-    function IsSet($var1, $var2){
-        if(isset($var1))
-            $var2 = $var1;
-        else
+
+    //function IsSet($var1, $var2){
+        //if(isset($var1))
+            //$var2 = $var1;
+        //else
             
-    }
-    
+    //}
+    echo $bio;
+    echo $content;
 
     if(isset( $_POST["file"])){
         //Get Image Upload path
@@ -64,7 +67,7 @@
         $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
         //Check if file is an image and upload it to the server
-        $allowTypes = array('jpg', 'JPG', 'png','jpeg');
+        $allowTypes = array('jpg', 'JPG', 'png','jpeg','JPEG', 'PNG');
 
         if(in_array($fileType, $allowTypes)){
 
@@ -92,27 +95,31 @@
     }
 
     $userTable = "UPDATE Users
-                SET fname = '$fname', lname= '$lname''
-                where email = '$email'";
+                SET fname = '".$fname."', lname= '".$lname."'
+                where email = '$email' ";
     
     if(!mysqli_query($conn, $userTable))
-        die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
+        die("ERROR: Could not able to execute $userTable. " . mysqli_error($conn));
 
+    $innerjoin = "UPDATE Creators 
+                    INNER JOIN Content on Creators.creator_id = Content.creator_id
+                    SET Creators.bio = '".$bio."', Content.content = '".$content."'
+                    WHERE Creators.creator_id = $creatorid and Content.creator_id = $creatorid ";
+    if(!mysqli_query($conn, $innerjoin))
+        die("ERROR: Could not able to execute $innerjoin " . mysqli_error($conn));
     
+    #$contentTable = "UPDATE Content
+                    #SET content = '$content'
+                    #where creatorid = '$creatorid'";
+    #if(!mysqli_query($conn, $contentTable))
+        #die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
 
-    
-    $contentTable = "UPDATE Content
-                    SET content = '$content'
-                    where creatorid = '$creatorid'";
-    if(!mysqli_query($conn, $contentTable))
-        die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
-
-    $socials = "UPDATE CreatorSocials
-                SET PWebsite1 = '$pw1', PWebsite2 = '$pw2', LinkedIn = '$linkedin',Facebook = '$fb',Youtube = '$yt',Twitch = '$twitch' ,Twitter = '$twitter'
-                WHERE creatorid = '$creatorid' ";
+    $socials = "UPDATE CreatorSocial
+                SET PWebsite1 = '".$pw1."', PWebsite2 = '".$pw2."', LinkedIn = '".$linkedin."',Facebook = '".$fb."',Youtube = '".$yt."',Twitch = '".$twitch."' ,Twitter = '".$twitter."'
+                WHERE creator_id = $creatorid ";
 
     if(!mysqli_query($conn, $socials))
-        die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
+        die("ERROR: Could not able to execute $socials. " . mysqli_error($conn));
     
     
     
