@@ -9,13 +9,8 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
-
-  <!-- Bootstrap -->
-  
 
   <!-- Vendor CSS Files -->
   <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -36,7 +31,6 @@
 </head>
 
 <body>
-
 
   <!-- ======= Header ======= -->
   <header id="header" class="header-fixed">
@@ -65,10 +59,8 @@
             <h2>Creator Details</h2>
             </div>
             <div class=" col-2">
-             <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#EditProfile">Edit Profile</button>
+              <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#EditProfile">Edit Profile</button>
             </div>
-
-          </div> 
           <p>Content Type.</p>
         </div>
 
@@ -82,12 +74,12 @@
                   </div>
                 <div class="modal-body">
 
-                  <form action="" method="POST" enctype="multipart/form-data">
+                  <form action="creatorDetailsUpdate.php" id = "update" method="POST" enctype="multipart/form-data">
                     <div class="form-group row no-gutters mb-4">
                         <label class="col-md-4 col-form-label text-left" for="fname">First Name</label>
                         <div class="col-md-8">
                             <input type="text" id="fname" name="creatorfname" class="form-control">
-                            <input type="number" id="fnameID" name="fnameID" class="form-control" style="display:none;">
+                            <input type="number" id="fnameID" name="fname" class="form-control" style="display:none;">
                         </div>
                       </div>
 
@@ -95,7 +87,7 @@
                         <label class="col-md-4 col-form-label text-left" for="lname">Last Name</label>
                         <div class="col-md-8">
                             <input type="text" id="lname" name="creatorlname" class="form-control">
-                            <input type="number" id="lnameID" name="lnameID" class="form-control" style="display:none;">
+                            <input type="number" id="lnameID" name="lname" class="form-control" style="display:none;">
                         </div>
                       </div>
 
@@ -116,23 +108,23 @@
                           <option value="music">Music</option>
                           <option value="other">Other</option>
                         </select>
-                            <input type="number" id="lnameID" name="lnameID" class="form-control" style="display:none;">
+                            <input type="number" id="lnameID" name="lname" class="form-control" style="display:none;">
                         </div>
                       </div>
 
                       <div class="form-group row no-gutters mb-4">
                         <label class="col-md-4 col-form-label text-left" for="bio">Bio</label>
                         <div class="col-md-8">
-                          <textarea cols="36" rows="5"></textarea>
-                          <input type="number" id="bioID" name="bioID" class="form-control" style="display:none;">
+                          <textarea name = "bio" cols="36" rows="5"></textarea>
+                          <input type="number" id="bioID" name="bio1" class="form-control" style="display:none;">
                         </div>
                       </div>
 
                       <div id="social0" class="form-group row no-gutters mb-1">
                         <label class="col-md-4 col-form-label text-left" for="twitch">Twitch</label>
                         <div class="col-md-8">
-                            <input type="text" id="name" name="creatortwitch" class="form-control">
-                            <input type="number" id="twitchID" name="twitchID" class="form-control" style="display:none;">
+                            <input type="text" id="name" name="twitch" class="form-control">
+
                         </div>
                       </div>
 
@@ -169,7 +161,7 @@
                       </div>
                       <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="submit" form = "update" class="btn btn-primary">Save changes</button>
                       </div>
                     </div>
                   </div>
@@ -188,13 +180,8 @@
               <div class="social">
                 <a href=""><i class="fa fa-twitter"></i></a>
                 <a href=""><i class="fa fa-facebook"></i></a>
+                <a href=""><i class="fa fa-google-plus"></i></a>
                 <a href=""><i class="fa fa-linkedin"></i></a>
-                <a href=""> <i class="fa fa-youtube"></i></a>
-                <a href=""> <i class="fa fa-twitch"></i></a>
-                <a href=""> <i class="fa fa-facebook"></i></a>
-                <a href=""> <i class="fa fa-desktop"></i></a>
-                <a href=""> <i class="fa fa-desktop"></i></a>
-               
               </div>
               <p>Voluptatem perferendis sed assumenda voluptatibus. Laudantium molestiae sint. Doloremque odio dolore dolore sit. Quae labore alias ea omnis ex expedita sapiente molestias atque. Optio voluptas et.</p>
 
@@ -208,8 +195,6 @@
       </div>
 
     </section>
-
-    
 
 
         <!-- ======= Gallery Section ======= -->
@@ -282,7 +267,7 @@
 
   <!-- Vendor JS Files -->
   <script src="../assets/vendor/jquery/jquery.min.js"></script>
-  <!-- <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/vendor/jquery.easing/jquery.easing.min.js"></script>
   <script src="../assets/vendor/php-email-form/validate.js"></script>
   <script src="../assets/vendor/venobox/venobox.min.js"></script>
