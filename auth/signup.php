@@ -32,7 +32,7 @@
 	<link rel="stylesheet" href="../css/style2.css">
 
 	</head>
-	<body>
+	<body style="background-color: #060c22;">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -42,7 +42,7 @@
 			      </div>
 						<div class="login-wrap p-4 p-md-5">
 			      	<div class="d-flex">
-			      		<div class="w-100">
+			      		<div class="w-100 d-flex justify-content-center">
 			      			<h3 class="mb-4">Sign Up</h3>
 			      		</div>
 			      	</div>

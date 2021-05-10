@@ -18,10 +18,33 @@
     <li><a href="views/favorites.php">Favourites</a></li>';
 
     if ($_SESSION['role'] == 'creator'){
-      $info = '<li style="margin-top: -2%;"><a href=""> 
+      $info = '<li style="margin-top: -2%;"><a> 
                   <div class="img-log-div">
-                    <img src="assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log">
+                    <img src="assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
+                    
+                  
+                      <ul class="dropdown-menu" style="background-color: #060c22;">
+                        <button type="button"  class="list-group-item btn btn-outline-success mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
+                        <button type="button"  class="list-group-item btn btn-outline-success pt-1 pl-1 pr-1 pb-1">Sign Out</button>
+                      </ul>
+                        
+
+                    
+                      
+                     
+                      
+                    </div>
+
+
+                   
+                 
+
                   </div>
+
+               
+                  
+
+                 
                 </a></li>';
     }
     elseif($_SESSION['role'] == 'user'){
@@ -78,11 +101,11 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header">
-    <div class="container">
+  <header id="header" >
+    <div class="container"  >
 
-      <nav id="nav-menu-container">
-        <ul class="nav-menu">
+      <nav id="nav-menu-container" >
+        <ul class="nav-menu" >
           <li class="menu-active"><a href="index.php">Home</a></li>
           <li><a href="#hr">Highest Rated</a></li>
           <li><a href="#mr">Most Trending</a></li>
@@ -110,22 +133,34 @@
 
   </section><!-- End Intro Section -->
 
+                   
       <!-- <nav class="navbar navbar-dark bg-dark"> -->
-        <div class="container-fluid searchbar" >
+        <div class="container-fluid searchbar mt-3" >
           <form class="d-flex justify-content-center">
             <input id='search' style="margin-right:10px; width:500px;" class="form-control " type="search" placeholder="Search" aria-label="Search">
+            <div class="filter mr-2 mt-2">
+              <select id="content" name="content">
+                <option value="gaming">Any</option>
+                <option value="gaming">Gaming</option>
+                <option value="photography">Photography</option>
+                <option value="videography">Videography</option>
+                <option value="basketball">Basketball</option>
+                <option value="football">Football</option>
+                <option value="swimming">Swimming</option>
+                <option value="art">Art</option>
+                <option value="comedy">Comedy</option>
+                <option value="gym">Gym</option>
+                <option value="vlog">Vlog</option>
+                <option value="music">Music</option>
+                <option value="other">Other</option>
+              </select>           
+            </div>
             <button id="searchButton" style="margin-right:10px;" class="btn btn-outline-success">Search</button>
 
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                Filter
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </div>
+                      
+
+                 
+                     
 
           </form>
 
@@ -144,6 +179,8 @@
           <h2>Highest Rated</h2>
           <p>Here are some of our highly rated content creators</p>
         </div>
+
+        
 
         <div class="row">
           
@@ -449,6 +486,7 @@
   <script src="assets/vendor/aos/aos.js"></script>
 
   <!-- Template Main JS File -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
   <script src="assets/js/main.js"></script>
 
   <script>

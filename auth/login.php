@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="../css/style2.css">
 
 	</head>
-	<body  style="background-color:rgb(37, 150, 190);">
+	<body  style="background-color: #060c22;">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -27,15 +27,10 @@
 			      </div>
 						<div class="login-wrap p-4 p-md-5">
 			      	<div class="d-flex">
-			      		<div class="w-100">
+			      		<div class="w-100 d-flex justify-content-center">
 			      			<h3 class="mb-4">Sign In</h3>
 			      		</div>
-								<div class="w-100">
-									<p class="social-media d-flex justify-content-end">
-										<a href="#" class="d-flex align-items-center justify-content-center btn-outline-danger" style="border-radius: 50%; font-size: 16px; width: 40px;height: 40px;"><span class="fa fa-facebook"></span></a>
-										<a href="#" class=" d-flex align-items-center justify-content-center btn-outline-danger" style="border-radius: 50%; font-size: 16px; width: 40px;height: 40px;"><span class="fa fa-twitter"></span></a>
-									</p>
-								</div>
+								
 			      	</div>
 							<form action="loginBack.php" class="signin-form" method="POST">
 			      		<div class="form-group mb-3">
