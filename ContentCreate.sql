@@ -58,8 +58,7 @@ create table Content(
 	creator_id bigint,
     foreign key(creator_id) references Creators(creator_id),
     content varchar(255),
-    contentName varchar(100),
-    keyword varchar(255)
+    contentType enum('IMAGE','VIDEO')
 );
 
 

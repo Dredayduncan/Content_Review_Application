@@ -350,8 +350,35 @@
               <p>Check our gallery from the recent events</p>
             </div>
           </div>
-    
-          <div class="owl-carousel gallery-carousel" data-aos="fade-up" data-aos-delay="100">
+          
+          <?php
+            $creatorid = $_SESSION['cid'];
+            $sql = "SELECT content from Content WHERE creator_id = ".$creatorid." and contentType = 'IMAGE' ";
+            $result = mysqli_query($conn, $sql);
+            echo "<div class='container'>";
+            if(!$result)
+                die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
+            else{
+                
+                if(mysqli_num_rows($result)== 0){
+                  echo "<p>".$creator["fname"]. " does not have any images</p>";
+                }else{
+                  echo "<div class='owl-carousel gallery-carousel' data-aos='fade-up' data-aos-delay='100'>";
+                  while($data = mysqli_fetch_array($result)){
+                    echo "
+                      <a href='".$data['content']."' class='venobox' id = ' img".($i)." ' data-gall='gallery-carousel'><img src='".$data['content']."' alt=''></a>
+                    ";
+                  }
+                  echo "</div></div>";
+                }
+                
+                
+            }
+
+          ?>
+          
+
+          <!--<div class="owl-carousel gallery-carousel" data-aos="fade-up" data-aos-delay="100">
             <a href="../assets/img/gallery/1.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/1.jpg" alt=""></a>
             <a href="../assets/img/gallery/2.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/2.jpg" alt=""></a>
             <a href="../assets/img/gallery/3.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/3.jpg" alt=""></a>
@@ -360,7 +387,7 @@
             <a href="../assets/img/gallery/6.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/6.jpg" alt=""></a>
             <a href="../assets/img/gallery/7.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/7.jpg" alt=""></a>
             <a href="../assets/img/gallery/8.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/8.jpg" alt=""></a>
-          </div>
+          </div> -->
     
         </section><!-- End Gallery Section -->
 
@@ -423,7 +450,38 @@
             </div>
           </div>
 
-          <div class="container">
+          <?php
+            $creatorid = $_SESSION['cid'];
+            $sql = "SELECT content from Content WHERE creator_id = ".$creatorid." and contentType = 'VIDEO' ";
+            $result = mysqli_query($conn, $sql);
+            if(!$result)
+                die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
+            else{
+                echo "
+                <div class='container'>
+                  <div class='row'>
+                ";
+                if(mysqli_num_rows($result)== 0){
+                  echo "<p>".$creator["fname"]. " does not have any videos</p>";
+                }else{
+                  while($data = mysqli_fetch_array($result)){
+                    echo "
+                      <
+                      <iframe class='embed-responsive-item col-lg-4 col-md-6' src='".$data['content']."' style='margin-bottom: 2%; height: 20vw;' 
+                        title='YouTube video player' frameborder='0' 
+                        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen>
+                      </iframe>
+                    ";
+                  }
+                  echo "</div></div>";
+                }
+                
+                
+            }
+
+          ?>
+
+          <!--<div class="container">
             <div class="row">
               <iframe class="embed-responsive-item col-lg-4 col-md-6" src="https://www.youtube.com/embed/PwGv6qhOlvI" style="margin-bottom: 2%; height: 20vw;" 
                 title="YouTube video player" frameborder="0" 
@@ -451,7 +509,7 @@
               </iframe> 
  
             </div>  
-          </div>
+          </div>-->
 
           <div class="container ">
           <?php echo $editVideos; ?>

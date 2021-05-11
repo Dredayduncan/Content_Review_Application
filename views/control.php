@@ -176,6 +176,25 @@
             }
 
             break;
+            case 'UpdateImages':
+                $img = $_SESSION['gallery'];
+                $creatorid = $_POST["creatorid"];
+                for(int $i = 0; $i < count($img); $i++){
+                    $insert = "INSERT INTO Content (creator_id, content,contentType) values ($creatorid ,".$img[$i]. ", IMAGE)";
+                    if(!mysqli_query($conn, $insert))
+                        die("ERROR: Could not able to execute $insert. " . mysqli_error($conn));
+                }
+            break;
+
+            case 'UpdateVideos':
+                $video = $_SESSION["videos"];
+                $creatorid = $_POST["creatorid"];
+                for(int $i = 0; $i < count($img); $i++){
+                    $insert = "INSERT INTO Content (creator_id, content, contentType) values ($creatorid ,".$img[$i]. ", VIDEO)";
+                    if(!mysqli_query($conn, $insert))
+                        die("ERROR: Could not able to execute $insert. " . mysqli_error($conn));
+                }
+            break;
 
         default:
             # code...
