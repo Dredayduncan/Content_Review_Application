@@ -353,7 +353,7 @@
           
           <div id="owl-demo" class='owl-carousel owl-theme' data-aos='fade-up' data-aos-delay='100'>
           <?php
-            $creatorid = $_SESSION['cid'];
+            $creatorid = $_GET['cid'];
             $sql = "SELECT content from Content WHERE creator_id = ".$creatorid." and contentType = 'IMAGE' ";
             $result = mysqli_query($conn, $sql);
             
@@ -773,6 +773,23 @@
     });
 
     // Update the image table when save changes is clicked 
+    $('.saveImage').on('click', function(){
+        var images = $('.modal-body').find('.gall');
+
+        // create array of image links
+        var imgs = [];
+
+        // populatee the array
+        for (var i = 0; i < images.length; i++) {
+          imgs.push(images[i].value);
+        }
+
+        $.post("control.php", {choice: 'UpdateImages', images: JSON.stringify(imgs)}, function(data){
+          window.location.replace("creator-details.php?cid=" + <?=json_encode($_SESSION['cid']);?>);
+        });
+    });
+
+    // Update the video table when save changes is clicked 
     $('.saveVideo').on('click', function(){
         var videos = $('.modal-body').find('.vids');
 
@@ -785,7 +802,7 @@
         }
 
         $.post("control.php", {choice: 'UpdateVideos', videos: JSON.stringify(vids)}, function(data){
-            alert(data);
+          window.location.replace("creator-details.php?cid=" + <?=json_encode($_SESSION['cid']);?>);
         });
     });
 
@@ -798,7 +815,10 @@
     });
 
     $(".star").on("click",function(){
-      alert($(this).val());
+  
+      $.post("control.php", {choice: 'rating', rating: $(this).val(), }, function(data){
+            alert(data);
+        });
     });
 
 

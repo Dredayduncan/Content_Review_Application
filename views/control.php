@@ -187,8 +187,6 @@
                     if(!mysqli_query($conn, $insert))
                         die("ERROR: Could not able to execute $insert. " . mysqli_error($conn));
                 }
-
-                header("Location: creator-details.php?".$_SESSION['cid']);
             break;
 
             case 'UpdateVideos':
@@ -202,8 +200,6 @@
                     if(!mysqli_query($conn, $insert))
                         die("ERROR: Could not able to execute $insert. " . mysqli_error($conn));
                 }
-
-                header("Location: creator-details.php?".$_SESSION['cid']);
             break;
 
         default:
