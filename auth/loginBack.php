@@ -44,6 +44,9 @@
                 $creator = mysqli_fetch_assoc($res);
                 $_SESSION['avi'] = $creator['avi'];
                 $_SESSION['cid'] = $creator['creator_id'];
+
+                 //Reroute to main page
+                header("Location: ../index.php");
             }
             else{
                 die("ERROR: Could not able to execute $query. " . mysqli_error($conn));
@@ -51,9 +54,7 @@
             
         }
         
-        //Reroute to email page
-        header("Location: ../index.php");
-        die;
+       
     }
     else{
         session_start();

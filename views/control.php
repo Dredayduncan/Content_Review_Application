@@ -112,11 +112,15 @@
             $value = $_POST['value'];
             $filter = $_POST['filter'];
 
+            if ($filter == 'any'){
+                $filter = '';
+            }
+
             #Generate the query
             $sql = "SELECT * FROM Users
                     INNER JOIN Creators on Users.email = Creators.email
                     INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
-                    WHERE Users.fname like '%".$value."%' or Users.lname like '%".$value."%' or Creators.contentType = '$filter'";
+                    WHERE Users.fname like '%".$value."%' or Users.lname like '%".$value."%' and Creators.contentType = '$filter'";
 
             // Execute the query 
             $result = mysqli_query($conn, $sql);
@@ -124,26 +128,33 @@
             if(!$result){
                 die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
             }else{
-                echo "<section style='margin-top:20px;'> <div class='row'> <div class='container' data-aos='fade-up'>
+                echo "<section style='margin-top:20px;'><div class='container' data-aos='fade-up'> 
                 <div class='section-header'>
                 <h2>Search</h2>
                 <p>Here are your search results</p>
-              </div>";
-                while ($data = mysqli_fetch_array($result)){
+                </div> <div class='row'>";
 
-                    echo '<div class="col-lg-4 col-md-6">
-                    <div class="speaker" data-aos="fade-up" data-aos-delay="200">
-                      <a href="views/creator-details.php?cid='.$data['creator_id'].'"><img src="assets/avis/'.$data['avi'].'" alt="Creator" class="img-fluid select"></a>
-                      <div class="details">
-                        <h3><a class="select" href="views/creator-details.php?cid='.$data['creator_id'].'">'.$data["fname"]. " " . $data["lname"] .'</a></h3>
-                        <p>'.$data['contentType'].'</p>
-                        <p class="code" hidden>'.$data['creator_id'].'</p>
-                        '. socials($data['Twitch'], $data['Facebook'], $data['Youtube'], $data['Twitter'], $data['LinkedIn'], $data['PWebsite1'], $data['PWebsite2']).'
-                      </div>
-                    </div>
-                  </div>';
+                if (mysqli_num_rows($result) == 0) {
+                    echo "<div class='d-flex justify-content-center' ><h3 style='color: #ffffff;'>There are no results for your search</h3></div>";
                 }
-                echo "</div></div></section> ";
+                else{
+                    while ($data = mysqli_fetch_array($result)){
+
+                        echo '<div class="col-lg-4 col-md-6">
+                        <div class="speaker" data-aos="fade-up" data-aos-delay="200">
+                          <a href="views/creator-details.php?cid='.$data['creator_id'].'"><img src="assets/avis/'.$data['avi'].'" alt="Creator" class="img-fluid select"></a>
+                          <div class="details">
+                            <h3><a class="select" href="views/creator-details.php?cid='.$data['creator_id'].'">'.$data["fname"]. " " . $data["lname"] .'</a></h3>
+                            <p>'.$data['contentType'].'</p>
+                            <p class="code" hidden>'.$data['creator_id'].'</p>
+                            '. socials($data['Twitch'], $data['Facebook'], $data['Youtube'], $data['Twitter'], $data['LinkedIn'], $data['PWebsite1'], $data['PWebsite2']).'
+                          </div>
+                        </div>
+                      </div>';
+                    }
+                    echo "</div></div></section> ";
+                }
+                
             }
 
         default:
@@ -183,7 +194,8 @@
             $socials .= '<a href="'.$pw2.'" class="btn btn-outline-danger"><i class="fas fa-globe"></i></a>';
         }
 
-        if ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'creator'){
+
+        if (isset($_SESSION['role']) && ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'creator')){
             $socials .= '<a class="btn btn-outline-secondary fav" style="margin-left: 125px;">
                             <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">

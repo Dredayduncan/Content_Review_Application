@@ -99,10 +99,17 @@
                 // Get Creator ID
                 $cid = "SELECT creator_id FROM Creators WHERE email = '$email'";
 
-                if(!mysqli_query($conn, $creatorSocials))
+                 // execute query
+                 $id = mysqli_query($conn, $cid);
+
+                if(!$id){
                     die("ERROR: Could not able to execute $creatorSocials. " . mysqli_error($conn));
-                    
-                $_SESSION['cid'] = getCid($email, $conn);
+                }
+                else {
+                    $data = mysqli_fetch_assoc($id);
+                    $_SESSION['cid'] = $data['creator_id'];
+                }
+               
             }
             else{
                 $_SESSION['role'] = 'user';

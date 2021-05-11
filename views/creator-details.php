@@ -2,19 +2,31 @@
   //Establish Database Connection
   include "../auth/config.php";
 
+  
   // Begin session
   session_start();
 
-  $edit = '';
+  $editProfile = '';
+  $editGallery = '';
+  $editVideos = '';
   $menu = '';
   $info = '';
 
   if (isset($_SESSION['cid'])){
     if ($_SESSION['cid'] == $_GET['cid']){
-      $edit = '<div class=" col-2">
+      $editProfile = '<div class="col-2">
                   <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" 
                   data-bs-target="#EditProfile">Edit Profile</button>
                   </div> ';
+
+      $editGallery = '<div class="button d-flex justify-content-center mb-5">
+                      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Editgallery">
+                      Edit Gallery</button>
+                      </div>';
+
+      $editVideos = '<div class="button d-flex justify-content-center mb-5">
+                      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Editvids">Edit Videos</button>
+                      </div>';
     }
   }
 
@@ -44,7 +56,7 @@
               </li>';
     }
   }
-
+  
   // Get creator information
   $sql = "SELECT * FROM Users
   INNER JOIN Creators on Users.email = Creators.email
@@ -63,7 +75,7 @@
     $creator = mysqli_fetch_assoc($result);
   }
   else{
-    die("ERROR: Could not able to execute $query. " . mysqli_error($conn));
+    die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
   }
 
   // Generate socials for existing social fields
@@ -166,7 +178,7 @@
             <div class=" col-10 d-flex justify-content-center mx-auto">
               <h2>Creator Details</h2>
             </div>
-            <?php echo $edit; ?>
+            <?php echo $editProfile; ?>
           </div>
           <p>
             <?php 
@@ -183,7 +195,7 @@
 
         <div class="row">
           <div class="col-md-6">
-            <img src="../assets/avis/<?php echo $_SESSION['avi']; ?>" alt="Creator" class="img-fluid">
+            <img src="../assets/avis/<?php echo $creator['avi']; ?>" alt="Creator" class="img-fluid">
           </div>
 
           <div class="col-md-6">
@@ -192,8 +204,8 @@
               <?php 
                 echo socials($creator['Twitch'], $creator['Facebook'], $creator['Youtube'], $creator['Twitter'], $creator['LinkedIn'], $creator['PWebsite1'], $creator['PWebsite2']); 
 
-                $prebio = '<p>';
-                $bio = 'Update your bio, to tell people more about you!';
+                $prebio = '<p style="color: #6c757d;">';
+                $bio = 'Nothing much to see here!';
                 $probio = '</p>';
 
                 if (!empty($creator['bio'])){
@@ -341,11 +353,9 @@
         </section><!-- End Gallery Section -->
 
         <div class="container ">
-          <div class="button d-flex justify-content-center mb-5">
-          <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Editgallery">Edit Gallery</button>
-          </div>
-        
 
+          <?php echo $editGallery; ?>
+          
         <div class="modal fade" tabindex="-1" id="Editgallery" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
@@ -432,10 +442,7 @@
           </div>
 
           <div class="container ">
-          <div class="button d-flex justify-content-center mb-5">
-          <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Editvids">Edit Videos</button>
-          </div>
-        
+          <?php echo $editVideos; ?>
 
         <div class="modal fade" tabindex="-1" id="Editvids" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
