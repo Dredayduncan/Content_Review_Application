@@ -372,41 +372,42 @@
               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title">Edit Profile</h5>
+                    <h5 class="modal-title">Edit Gallery</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
 
-                  <div class="form-group row no-gutters mb-4">
-                    <label class="col-md-4 col-form-label text-left" for="fname">First Name</label>
-                    <div class="col-md-8">
-                        <input type="text" id="fname" name="creatorfname" class="form-control">
-                        <input type="number" id="fnameID" name="fnameID" class="form-control" style="display:none;">
-                    </div>
-                  </div>
-
-                  <div class="contain">
-                          <div class="add-button btn btn-outline-success" > 
-                            <svg  xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" 
-                                class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                            </svg>
-                          </div>
-
-                          <div class="remove-button btn btn-outline-danger" > 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                            </svg>
-                          </div>
+                    <!-- <form action="creatorDetailsUpdate.php" id = "update" method="POST" enctype="multipart/form-data"> -->
+                      <div id="image0" class="form-group row no-gutters mb-4">
+                        <label class="col-md-4 col-form-label text-left" for="fname">image0</label>
+                        <div class="col-md-8">
+                            <input type="text" id="img0" name="img0" class="form-control gall">
                         </div>
-                  </div>
+                      </div>
 
-                  <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
+                      <div class="contain">
+                              <div class="btn btn-outline-success add-btn" > 
+                                <svg  xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" 
+                                    class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                              </div>
+
+                              <div class="btn btn-outline-danger remove-btn" > 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                </svg>
+                              </div>
+                            </div>
+                      </div>
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary saveImage">Save changes</button>
+                      </div>
+                    <!-- </form> -->
                 </div>
               </div>
             </div> 
@@ -547,8 +548,11 @@
 
   <script>
     var item = 0;
+    var imgItem = 0;
     
     $(document).ready(function(){
+
+    // Manage buttons in the edit profile modal
       var socials = ['Twitter', 'Facebook', 'LinkedIn', 'Youtube', 'Personal Website 1', 'Personal Website 2'];
 
       // When the add button is clicked
@@ -559,8 +563,6 @@
                           '<input type="text" id="' + socials[item] + '" name="' + socials[item] + '" class="form-control">' +
                       '</div>' +
                     '</div>';
-
-       
 
         // Add new social field
         var el = '#social' + item;
@@ -600,17 +602,85 @@
           $('.remove-button').fadeOut(function(){
             $(this).hide()
           });
-        }else{
+        }
+        else{
           $('.add-button').fadeIn(function(){
             $(this).show();
         });
         }
       });
+
+    // Manage buttons in the edit image modal
+
+    // When the add button is clicked
+    $('.add-btn').on("click", function(){
+
+        var id = "image"+ (imgItem + 1);
+        var nonID = "img"+ (imgItem + 1);
+         html = '<div id='+ id +' class="form-group row no-gutters mb-4 animated bounceInLeft">' +
+                      '<label class="col-md-4 col-form-label text-left" for="'+ id +'">'+ id +'</label>' +
+                      '<div class="col-md-8">' +
+                          '<input type="text" id='+ nonID +' name='+ nonID +' class="form-control gall">' +
+                      '</div>' +
+                    '</div>';
+
+        // Add new social field
+        var el = '#image' + imgItem;
+        $(html).insertAfter(el);
+
+        // Display remove button
+        $('.remove-btn').fadeIn(function(){
+            $(this).show();
+        });
+
+        // Increment imgItem
+        imgItem++;
+        
+      });
+    
+      // When the remove button is clicked 
+      $('.remove-btn').on('click', function(){
+
+        // Remove the recently added social field 
+        $('#image'+ (imgItem)).removeClass('bounceInLeft').addClass('bounceOutRight')
+          .fadeOut(function(){
+            $(this).remove();
+        });
+
+        // decrement imgItem
+        imgItem--;
+
+        // Remove remove button if the social fields are only one
+        if(imgItem == 0){
+          $('.remove-btn').fadeOut(function(){
+            $(this).hide()
+          });
+        }
+      });
+    });
+
+    // Update the image table when save changes is clicked 
+    $('.saveImage').on('click', function(){
+        var images = $('.modal-body').find('.gall');
+
+        // create array of image links
+        var imgs = [];
+
+        // populatee the array
+        for (var i = 0; i < images.length; i++) {
+          imgs.push(images[i].value);
+        }
+
+        $.post("views/control.php", {choice: 'UpdateImages', images: JSON.stringify(array)}, function(data){
+            alert(data);
+        });
     });
 
     $(".star").on("click",function(){
       alert($(this).val());
     });
+
+
     
   </script>
 
