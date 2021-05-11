@@ -233,6 +233,8 @@
             $query = "SELECT * FROM Users
                       INNER JOIN Creators on Users.email = Creators.email
                       INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
+                      INNER JOIN SearchHistory on Creators.creator_id = SearchHistory.history_id
+                      WHERE time > now() - INTERVAL 7 day
                       ORDER BY numClicks desc LIMIT 6";
 
             // execute query
