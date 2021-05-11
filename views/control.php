@@ -223,7 +223,7 @@
                             $.post("views/control.php", {choice: "history", email:"'.$_SESSION["userEmail"].'", 
                                 creatorid: creator}, function(data){
                                 alert(data);
-                                return false;
+                                
                             });
 
                             

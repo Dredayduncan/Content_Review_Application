@@ -36,15 +36,22 @@
             <li><a href="favorites.php">Favourites</a></li>';
 
     if ($_SESSION['role'] == 'creator'){
-      $info = '<li style="margin-top: -2%;"><a href=""> 
+      $info = '<li style="margin-top: -2%;"><a> 
         <div class="img-log-div">
-          <img src="../assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log">
+          <img src="../assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
+
+          <ul class="dropdown-menu" style="background-color: #060c22;">
+
+            <form action="../index.php?logout=yes" method="post">
+              <button type="submit" class="list-group-item btn btn-outline-success ml-4 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
+            </form>
+            </ul>
         </div>
       </a></li>';
     }
     elseif ($_SESSION['role'] == 'user'){
       $info = '<li>
-                <button type="button" class="btn btn-link ">
+                <button type="button" class="btn btn-link dropdown-toggle" data-bs-toggle="dropdown">
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" 
                     fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -53,6 +60,12 @@
                     7 0 0 0 8 1z"/>
                   </svg>
                 </button>
+
+                <ul class="dropdown-menu" style="background-color: #060c22;">
+                  <form action="../index.php?logout=yes" method="post">
+                    <button type="submit" class="list-group-item btn btn-outline-success ml-4 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
+                  </form>
+                </ul>
               </li>';
     }
   }
@@ -490,6 +503,28 @@
         </div>
         </section>    
 
+
+        <section id="rating">
+
+          <div class="container" data-aos="fade-up">
+            <div class="section-header">
+              <h2>Rate This Creator</h2>
+              <p>Tell us what you think ?</p>
+            </div>
+          </div>
+    
+          <div class=" rater container ">
+            <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                <input type="radio" class="star" id="star5" name="rating" value="5" /><label for="star5" title="5 star"></label>
+                <input type="radio" class="star" id="star4" name="rating" value="4" /><label for="star4" title="4 star"></label>
+                <input type="radio" class="star" id="star3" name="rating" value="3" /><label for="star3" title="3 star"></label>
+                <input type="radio" class="star" id="star2" name="rating" value="2" /><label for="star2" title="2 star"></label>
+                <input type="radio" class="star" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
+            </div>
+          </div>	
+    
+        </section>
+
   </main><!-- End #main -->
 
   
@@ -509,6 +544,7 @@
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
 
   <script>
     var item = 0;
@@ -571,6 +607,10 @@
         });
         }
       });
+    });
+
+    $(".star").on("click",function(){
+      alert($(this).val());
     });
     
   </script>

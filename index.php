@@ -20,20 +20,24 @@
               </a>';
 
     $menu = '<li><a href="views/history.php">History</a></li>
-            <li><a href="views/favorites.php">Favourites</a></li>';
+    <li><a href="views/favorites.php">Favourites</a></li>';
 
     if ($_SESSION['role'] == 'creator'){
       $info = '<li style="margin-top: -2%;"><a> 
                   <div class="img-log-div">
                     <img src="assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
+                    
+                  
                       <ul class="dropdown-menu" style="background-color: #060c22;">
+
                       <form action="views/creator-details.php?cid='.$_SESSION["cid"].'" method="post">
-                        <button type="submit" class="list-group-item btn btn-outline-success mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
+                        <button type="submit" class="list-group-item btn btn-outline-success ml-4 mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
                       </form>
 
                       <form action="index.php?logout=yes" method="post">
-                        <button type="submit" class="list-group-item btn btn-outline-success pt-1 pl-1 pr-1 pb-1">Sign Out</button>
+                        <button type="submit" class="list-group-item btn btn-outline-success ml-4 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
                       </form>
+
                       </ul>
                     </div>
                   </div>
@@ -49,20 +53,15 @@
                     7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 
                     7 0 0 0 8 1z"/>
                   </svg>
-
-                  <ul class="dropdown-menu" style="background-color: #060c22;">
-                        <button type="button"  class="list-group-item btn btn-outline-success mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
-                        <button type="button"  class="list-group-item btn btn-outline-success pt-1 pl-1 pr-1 pb-1">Sign Out</button>
-                      </ul>
                 </button>
+
+                <ul class="dropdown-menu" style="background-color: #060c22;">
+                <form action="index.php?logout=yes" method="post">
+                  <button type="submit" class="list-group-item btn btn-outline-success ml-5 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
+                </form>
+                </ul>
               </li>';
     }
-  }
-
-  $userEmail = '';
-
-  if (isset($_SESSION['userEmail'])){
-    $userEmail = $_SESSION['userEmail'];
   }
 ?>
 <!DOCTYPE html>
@@ -131,6 +130,9 @@
       
     </div>
 
+
+    
+
   </section><!-- End Intro Section -->
 
                    
@@ -157,6 +159,11 @@
             </div>
             <button id="searchButton" style="margin-right:10px;" class="btn btn-outline-success">Search</button>
 
+                      
+
+                 
+                     
+
           </form>
 
         
@@ -181,9 +188,9 @@
           
           <div class="col-lg-4 col-md-6">
             <div class="speaker" data-aos="fade-up" data-aos-delay="200">
-              <a href="views/creator-details.php?cid=1"><img src="assets/img/speakers/2.jpg" alt="Speaker 2" class="img-fluid select"></a>
+              <a href="views/creator-details.php"><img src="assets/img/speakers/2.jpg" alt="Speaker 2" class="img-fluid select"></a>
               <div class="details">
-                <h3><a class='select' href="views/creator-details.php?cid=1">Hubert Hirthe</a></h3>
+                <h3><a class='select' href="views/creator-details.php">Hubert Hirthe</a></h3>
                 <p>Consequuntur odio aut</p>
                 <p class='code' hidden>1</p>
                 <div class="social">
@@ -489,17 +496,17 @@
     $(".speaker .fav").on('click', function(){
 		var creator = $(this).parent().prev().html();
 		
-		$.post("views/control.php", {choice: 'favorite', email: <?=json_encode($userEmail);?>,
+		$.post("views/control.php", {choice: 'favorite', email: <?=json_encode($_SESSION['userEmail']);?>,
         creatorid: creator}, function(data){
 			  alert(data);
 		});
 	});
 
 	// Add to history
-	$( ".select" ).on("click", function() {
+	$( ".select" ).click(function( event ) {
     var creator = $(this).parent().parent().find(".code").html();
    
-    $.post("views/control.php", {choice: 'history',  email: <?=json_encode($userEmail);?>, 
+    $.post("views/control.php", {choice: 'history',  email: <?=json_encode($_SESSION['userEmail']);?>, 
       creatorid: creator}, function(data){
       alert(data);
     });
