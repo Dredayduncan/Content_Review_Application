@@ -57,8 +57,8 @@ create table CreatorSocial(
 create table Content(
 	creator_id bigint,
     foreign key(creator_id) references Creators(creator_id),
-    content varchar(255),
-    contentType enum('image', 'video')
+    content mediumtext,
+    contentType enum('IMAGE','VIDEO')
 );
 
 

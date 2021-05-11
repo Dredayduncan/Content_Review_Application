@@ -350,8 +350,41 @@
               <p>Check our gallery from the recent events</p>
             </div>
           </div>
-    
-          <div class="owl-carousel gallery-carousel" data-aos="fade-up" data-aos-delay="100">
+          
+          <div id="owl-demo" class='owl-carousel owl-theme' data-aos='fade-up' data-aos-delay='100'>
+          <?php
+            $creatorid = $_SESSION['cid'];
+            $sql = "SELECT content from Content WHERE creator_id = ".$creatorid." and contentType = 'IMAGE' ";
+            $result = mysqli_query($conn, $sql);
+            
+            if(!$result)
+                die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
+            else{
+                
+                if(mysqli_num_rows($result)== 0){
+                  echo "<p>".$creator["fname"]. " does not have any images</p>";
+                }else{
+
+                  $res = "";
+                  $i = 0;
+                  while($data = mysqli_fetch_array($result)){
+                    $res .= "
+                      <div class='item'><a href='".$data['content']."' class='venobox' id = ' img".$i." '><img src='".$data['content']."' alt=''></a></div>
+                    ";
+
+                    $i++;
+                  }
+
+                  echo $res;
+                }
+            }
+
+          ?>
+          </div>
+        </div>
+          
+
+          <!--<div class="owl-carousel gallery-carousel" data-aos="fade-up" data-aos-delay="100">
             <a href="../assets/img/gallery/1.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/1.jpg" alt=""></a>
             <a href="../assets/img/gallery/2.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/2.jpg" alt=""></a>
             <a href="../assets/img/gallery/3.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/3.jpg" alt=""></a>
@@ -360,7 +393,7 @@
             <a href="../assets/img/gallery/6.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/6.jpg" alt=""></a>
             <a href="../assets/img/gallery/7.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/7.jpg" alt=""></a>
             <a href="../assets/img/gallery/8.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/8.jpg" alt=""></a>
-          </div>
+          </div> -->
     
         </section><!-- End Gallery Section -->
 
@@ -424,7 +457,39 @@
             </div>
           </div>
 
-          <div class="container">
+          <?php
+            $creatorid = $_SESSION['cid'];
+            $sql = "SELECT content from Content WHERE creator_id = ".$creatorid." and contentType = 'VIDEO' ";
+            $result = mysqli_query($conn, $sql);
+            if(!$result)
+                die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
+            else{
+                
+                if(mysqli_num_rows($result)== 0){
+                  echo "<p>".$creator["fname"]. " does not have any videos</p>";
+                }else{
+                  echo "
+                    <div class='container'>
+                      <div class='row'>
+                    ";
+                  while($data = mysqli_fetch_array($result)){
+                    echo "
+                      <
+                      <iframe class='embed-responsive-item col-lg-4 col-md-6' src='".$data['content']."' style='margin-bottom: 2%; height: 20vw;' 
+                        title='YouTube video player' frameborder='0' 
+                        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen>
+                      </iframe>
+                    ";
+                  }
+                  echo "</div></div>";
+                }
+                
+                
+            }
+
+          ?>
+
+          <!--<div class="container">
             <div class="row">
               <iframe class="embed-responsive-item col-lg-4 col-md-6" src="https://www.youtube.com/embed/PwGv6qhOlvI" style="margin-bottom: 2%; height: 20vw;" 
                 title="YouTube video player" frameborder="0" 
@@ -452,7 +517,7 @@
               </iframe> 
  
             </div>  
-          </div>
+          </div>-->
 
           <div class="container ">
           <?php echo $editVideos; ?>
@@ -466,17 +531,16 @@
                   </div>
                   <div class="modal-body">
 
-                  <div class="form-group row no-gutters mb-4">
-                    <label class="col-md-4 col-form-label text-left" for="fname">First Video</label>
+                  <div id="video0" class="form-group row no-gutters mb-4">
+                    <label class="col-md-4 col-form-label text-left" for="vid0">video0</label>
                     <div class="col-md-8">
-                        <input type="text" id="fname" name="creatorfname" class="form-control">
-                        <input type="number" id="fnameID" name="fnameID" class="form-control" style="display:none;">
+                        <input type="text" id="vid0" name="vid0" class="form-control">
                     </div>
                   </div>
 
                   
                   <div class="contain">
-                          <div class="add-button btn btn-outline-success" > 
+                          <div class="btn btn-outline-success addd-btn" > 
                             <svg  xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" 
                                 class="bi bi-plus-circle" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -484,7 +548,7 @@
                             </svg>
                           </div>
 
-                          <div class="remove-button btn btn-outline-danger" > 
+                          <div class="rm-btn btn btn-outline-danger" > 
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                               <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                               <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -495,7 +559,7 @@
 
                   <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary saveVideo">Save changes</button>
                   </div>
                 </div>
               </div>
@@ -549,6 +613,7 @@
   <script>
     var item = 0;
     var imgItem = 0;
+    var vidItem = 0;
     
     $(document).ready(function(){
 
@@ -657,23 +722,79 @@
           });
         }
       });
+
+    // Manage buttons in the edit video modal
+
+    // When the add button is clicked
+    $('.addd-btn').on("click", function(){
+
+      var id = "video"+ (vidItem + 1);
+      var nonID = "vid"+ (vidItem + 1);
+      html = '<div id='+ id +' class="form-group row no-gutters mb-4 animated bounceInLeft">' +
+                    '<label class="col-md-4 col-form-label text-left" for="'+ id +'">'+ id +'</label>' +
+                    '<div class="col-md-8">' +
+                        '<input type="text" id='+ nonID +' name='+ nonID +' class="form-control vids">' +
+                    '</div>' +
+                  '</div>';
+
+      // Add new social field
+      var el = '#video' + vidItem;
+      $(html).insertAfter(el);
+
+      // Display remove button
+      $('.rm-btn').fadeIn(function(){
+          $(this).show();
+      });
+
+      // Increment vidItem
+      vidItem++;
+
+    });
+
+    // When the remove button is clicked 
+    $('.rm-btn').on('click', function(){
+
+      // Remove the recently added social field 
+      $('#video'+ (vidItem)).removeClass('bounceInLeft').addClass('bounceOutRight')
+        .fadeOut(function(){
+          $(this).remove();
+      });
+
+      // decrement vidItem
+      vidItem--;
+
+      // Remove remove button if the social fields are only one
+      if(vidItem == 0){
+        $('.rm-btn').fadeOut(function(){
+          $(this).hide()
+        });
+      }
+      });
     });
 
     // Update the image table when save changes is clicked 
-    $('.saveImage').on('click', function(){
-        var images = $('.modal-body').find('.gall');
+    $('.saveVideo').on('click', function(){
+        var videos = $('.modal-body').find('.vids');
 
         // create array of image links
-        var imgs = [];
+        var vids = [];
 
         // populatee the array
-        for (var i = 0; i < images.length; i++) {
-          imgs.push(images[i].value);
+        for (var i = 0; i < videos.length; i++) {
+          vids.push(videos[i].value);
         }
 
-        $.post("views/control.php", {choice: 'UpdateImages', images: JSON.stringify(array)}, function(data){
+        $.post("control.php", {choice: 'UpdateVideos', videos: JSON.stringify(vids)}, function(data){
             alert(data);
         });
+    });
+
+    // Manage owl carousel 
+    var owl = $("#owl-demo");
+ 
+    owl.owlCarousel({
+        items: 4,
+        navigation : true
     });
 
     $(".star").on("click",function(){
