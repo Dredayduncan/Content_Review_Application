@@ -1,4 +1,5 @@
 <?php
+
 	// Check if the user is a creator
 	$pic = "";
 	$role = "user";

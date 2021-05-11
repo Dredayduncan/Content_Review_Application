@@ -38,7 +38,16 @@
     if ($_SESSION['role'] == 'creator'){
       $info = '<li style="margin-top: -2%;"><a href=""> 
         <div class="img-log-div">
-          <img src="../assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log">
+          <img src="../assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
+          <ul class="dropdown-menu" style="background-color: #060c22;">
+                      <form action="creator-details.php?cid='.$_SESSION["cid"].'" method="post">
+                        <button type="submit" class="list-group-item btn btn-outline-success mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
+                      </form>
+
+                      <form action="../index.php?logout=yes" method="post">
+                        <button type="submit" class="list-group-item btn btn-outline-success pt-1 pl-1 pr-1 pb-1">Sign Out</button>
+                      </form>
+                      </ul>
         </div>
       </a></li>';
     }

@@ -35,7 +35,7 @@
                         <button type="submit" class="list-group-item btn btn-outline-success pt-1 pl-1 pr-1 pb-1">Sign Out</button>
                       </form>
                       </ul>
-                    </div>
+
                   </div>
                 </a></li>';
     }
