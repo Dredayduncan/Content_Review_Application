@@ -4,6 +4,9 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+ @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+ 
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -8346,3 +8349,36 @@ h1, h2, h3, h4, h5,
         border: 1px solid transparent;
         background: #e3b04b;
         color: #fff; }
+
+#rating  {
+  display: none;/* Remove radio buttons */
+
+  }.rater{
+
+    }.starrating > input {display: none;}  /* Remove radio buttons */
+    .starrating > label:before { 
+      content: "\f005"; /* Star */
+      margin: 2px;
+      font-size: 8em;
+      font-family: FontAwesome;
+      display: inline-block; 
+    }
+    .starrating > label
+    {
+      color: #222222; /* Start color when not clicked */
+    }
+    .starrating > input:checked ~ label
+    { color: #ffca08 ; } /* Set yellow color when star checked */
+    .starrating > input:hover ~ label
+    { color: #ffca08 ;  } /* Set yellow color when star hover */
+
+
+   
+
+   
+
+    
+
+    
+        
+        

@@ -66,7 +66,7 @@ create table Content(
 create table Favorites(
 	email varchar(255),
     foreign key(email) references Users(email),
-    favorite_id bigint NOT NULL UNIQUE,
+    favorite_id bigint NOT NULL,
     foreign key(favorite_id) references Creators(creator_id),
     time timestamp
 );
@@ -80,6 +80,8 @@ create table SearchHistory(
     time timestamp
     
 );
+
+UPDATE Creators SET numClicks = 0 WHERE numClicks IS NULL;
 
 
 

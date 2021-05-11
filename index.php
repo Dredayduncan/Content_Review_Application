@@ -1,4 +1,7 @@
 <?php
+  // Get config file
+  include 'auth/config.php';
+
   session_start();
 
   if (isset($_GET['logout']) && $_GET['logout'] == 'yes'){
@@ -20,20 +23,24 @@
               </a>';
 
     $menu = '<li><a href="views/history.php">History</a></li>
-            <li><a href="views/favorites.php">Favourites</a></li>';
+    <li><a href="views/favorites.php">Favourites</a></li>';
 
     if ($_SESSION['role'] == 'creator'){
       $info = '<li style="margin-top: -2%;"><a> 
                   <div class="img-log-div">
                     <img src="assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
+                    
+                  
                       <ul class="dropdown-menu" style="background-color: #060c22;">
+
                       <form action="views/creator-details.php?cid='.$_SESSION["cid"].'" method="post">
-                        <button type="submit" class="list-group-item btn btn-outline-success mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
+                        <button type="submit" class="list-group-item btn btn-outline-success ml-4 mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
                       </form>
 
                       <form action="index.php?logout=yes" method="post">
-                        <button type="submit" class="list-group-item btn btn-outline-success pt-1 pl-1 pr-1 pb-1">Sign Out</button>
+                        <button type="submit" class="list-group-item btn btn-outline-success ml-4 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
                       </form>
+
                       </ul>
 
                   </div>
@@ -49,20 +56,15 @@
                     7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 
                     7 0 0 0 8 1z"/>
                   </svg>
-
-                  <ul class="dropdown-menu" style="background-color: #060c22;">
-                        <button type="button"  class="list-group-item btn btn-outline-success mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
-                        <button type="button"  class="list-group-item btn btn-outline-success pt-1 pl-1 pr-1 pb-1">Sign Out</button>
-                      </ul>
                 </button>
+
+                <ul class="dropdown-menu" style="background-color: #060c22;">
+                <form action="index.php?logout=yes" method="post">
+                  <button type="submit" class="list-group-item btn btn-outline-success ml-5 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
+                </form>
+                </ul>
               </li>';
     }
-  }
-
-  $userEmail = '';
-
-  if (isset($_SESSION['userEmail'])){
-    $userEmail = $_SESSION['userEmail'];
   }
 ?>
 <!DOCTYPE html>
@@ -140,7 +142,7 @@
             <input id='search' style="margin-right:10px; width:500px;" class="form-control " type="search" placeholder="Search" aria-label="Search">
             <div class="filter mr-2 mt-2">
               <select id="content" name="content">
-                <option value="gaming">Any</option>
+                <option value="">Any</option>
                 <option value="gaming">Gaming</option>
                 <option value="photography">Photography</option>
                 <option value="videography">Videography</option>
@@ -156,7 +158,6 @@
               </select>           
             </div>
             <button id="searchButton" style="margin-right:10px;" class="btn btn-outline-success">Search</button>
-
           </form>
 
         
@@ -179,138 +180,40 @@
 
         <div class="row">
           
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker" data-aos="fade-up" data-aos-delay="200">
-              <a href="views/creator-details.php?cid=1"><img src="assets/img/speakers/2.jpg" alt="Speaker 2" class="img-fluid select"></a>
-              <div class="details">
-                <h3><a class='select' href="views/creator-details.php?cid=1">Hubert Hirthe</a></h3>
-                <p>Consequuntur odio aut</p>
-                <p class='code' hidden>1</p>
-                <div class="social">
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  
-                  <?php echo $fav; ?>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php 
+            #Write the query to get highest rated creators over the past 7 days
+            $query = "SELECT * FROM Users
+                      INNER JOIN Creators on Users.email = Creators.email
+                      INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
+                      ORDER BY numClicks";
 
-          <div class="col-lg-4 col-md-6 speak-col" style="margin-bottom: 100px;">
-            <div class="speaker" data-aos="fade-up" data-aos-delay="100">
-              <img src="assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
-              <div class="details">
-                <h3><a href="views/creator-details.php">Brenden Legros</a></h3>
-                <p>Quas alias incidunt</p>
-                <div class="social">
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
+            // execute query
+				    $result = mysqli_query($conn, $query);
 
-                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
-                    <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
-                     width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                     </svg>
-                    </i>
-                  </a>
+            // Check if the query is executed and perform the necessary actions
+            if(!$result){
+              die("ERROR: Could not able to execute $query. " . mysqli_error($conn));
+            }
+            else{
+                
+              // Display the results
+              while ($data = mysqli_fetch_array($result)){
 
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker" data-aos="fade-up" data-aos-delay="300">
-              <img src="assets/img/speakers/3.jpg" alt="Speaker 3" class="img-fluid">
-              <div class="details">
-                <h3><a href="views/creator-details.php">Cole Emmerich</a></h3>
-                <p>Fugiat laborum et</p>
-                <div class="social">
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
-                    <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
-                     width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                     </svg>
-                    </i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 speak-col" style="margin-bottom: 100px;">
-            <div class="speaker" data-aos="fade-up" data-aos-delay="100">
-              <img src="assets/img/speakers/4.jpg" alt="Speaker 4" class="img-fluid">
-              <div class="details">
-                <h3><a href="views/creator-details.php">Jack Christiansen</a></h3>
-                <p>Debitis iure vero</p>
-                <div class="social">
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
-                    <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
-                     width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                     </svg>
-                    </i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker" data-aos="fade-up" data-aos-delay="200">
-              <img src="assets/img/speakers/5.jpg" alt="Speaker 5" class="img-fluid">
-              <div class="details">
-                <h3><a href="views/creator-details.php">Alejandrin Littel</a></h3>
-                <p>Qui molestiae natus</p>
-                <div class="social">
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
-                    <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
-                     width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                     </svg>
-                    </i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker" data-aos="fade-up" data-aos-delay="300">
-              <img src="assets/img/speakers/6.jpg" alt="Speaker 6" class="img-fluid">
-              <div class="details">
-                <h3><a href="views/creator-details.php">Willow Trantow</a></h3>
-                <p>Non autem dicta</p>
-                <div class="social">
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
-                    <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
-                     width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                     </svg>
-                    </i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+                  echo '<div class="col-lg-4 col-md-6 mb-2">
+                  <div class="speaker" data-aos="fade-up" data-aos-delay="200">
+                  <a href="views/creator-details.php?cid='.$data['creator_id'].'"><img src="assets/avis/'.$data['avi'].'" alt="Creator" class="img-fluid select"></a>
+                    <div class="details">
+                      <h3><a class="select" href="views/creator-details.php?cid='.$data['creator_id'].'">'.$data["fname"]. " ". $data["lname"].'</a></h3>
+                      <p>'.$data['contentType'].'</p>
+                      <p class="code" hidden>'.$data['creator_id'].'</p>
+                      '. socials($data['Twitch'], $data['Facebook'], $data['Youtube'], $data['Twitter'], $data['LinkedIn'], $data['PWebsite1'], $data['PWebsite2']).'
+                    </div>
+                  </div>
+                </div>';
+              }
+          }
+
+        ?>
         </div>
       </div>
 
@@ -318,148 +221,48 @@
 
     <!-- ======= Speakers Section ======= -->
     <section id="mr">
-      <div class="container" data-aos="fade-up">
-        <div class="section-header">
+      <div class="container mt-5" data-aos="fade-up">
+        <div class="section-header ">
           <h2>Most Trending</h2>
           <p>Here are some of our most trending creators </p>
         </div>
 
         <div class="row">
-          <div class="col-lg-4 col-md-6 " style="margin-bottom: 100px;">
-            <div class="speaker" data-aos="fade-up" data-aos-delay="100">
-              <img src="assets/img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
-              <div class="details">
-                <h3><a href="views/creator-details.php">Brenden Legros</a></h3>
-                <p>Quas alias incidunt</p>
-                <div class="social">
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                  <a href="" class="btn btn-outline-danger "><i class="fa fa-facebook"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
-                    <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
-                     width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                     </svg>
-                    </i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker" data-aos="fade-up" data-aos-delay="200">
-              <img src="assets/img/speakers/2.jpg" alt="Speaker 2" class="img-fluid">
-              <div class="details">
-                <h3><a href="views/creator-details.php">Hubert Hirthe</a></h3>
-                <p>Consequuntur odio aut</p>
-                <div class="social">
-                  <a href=""class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                  <a href=""class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
-                    <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
-                     width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                     </svg>
-                    </i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker" data-aos="fade-up" data-aos-delay="300">
-              <img src="assets/img/speakers/3.jpg" alt="Speaker 3" class="img-fluid">
-              <div class="details">
-                <h3><a href="views/creator-details.php">Cole Emmerich</a></h3>
-                <p>Fugiat laborum et</p>
-                <div class="social">
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
-                    <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
-                     width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                     </svg>
-                    </i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6" style="margin-bottom: 100px;">
-            <div class="speaker" data-aos="fade-up" data-aos-delay="100">
-              <img src="assets/img/speakers/4.jpg" alt="Speaker 4" class="img-fluid">
-              <div class="details">
-                <h3><a href="views/creator-details.php">Jack Christiansen</a></h3>
-                <p>Debitis iure vero</p>
-                <div class="social">
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
-                    <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
-                     width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                     </svg>
-                    </i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker" data-aos="fade-up" data-aos-delay="200">
-              <img src="assets/img/speakers/5.jpg" alt="Speaker 5" class="img-fluid">
-              <div class="details">
-                <h3><a href="views/creator-details.php">Alejandrin Littel</a></h3>
-                <p>Qui molestiae natus</p>
-                <div class="social">
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
-                    <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
-                     width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                     </svg>
-                    </i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker" data-aos="fade-up" data-aos-delay="300">
-              <img src="assets/img/speakers/6.jpg" alt="Speaker 6" class="img-fluid">
-              <div class="details">
-                <h3><a href="views/creator-details.php">Willow Trantow</a></h3>
-                <p>Non autem dicta</p>
-                <p hidden>creator ID</p>
-                <div class="social">
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                  <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                  <a href="" class="btn btn-outline-secondary fav" style="margin-left: 125px;">
-                    <i class=""> <svg xmlns="http://www.w3.org/2000/svg"
-                     width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                     </svg>
-                    </i>
-                  </a>
-                  
-                  
-                </div>
-              </div>
-            </div>
-          </div>
+        <?php 
+            #Write the query to get highest rated creators over the past 7 days
+            $query = "SELECT * FROM Users
+                      INNER JOIN Creators on Users.email = Creators.email
+                      INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
+                      ORDER BY numClicks desc LIMIT 6";
+
+            // execute query
+				    $result = mysqli_query($conn, $query);
+
+            // Check if the query is executed and perform the necessary actions
+            if(!$result){
+              die("ERROR: Could not able to execute $query. " . mysqli_error($conn));
+            }
+            else{
+                
+              // Display the results
+              while ($data = mysqli_fetch_array($result)){
+
+                  echo '<div class="col-lg-4 col-md-6 mb-2">
+                  <div class="speaker" data-aos="fade-up" data-aos-delay="200">
+                  <a href="views/creator-details.php?cid='.$data['creator_id'].'"><img src="assets/avis/'.$data['avi'].'" alt="Creator" class="img-fluid select"></a>
+                    <div class="details">
+                      <h3><a class="select" href="views/creator-details.php?cid='.$data['creator_id'].'">'.$data["fname"]. " ". $data["lname"].'</a></h3>
+                      <p>'.$data['contentType'].'</p>
+                      <p class="code" hidden>'.$data['creator_id'].'</p>
+                      '. socials($data['Twitch'], $data['Facebook'], $data['Youtube'], $data['Twitter'], $data['LinkedIn'], $data['PWebsite1'], $data['PWebsite2']).'
+                    </div>
+                  </div>
+                </div>';
+              }
+          }
+
+        ?>
+          
         </div>
       </div>
 
@@ -489,24 +292,26 @@
     $(".speaker .fav").on('click', function(){
 		var creator = $(this).parent().prev().html();
 		
-		$.post("views/control.php", {choice: 'favorite', email: <?=json_encode($userEmail);?>,
+		$.post("views/control.php", {choice: 'favorite', email: <?=json_encode($_SESSION['userEmail']);?>,
         creatorid: creator}, function(data){
 			  alert(data);
 		});
 	});
 
 	// Add to history
-	$( ".select" ).on("click", function() {
+	$( ".select" ).click(function( event ) {
     var creator = $(this).parent().parent().find(".code").html();
+
+    console.log(creator);
    
-    $.post("views/control.php", {choice: 'history',  email: <?=json_encode($userEmail);?>, 
+    $.post("views/control.php", {choice: 'history',  email: <?=json_encode($_SESSION['userEmail']);?>, 
       creatorid: creator}, function(data){
       alert(data);
     });
   });
 
   $('#searchButton').on("click", function(){
-    var filter = 'gaming';
+    var filter = $('#content').val();
 
     $.post("views/control.php", {choice: 'search',  value: $('#search').val(), filter: filter}, function(data){
       $('#main').html(data);

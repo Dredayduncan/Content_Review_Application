@@ -64,8 +64,8 @@
                 }
 
                 // insert record into creator table
-                $sql = "INSERT into Creators (email, avi)
-                VALUES ('$email', '$fileName')";
+                $sql = "INSERT into Creators (email, avi, numClicks)
+                VALUES ('$email', '$fileName', 0)";
 
                 // execute query
                 $res = mysqli_query($conn, $sql);

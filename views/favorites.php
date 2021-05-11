@@ -11,7 +11,7 @@
       }
 
     $info = '<li>
-    <button type="button" class="btn btn-link ">
+    <button type="button" class="btn btn-link dropdown-toggle" data-bs-toggle="dropdown">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" 
         fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -20,6 +20,12 @@
         7 0 0 0 8 1z"/>
         </svg>
     </button>
+
+    <ul class="dropdown-menu" style="background-color: #060c22;">
+        <form action="../index.php?logout=yes" method="post">
+            <button type="submit" class="list-group-item btn btn-outline-success ml-4 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
+        </form>
+    </ul>
     </li>';
 
     if (isset($_SESSION['role'])){
@@ -28,15 +34,16 @@
             $info = '<li style="margin-top: -2%;"><a > 
                         <div class="img-log-div">
                         <img src="../assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
-                        <ul class="dropdown-menu" style="background-color: #060c22;">
-                            <form action="creator-details.php?cid='.$_SESSION["cid"].'" method="post">
-                                <button type="submit" class="list-group-item btn btn-outline-success mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
-                            </form>
 
-                            <form action="../index.php?logout=yes" method="post">
-                                <button type="submit" class="list-group-item btn btn-outline-success pt-1 pl-1 pr-1 pb-1">Sign Out</button>
-                            </form>
-                      </ul>
+                        <ul class="dropdown-menu" style="background-color: #060c22;">
+                        <form action="creator-details.php?cid='.$_SESSION["cid"].'" method="post">
+                          <button type="submit" class="list-group-item btn btn-outline-success ml-4 mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
+                        </form>
+  
+                        <form action="../index.php?logout=yes" method="post">
+                          <button type="submit" class="list-group-item btn btn-outline-success ml-4 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
+                        </form>
+                        </ul>
                         </div>
                     </a></li>';
         }
@@ -121,8 +128,8 @@
                 inner join Favorites
                 on Creators.creator_id = Favorites.favorite_id
                 WHERE creator_id in 
-                (SELECT favorite_id FROM Favorites WHERE email = '".$_SESSION['userEmail']."' 
-                order by time desc)";
+                (SELECT favorite_id FROM Favorites WHERE email = '".$_SESSION['userEmail']."')
+                order by time desc";
 
                 // execute query
                 $result = mysqli_query($conn, $sql);
@@ -140,7 +147,7 @@
                                     <img class="img-responsive img-fluid" src="../assets/avis/'.$data['avi'].'" alt="...">
                                     </div>
                                     <div class="col-md-8">
-                                        <div class="card-body">
+                                        <div class="card-body" style="width:1000px;">
                                             <h5 class="card-title">'. $data['fname'] . " " . $data['lname'].'</h5>
                                             <p class="card-text">'.$data['bio'].'</p>
                                             <p class="card-text"><small class="text-muted">'.$data['time'].'</small></p>
@@ -162,40 +169,13 @@
                 }
             ?>
 
-            <div class="row d-flex justify-content-center" data-aos="fade-up">
-                <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                        <img class="img-responsive img-fluid" src="../assets/img/gallery/4.jpg" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                <div class="social">
-                                    <a href="" class="btn btn-outline-danger"><i class="fa fa-twitter"></i></a>
-                                    <a href="" class="btn btn-outline-danger"><i class="fa fa-facebook"></i></a>
-                                    <a href="" class="btn btn-outline-danger"><i class="fa fa-google-plus"></i></a>
-                                    <a href="" class="btn btn-outline-danger"><i class="fa fa-linkedin"></i></a>
-                                    
-                                    <div class="delete-button btn btn-outline-danger" style="margin-left: 60%;"> 
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
+        </div>
 
 
     </section><!-- End Speakers Section -->
+
+   
 
   </main><!-- End #main -->
 
@@ -214,6 +194,8 @@
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+
 
   <script>
       // Delete item to history when favorites button has been clicked
