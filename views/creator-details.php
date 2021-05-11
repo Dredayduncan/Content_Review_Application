@@ -351,11 +351,12 @@
             </div>
           </div>
           
+          <div id="owl-demo" class='owl-carousel owl-theme' data-aos='fade-up' data-aos-delay='100'>
           <?php
             $creatorid = $_SESSION['cid'];
             $sql = "SELECT content from Content WHERE creator_id = ".$creatorid." and contentType = 'IMAGE' ";
             $result = mysqli_query($conn, $sql);
-            echo "<div class='container'>";
+            
             if(!$result)
                 die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
             else{
@@ -363,19 +364,24 @@
                 if(mysqli_num_rows($result)== 0){
                   echo "<p>".$creator["fname"]. " does not have any images</p>";
                 }else{
-                  echo "<div class='owl-carousel gallery-carousel' data-aos='fade-up' data-aos-delay='100'>";
+
+                  $res = "";
+                  $i = 0;
                   while($data = mysqli_fetch_array($result)){
-                    echo "
-                      <a href='".$data['content']."' class='venobox' id = ' img".($i)." ' data-gall='gallery-carousel'><img src='".$data['content']."' alt=''></a>
+                    $res .= "
+                      <div class='item'><a href='".$data['content']."' class='venobox' id = ' img".$i." '><img src='".$data['content']."' alt=''></a></div>
                     ";
+
+                    $i++;
                   }
-                  echo "</div></div>";
+
+                  echo $res;
                 }
-                
-                
             }
 
           ?>
+          </div>
+        </div>
           
 
           <!--<div class="owl-carousel gallery-carousel" data-aos="fade-up" data-aos-delay="100">
@@ -399,41 +405,42 @@
               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title">Edit Profile</h5>
+                    <h5 class="modal-title">Edit Gallery</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
 
-                  <div class="form-group row no-gutters mb-4">
-                    <label class="col-md-4 col-form-label text-left" for="fname">First Name</label>
-                    <div class="col-md-8">
-                        <input type="text" id="fname" name="creatorfname" class="form-control">
-                        <input type="number" id="fnameID" name="fnameID" class="form-control" style="display:none;">
-                    </div>
-                  </div>
-
-                  <div class="contain">
-                          <div class="add-button btn btn-outline-success" > 
-                            <svg  xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" 
-                                class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                            </svg>
-                          </div>
-
-                          <div class="remove-button btn btn-outline-danger" > 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                            </svg>
-                          </div>
+                    <!-- <form action="creatorDetailsUpdate.php" id = "update" method="POST" enctype="multipart/form-data"> -->
+                      <div id="image0" class="form-group row no-gutters mb-4">
+                        <label class="col-md-4 col-form-label text-left" for="fname">image0</label>
+                        <div class="col-md-8">
+                            <input type="text" id="img0" name="img0" class="form-control gall">
                         </div>
-                  </div>
+                      </div>
 
-                  <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
+                      <div class="contain">
+                              <div class="btn btn-outline-success add-btn" > 
+                                <svg  xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" 
+                                    class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                              </div>
+
+                              <div class="btn btn-outline-danger remove-btn" > 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                </svg>
+                              </div>
+                            </div>
+                      </div>
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary saveImage">Save changes</button>
+                      </div>
+                    <!-- </form> -->
                 </div>
               </div>
             </div> 
@@ -457,13 +464,14 @@
             if(!$result)
                 die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
             else{
-                echo "
-                <div class='container'>
-                  <div class='row'>
-                ";
+                
                 if(mysqli_num_rows($result)== 0){
                   echo "<p>".$creator["fname"]. " does not have any videos</p>";
                 }else{
+                  echo "
+                    <div class='container'>
+                      <div class='row'>
+                    ";
                   while($data = mysqli_fetch_array($result)){
                     echo "
                       <
@@ -523,17 +531,16 @@
                   </div>
                   <div class="modal-body">
 
-                  <div class="form-group row no-gutters mb-4">
-                    <label class="col-md-4 col-form-label text-left" for="fname">First Video</label>
+                  <div id="video0" class="form-group row no-gutters mb-4">
+                    <label class="col-md-4 col-form-label text-left" for="vid0">video0</label>
                     <div class="col-md-8">
-                        <input type="text" id="fname" name="creatorfname" class="form-control">
-                        <input type="number" id="fnameID" name="fnameID" class="form-control" style="display:none;">
+                        <input type="text" id="vid0" name="vid0" class="form-control">
                     </div>
                   </div>
 
                   
                   <div class="contain">
-                          <div class="add-button btn btn-outline-success" > 
+                          <div class="btn btn-outline-success addd-btn" > 
                             <svg  xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" 
                                 class="bi bi-plus-circle" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -541,7 +548,7 @@
                             </svg>
                           </div>
 
-                          <div class="remove-button btn btn-outline-danger" > 
+                          <div class="rm-btn btn btn-outline-danger" > 
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                               <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                               <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -552,7 +559,7 @@
 
                   <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary saveVideo">Save changes</button>
                   </div>
                 </div>
               </div>
@@ -605,8 +612,12 @@
 
   <script>
     var item = 0;
+    var imgItem = 0;
+    var vidItem = 0;
     
     $(document).ready(function(){
+
+    // Manage buttons in the edit profile modal
       var socials = ['Twitter', 'Facebook', 'LinkedIn', 'Youtube', 'Personal Website 1', 'Personal Website 2'];
 
       // When the add button is clicked
@@ -617,8 +628,6 @@
                           '<input type="text" id="' + socials[item] + '" name="' + socials[item] + '" class="form-control">' +
                       '</div>' +
                     '</div>';
-
-       
 
         // Add new social field
         var el = '#social' + item;
@@ -658,17 +667,141 @@
           $('.remove-button').fadeOut(function(){
             $(this).hide()
           });
-        }else{
+        }
+        else{
           $('.add-button').fadeIn(function(){
             $(this).show();
         });
         }
       });
+
+    // Manage buttons in the edit image modal
+
+    // When the add button is clicked
+    $('.add-btn').on("click", function(){
+
+        var id = "image"+ (imgItem + 1);
+        var nonID = "img"+ (imgItem + 1);
+         html = '<div id='+ id +' class="form-group row no-gutters mb-4 animated bounceInLeft">' +
+                      '<label class="col-md-4 col-form-label text-left" for="'+ id +'">'+ id +'</label>' +
+                      '<div class="col-md-8">' +
+                          '<input type="text" id='+ nonID +' name='+ nonID +' class="form-control gall">' +
+                      '</div>' +
+                    '</div>';
+
+        // Add new social field
+        var el = '#image' + imgItem;
+        $(html).insertAfter(el);
+
+        // Display remove button
+        $('.remove-btn').fadeIn(function(){
+            $(this).show();
+        });
+
+        // Increment imgItem
+        imgItem++;
+        
+      });
+    
+      // When the remove button is clicked 
+      $('.remove-btn').on('click', function(){
+
+        // Remove the recently added social field 
+        $('#image'+ (imgItem)).removeClass('bounceInLeft').addClass('bounceOutRight')
+          .fadeOut(function(){
+            $(this).remove();
+        });
+
+        // decrement imgItem
+        imgItem--;
+
+        // Remove remove button if the social fields are only one
+        if(imgItem == 0){
+          $('.remove-btn').fadeOut(function(){
+            $(this).hide()
+          });
+        }
+      });
+
+    // Manage buttons in the edit video modal
+
+    // When the add button is clicked
+    $('.addd-btn').on("click", function(){
+
+      var id = "video"+ (vidItem + 1);
+      var nonID = "vid"+ (vidItem + 1);
+      html = '<div id='+ id +' class="form-group row no-gutters mb-4 animated bounceInLeft">' +
+                    '<label class="col-md-4 col-form-label text-left" for="'+ id +'">'+ id +'</label>' +
+                    '<div class="col-md-8">' +
+                        '<input type="text" id='+ nonID +' name='+ nonID +' class="form-control vids">' +
+                    '</div>' +
+                  '</div>';
+
+      // Add new social field
+      var el = '#video' + vidItem;
+      $(html).insertAfter(el);
+
+      // Display remove button
+      $('.rm-btn').fadeIn(function(){
+          $(this).show();
+      });
+
+      // Increment vidItem
+      vidItem++;
+
+    });
+
+    // When the remove button is clicked 
+    $('.rm-btn').on('click', function(){
+
+      // Remove the recently added social field 
+      $('#video'+ (vidItem)).removeClass('bounceInLeft').addClass('bounceOutRight')
+        .fadeOut(function(){
+          $(this).remove();
+      });
+
+      // decrement vidItem
+      vidItem--;
+
+      // Remove remove button if the social fields are only one
+      if(vidItem == 0){
+        $('.rm-btn').fadeOut(function(){
+          $(this).hide()
+        });
+      }
+      });
+    });
+
+    // Update the image table when save changes is clicked 
+    $('.saveVideo').on('click', function(){
+        var videos = $('.modal-body').find('.vids');
+
+        // create array of image links
+        var vids = [];
+
+        // populatee the array
+        for (var i = 0; i < videos.length; i++) {
+          vids.push(videos[i].value);
+        }
+
+        $.post("control.php", {choice: 'UpdateVideos', videos: JSON.stringify(vids)}, function(data){
+            alert(data);
+        });
+    });
+
+    // Manage owl carousel 
+    var owl = $("#owl-demo");
+ 
+    owl.owlCarousel({
+        items: 4,
+        navigation : true
     });
 
     $(".star").on("click",function(){
       alert($(this).val());
     });
+
+
     
   </script>
 

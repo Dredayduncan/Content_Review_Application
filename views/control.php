@@ -177,23 +177,33 @@
 
             break;
             case 'UpdateImages':
-                $img = $_SESSION['gallery'];
-                $creatorid = $_POST["creatorid"];
-                for(int $i = 0; $i < count($img); $i++){
-                    $insert = "INSERT INTO Content (creator_id, content,contentType) values ($creatorid ,".$img[$i]. ", IMAGE)";
+                $img = json_decode($_POST['images']);
+                $creatorid = $_SESSION["cid"];
+               
+                for($i = 0; $i < count($img); $i++){
+
+                    $insert = "INSERT INTO Content (creator_id, content,contentType) values ($creatorid ,'".$img[$i]. "', 'IMAGE')";
+
                     if(!mysqli_query($conn, $insert))
                         die("ERROR: Could not able to execute $insert. " . mysqli_error($conn));
                 }
+
+                header("Location: creator-details.php?".$_SESSION['cid']);
             break;
 
             case 'UpdateVideos':
-                $video = $_SESSION["videos"];
-                $creatorid = $_POST["creatorid"];
-                for(int $i = 0; $i < count($img); $i++){
-                    $insert = "INSERT INTO Content (creator_id, content, contentType) values ($creatorid ,".$img[$i]. ", VIDEO)";
+                $video = json_decode($_POST['videos']);
+                $creatorid = $_SESSION["cid"];
+
+                for($i = 0; $i < count($video); $i++){
+
+                    $insert = "INSERT INTO Content (creator_id, content, contentType) values ($creatorid ,".$video[$i]. ", 'VIDEO')";
+
                     if(!mysqli_query($conn, $insert))
                         die("ERROR: Could not able to execute $insert. " . mysqli_error($conn));
                 }
+
+                header("Location: creator-details.php?".$_SESSION['cid']);
             break;
 
         default:
