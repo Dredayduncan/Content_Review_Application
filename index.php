@@ -185,7 +185,9 @@
             $query = "SELECT * FROM Users
                       INNER JOIN Creators on Users.email = Creators.email
                       INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
-                      ORDER BY numClicks LIMIT 6";
+                      INNER JOIN Rating on Rating.creator_id = Creators.creator_id
+                      WHERE Rating.time > now() - INTERVAL 7 day
+                      ORDER BY Creators.rating LIMIT 6";
 
             // execute query
 				    $result = mysqli_query($conn, $query);
