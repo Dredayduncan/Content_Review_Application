@@ -37,7 +37,8 @@ create table Rating(
     foreign key(creator_id) references Creators(creator_id),
     ratorid varchar(255),
     foreign key(ratorid) references Users(email),
-    rating tinyint check (rating > 0 and rating < 6)
+    rating tinyint check (rating > 0 and rating < 6),
+    time timestamp
 );
 
 -- Table that contains links to each creator's social media links as well as website links

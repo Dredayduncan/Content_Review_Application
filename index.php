@@ -185,7 +185,9 @@
             $query = "SELECT * FROM Users
                       INNER JOIN Creators on Users.email = Creators.email
                       INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
-                      ORDER BY numClicks LIMIT 6";
+                      INNER JOIN Rating on Rating.creator_id = Creators.creator_id
+                      WHERE Rating.time > now() - INTERVAL 7 day
+                      ORDER BY Creators.rating LIMIT 6";
 
             // execute query
 				    $result = mysqli_query($conn, $query);
@@ -230,9 +232,14 @@
         <div class="row">
         <?php 
             #Write the query to get highest rated creators over the past 7 days
-            $query = "SELECT * FROM Users
+            $query = "SELECT Users.fname, Users.lname, Creators.creator_id, Creators.bio, Creators.email,
+                      Creators.contentType, CreatorSocial.PWebsite1, CreatorSocial.PWebsite2, CreatorSocial.LinkedIn, 
+                      CreatorSocial.Facebook, CreatorSocial.Youtube, CreatorSocial.Twitch, CreatorSocial.Twitter, SearchHistory.time, Creators.avi
+                      FROM Users
                       INNER JOIN Creators on Users.email = Creators.email
                       INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
+                      INNER JOIN SearchHistory on Creators.creator_id = SearchHistory.history_id
+                      WHERE time > now() - INTERVAL 7 day
                       ORDER BY numClicks desc LIMIT 6";
 
             // execute query
