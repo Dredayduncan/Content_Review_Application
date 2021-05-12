@@ -22,7 +22,7 @@
 					<div class="card fat">
 						<div class="card-body">
 							<h4 class="card-title d-flex justify-content-center">Reset Password</h4>
-							<form method="POST" class="my-login-validation" novalidate="">
+							<form action="login.php" method="POST" class="my-login-validation" novalidate="">
 								<div class="form-group">
 									<label for="new-password">New Password</label>
 									<input id="new-password" type="password" class="form-control" name="password" required autofocus data-eye>

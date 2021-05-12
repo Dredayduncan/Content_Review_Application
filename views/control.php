@@ -236,9 +236,17 @@
                 $img = json_decode($_POST['images']);
                 $creatorid = $_SESSION["cid"];
                 for($i = 0; $i < count($img); $i++){
-                    $insert = "INSERT INTO Content (creator_id, content,contentType) values ($creatorid ,'".$img[$i]. "', 'IMAGE')";
-                    if(!mysqli_query($conn, $insert))
-                        die("ERROR: Could not able to execute $insert. " . mysqli_error($conn));
+                    // Check if the rator has already rated the creator 
+                    $contentCheck = "SELECT * FROM Content WHERE content ='". $img[$i] . "' and contentType = 'IMAGE' and creator_id =". $_SESSION['cid'];
+
+                    $res = mysqli_query($conn, $contentCheck);
+
+                    if(mysqli_num_rows($res) == 0){
+                        $insert = "INSERT INTO Content (creator_id, content,contentType) values ($creatorid ,'".$img[$i]. "', 'IMAGE')";
+                        if(!mysqli_query($conn, $insert))
+                            die("ERROR: Could not able to execute $insert. " . mysqli_error($conn));
+
+                    }
                 }
             break;
 
@@ -248,12 +256,33 @@
                 $creatorid = $_SESSION["cid"];
                 $video = updateVid($video);
                 for($i = 0; $i < count($video); $i++){
-                    $insert = "INSERT INTO Content (creator_id, content, contentType) values ($creatorid ,'".$video[$i]. "', 'VIDEO')";
-                    if(!mysqli_query($conn, $insert))
-                        die("ERROR: Could not able to execute $insert. " . mysqli_error($conn));
+                    // Check if the rator has already rated the creator 
+                    $contentCheck = "SELECT * FROM Content WHERE content ='". $video[$i] . "' and contentType = 'VIDEO' and creator_id =". $_SESSION['cid'];
+
+                    $res = mysqli_query($conn, $contentCheck);
+
+                    if(mysqli_num_rows($res) == 0){
+                        $insert = "INSERT INTO Content (creator_id, content, contentType) values ($creatorid ,'".$video[$i]. "', 'VIDEO')";
+                        if(!mysqli_query($conn, $insert))
+                            die("ERROR: Could not able to execute $insert. " . mysqli_error($conn));
+                    }
                 }
             break;
 
+            case 'contentRemove':
+                $type = $_POST['type'];
+                $content = $_POST['item'];
+
+                // Write the query to remove from the Content table
+                $sql = "DELETE FROM Content WHERE content = '".$content."' and contentType = '".$type."' and creator_id =". $_SESSION['cid'];
+
+                //execute the update query
+                if(!mysqli_query($conn, $sql)){
+                    die("ERROR: Could not able to execute $sql " . mysqli_error($conn));
+                }   
+                
+
+            break;
         default:
             # code...
             break;

@@ -692,6 +692,11 @@
       // When the remove button is clicked 
       $('.remove-btn').on('click', function(){
 
+        // Remove the result from the database
+        $.post("control.php", {choice: 'contentRemove',  type: 'IMAGE', item:  $('#image'+ (imgItem) + ' #' + "img"+ (imgItem)).val()}, function(data){
+            data;
+        });
+
         // Remove the recently added social field 
         $('#image'+ (imgItem)).removeClass('bounceInLeft').addClass('bounceOutRight')
           .fadeOut(function(){
@@ -739,6 +744,11 @@
 
     // When the remove button is clicked 
     $('.rm-btn').on('click', function(){
+
+      // Remove the result from the database
+      $.post("control.php", {choice: 'contentRemove',  type: 'VIDEO', item:  $('#video'+ (vidItem) + ' #' + "vid"+ (vidItem)).val()}, function(data){
+          data;
+      });
 
       // Remove the recently added social field 
       $('#video'+ (vidItem)).removeClass('bounceInLeft').addClass('bounceOutRight')
@@ -789,11 +799,8 @@
         }
 
         $.post("control.php", {choice: 'UpdateVideos', videos: JSON.stringify(vids)}, function(data){
-          //window.location.replace("creator-details.php?cid=" + <?=json_encode($_SESSION['cid']);?>);
-          alert(data);
-          
+          window.location.replace("creator-details.php?cid=" + <?=json_encode($_SESSION['cid']);?>);
         });
-          return false;
     });
 
     // Manage owl carousel 
@@ -874,7 +881,7 @@
       // Append the results to the images modal
       $(images).insertAfter('#image0');
 
-      if (imgs.length > 1){
+      if (imgs.length >= 1){
         $('#image0').remove();
       }
       
@@ -889,7 +896,7 @@
       var vidLinks = [];
 
       for (var i = 0; i < vids.length; i++){
-        vidLinks.push(vids[i].getAttribute('href'));
+        vidLinks.push(vids[i].getAttribute('src'));
       }
 
       // populate the modal with the slots for the images
@@ -913,7 +920,7 @@
       // Append the results to the videos modal
       $(videos).insertAfter('#video0');
 
-      if (vids.length > 1){
+      if (vids.length >= 1){
         $('#video0').remove();
       }
     });
