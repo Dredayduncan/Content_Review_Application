@@ -129,7 +129,9 @@
                 on Creators.email = Users.email
                 inner join SearchHistory
                 on Creators.creator_id = SearchHistory.history_id
-                WHERE creator_id in 
+                INNER JOIN CreatorSocial 
+                on CreatorSocial.creator_id = Creators.creator_id
+                WHERE Creators.creator_id in 
                 (SELECT history_id FROM SearchHistory WHERE email = '".$_SESSION['userEmail']."')
                 order by time desc";
 
@@ -146,11 +148,11 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                    <img class="img-responsive img-fluid" style="max-height: 50%; width: 100%;" src="../assets/avis/'.$data['avi'].'" alt="...">
+                                    <a href="creator-details.php?cid='.$data['creator_id'].'"><img class="img-responsive img-fluid" src="../assets/avis/'.$data['avi'].'" alt="..."></a>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body" >
-                                            <h5 class="card-title">'. $data['fname'] . " " . $data['lname'].'</h5>
+                                            <h5><a class="select" href="creator-details.php?cid='.$data['creator_id'].'">'.$data["fname"]. " ". $data["lname"].'</a></h5>
                                             <p class="card-text">'.$data['bio'].'
                                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                                             Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, 
@@ -158,7 +160,8 @@
                                             It has survived not only five centuries, </p>
                                             <p class="card-text"><small class="text-muted">'.$data['time'].'</small></p>
                                             <p class="code" hidden>'.$data['creator_id'].'</p>
-
+                                            <p class="card-text">'.$data['contentType'].'</p>
+                                            '. socialsTrack($data['Twitch'], $data['Facebook'], $data['Youtube'], $data['Twitter'], $data['LinkedIn'], $data['PWebsite1'], $data['PWebsite2']).'
                                             <div class="delete-button btn btn-outline-danger" > 
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
