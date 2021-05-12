@@ -240,6 +240,7 @@
                       INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
                       INNER JOIN SearchHistory on Creators.creator_id = SearchHistory.history_id
                       WHERE time > now() - INTERVAL 7 day
+                      GROUP BY Creators.creator_id
                       ORDER BY numClicks desc LIMIT 6";
 
             // execute query
