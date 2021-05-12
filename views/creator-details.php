@@ -72,16 +72,24 @@
 
     if ($_SESSION['role'] == 'creator'){
       $info = '<li style="margin-top: -2%;"><a> 
-        <div class="img-log-div">
-          <img src="../assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
-
+      <div class="img-log-div dropdown">
+        <img src="../assets/avis/'.$_SESSION["avi"].'" alt="Profile picutre" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
+        
+      
           <ul class="dropdown-menu" style="background-color: #060c22;">
-            <form action="../index.php?logout=yes" method="post">
-              <button type="submit" class="list-group-item btn btn-outline-success ml-4 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
-            </form>
-            </ul>
-        </div>
-      </a></li>';
+
+          <form action="creator-details.php?cid='.$_SESSION["cid"].'" method="post">
+            <button type="submit" class="list-group-item btn btn-outline-success ml-4 mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
+          </form>
+
+          <form action="../index.php?logout=yes" method="post">
+            <button type="submit" class="list-group-item btn btn-outline-success ml-4 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
+          </form>
+
+          </ul>
+
+      </div>
+    </a></li>';
     }
     elseif ($_SESSION['role'] == 'user'){
       $info = '<li>
@@ -187,6 +195,7 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous"> -->
 
   <!-- =======================================================
   * Template Name: TheEvent - v2.3.1
@@ -225,13 +234,14 @@
       <div class="container">
         <div class="section-header">
           <div class="row">
-            <div class=" col-10 d-flex justify-content-center mx-auto">
+            <div class=" col-10 d-flex justify-content-center" style="margin-left:100px;">
               <h2>Creator Details</h2>
             </div>
-            <?php echo $editProfile; ?>
+           
           </div>
           <p id='cType'>
             <?php 
+            
               $cType = $creator['fname'] . ' has not updated their type of content :(';
 
               if (!empty($creator['contentType'])){
@@ -247,6 +257,7 @@
           <div class="col-md-6">
             <img src="../assets/avis/<?php echo $creator['avi']; ?>" alt="Creator" class="img-fluid">
           </div>
+          
 
           <div class="col-md-6">
             <div class="details">
@@ -371,6 +382,11 @@
             </div>
           </div>
         </div>
+        <div class="container mt-5" style="margin-left:880px;">
+        <?php echo $editProfile; ?>
+        
+        </div>
+        
 
     </section>
 
@@ -385,7 +401,7 @@
             </div>
           </div>
           
-          <div id="owl-demo" class='owl-carousel owl-theme' data-aos='fade-up' data-aos-delay='100'>
+          <div id="owl-demo" class='owl-carousel owl-theme d-flex justify-content-center' data-aos='fade-up' data-aos-delay='100'>
           <?php
             $creatorid = $_GET['cid'];
             $sql = "SELECT content from Content WHERE creator_id = ".$creatorid." and contentType = 'IMAGE' ";
@@ -396,7 +412,7 @@
             else{
                 
                 if(mysqli_num_rows($result)== 0){
-                  echo "<p>".$creator["fname"]. " does not have any images :(</p>";
+                  echo "<p class=text-center>".$creator["fname"]. " does not have any images :(</p>";
                 }else{
 
                   $res = "";
@@ -486,7 +502,7 @@
             else{
                 
                 if(mysqli_num_rows($result)== 0){
-                  echo "<p>".$creator["fname"]. " does not have any videos :(</p>";
+                  echo "<p class=text-center>".$creator["fname"]. " does not have any videos :(</p>";
                 }else{
                   echo "
                     <div class='container'>

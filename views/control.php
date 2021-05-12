@@ -159,17 +159,42 @@
         case 'search':
             # Get search data
             $value = $_POST['value'];
+            $val = "(Users.fname like '%".$value."%' or Users.lname like '%".$value."%' )";
             $filter = $_POST['filter'];
 
-            if ($filter == 'any'){
-                $filter = '';
-            }
+            $filt = "Creators.contentType = '".$filter."'";
+            $where = "";
 
-            #Generate the query
-            $sql = "SELECT * FROM Users
+            $sql = "";
+
+            if ( !empty($value ) && $filter != 'Any' ){
+                $where = $val ." and ". $filt ;
+                #Generate the query
+                $sql = "SELECT * FROM Users
+                INNER JOIN Creators on Users.email = Creators.email
+                INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
+                WHERE ".$where ;
+            }
+            elseif ( !empty($value) && $filter == 'Any' ){
+                    #Generate the query
+                    $sql = "SELECT * FROM Users
                     INNER JOIN Creators on Users.email = Creators.email
                     INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
-                    WHERE Users.fname like '%".$value."%' or Users.lname like '%".$value."%' and Creators.contentType = '$filter'";
+                    WHERE ".$val ;
+                }
+            elseif (empty($value) && $filter != 'Any'){
+                #Generate the query
+                $sql = "SELECT * FROM Users
+                INNER JOIN Creators on Users.email = Creators.email
+                INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
+                WHERE ".$filt;         
+            }
+            else{
+                #Generate the query
+                $sql = "SELECT * FROM Users
+                INNER JOIN Creators on Users.email = Creators.email
+                INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id" ;
+            }
 
             // Execute the query 
             $result = mysqli_query($conn, $sql);
@@ -184,7 +209,7 @@
                 </div> <div class='row'>";
 
                 if (mysqli_num_rows($result) == 0) {
-                    echo "<div class='d-flex justify-content-center' ><h3 style='color: #ffffff;'>There are no results for your search</h3></div>";
+                    echo "<div class= text-center ><h3 style='color: #ffffff;'>There are no results for your search</h3></div>";
                 }
                 else{
                     while ($data = mysqli_fetch_array($result)){

@@ -143,13 +143,13 @@
                     while ($data = mysqli_fetch_array($result)){
 
                         echo '<div class="row d-flex justify-content-center" data-aos="fade-up">
-                            <div class="card mb-3">
+                            <div class="card border-danger mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
                                     <a href="creator-details.php?cid='.$data['creator_id'].'"><img class="img-responsive img-fluid" src="../assets/avis/'.$data['avi'].'" alt="..."></a>
                                     </div>
                                     <div class="col-md-8">
-                                        <div class="card-body" style="width:1000px;">
+                                        <div class="card-body" >
                                             <h5><a class="select" href="creator-details.php?cid='.$data['creator_id'].'">'.$data["fname"]. " ". $data["lname"].'</a></h5>
                                             <p class="card-text">'.$data['bio'].'</p>
                                             <p class="card-text">'.$data['contentType'].'</p>
