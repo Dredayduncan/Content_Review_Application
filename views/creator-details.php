@@ -484,7 +484,7 @@
           </div>
 
           <?php
-            $creatorid = $_SESSION['cid'];
+            $creatorid = $_GET['cid'];
             $sql = "SELECT content from Content WHERE creator_id = ".$creatorid." and contentType = 'VIDEO' ";
             $result = mysqli_query($conn, $sql);
             if(!$result)
