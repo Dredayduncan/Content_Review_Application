@@ -121,7 +121,7 @@
                 <p>Here are your recently visited content creators</p>
             </div>
 
-            <?php
+        <?php
 
 				// Get the User History
 				$sql = "SELECT * FROM Creators
@@ -146,12 +146,16 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                    <img class="img-responsive img-fluid" src="../assets/avis/'.$data['avi'].'" alt="...">
+                                    <img class="img-responsive img-fluid" style="max-height: 50%; width: 100%;" src="../assets/avis/'.$data['avi'].'" alt="...">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body" >
-                                            <h5 class="card-title" style="width:1000px;">'. $data['fname'] . " " . $data['lname'].'</h5>
-                                            <p class="card-text"></p>
+                                            <h5 class="card-title">'. $data['fname'] . " " . $data['lname'].'</h5>
+                                            <p class="card-text">'.$data['bio'].'
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                                            Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, 
+                                            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                                            It has survived not only five centuries, </p>
                                             <p class="card-text"><small class="text-muted">'.$data['time'].'</small></p>
                                             <p class="code" hidden>'.$data['creator_id'].'</p>
 
@@ -167,9 +171,9 @@
                                 </div>
                             </div>
                         </div>';
-					}
-		
-				}
+            }
+      
+          }
 			?>
 
 

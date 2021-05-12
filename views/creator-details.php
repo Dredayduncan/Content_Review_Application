@@ -6,11 +6,32 @@
   // Begin session
   session_start();
 
+  // Get the items to display based on the role of the user 
   $editProfile = '';
   $editGallery = '';
   $editVideos = '';
   $menu = '';
   $info = '';
+  $rate = '<section id="rating">
+
+          <div class="container" data-aos="fade-up">
+            <div class="section-header">
+              <h2>Rate This Creator</h2>
+              <p>Tell us what you think ?</p>
+            </div>
+          </div>
+
+          <div  class=" rater container ">
+            <div id="rater" class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                <input type="radio" class="star" id="star5" name="rating" value="5" /><label for="star5" title="5 star"></label>
+                <input type="radio" class="star" id="star4" name="rating" value="4" /><label for="star4" title="4 star"></label>
+                <input type="radio" class="star" id="star3" name="rating" value="3" /><label for="star3" title="3 star"></label>
+                <input type="radio" class="star" id="star2" name="rating" value="2" /><label for="star2" title="2 star"></label>
+                <input type="radio" class="star" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
+            </div>
+          </div>
+
+        </section>';
 
   if (isset($_SESSION['cid'])){
     if ($_SESSION['cid'] == $_GET['cid']){
@@ -27,11 +48,25 @@
       $editVideos = '<div class="button d-flex justify-content-center mb-5">
                       <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Editvids">Edit Videos</button>
                       </div>';
+
+      $rate = '';
     }
   }
 
   
   if (isset($_SESSION['role'])){
+    // Check if the user or creator has rated the current creator
+    $sql = "SELECT rating FROM Rating WHERE ratorid ='". $_SESSION['userEmail'] . "' and creator_id =". $_GET['cid'];
+
+    $res = mysqli_query($conn, $sql);
+
+    if(mysqli_num_rows($res) == 1){
+      $dat = mysqli_fetch_assoc($res);
+      
+      $rate .= "<script> document.getElementById('star".$dat['rating']."').click();</script>";
+      
+    }
+
     $menu = '<li><a href="history.php">History</a></li>
             <li><a href="favorites.php">Favourites</a></li>';
 
@@ -67,6 +102,9 @@
                 </ul>
               </li>';
     }
+  }
+  else{
+    $rate = '';
   }
   
   // Get creator information
@@ -382,18 +420,6 @@
           ?>
           </div>
         </div>
-          
-
-          <!--<div class="owl-carousel gallery-carousel" data-aos="fade-up" data-aos-delay="100">
-            <a href="../assets/img/gallery/1.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/1.jpg" alt=""></a>
-            <a href="../assets/img/gallery/2.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/2.jpg" alt=""></a>
-            <a href="../assets/img/gallery/3.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/3.jpg" alt=""></a>
-            <a href="../assets/img/gallery/4.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/4.jpg" alt=""></a>
-            <a href="../assets/img/gallery/5.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/5.jpg" alt=""></a>
-            <a href="../assets/img/gallery/6.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/6.jpg" alt=""></a>
-            <a href="../assets/img/gallery/7.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/7.jpg" alt=""></a>
-            <a href="../assets/img/gallery/8.jpg" class="venobox" data-gall="gallery-carousel"><img src="../assets/img/gallery/8.jpg" alt=""></a>
-          </div> -->
     
         </section><!-- End Gallery Section -->
 
@@ -567,27 +593,7 @@
         </div>
         </section>    
 
-
-        <section id="rating">
-
-          <div class="container" data-aos="fade-up">
-            <div class="section-header">
-              <h2>Rate This Creator</h2>
-              <p>Tell us what you think ?</p>
-            </div>
-          </div>
-    
-          <div class=" rater container ">
-            <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
-                <input type="radio" class="star" id="star5" name="rating" value="5" /><label for="star5" title="5 star"></label>
-                <input type="radio" class="star" id="star4" name="rating" value="4" /><label for="star4" title="4 star"></label>
-                <input type="radio" class="star" id="star3" name="rating" value="3" /><label for="star3" title="3 star"></label>
-                <input type="radio" class="star" id="star2" name="rating" value="2" /><label for="star2" title="2 star"></label>
-                <input type="radio" class="star" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
-            </div>
-          </div>	
-    
-        </section>
+        <?php echo $rate; ?>
 
   </main><!-- End #main -->
 
@@ -816,7 +822,7 @@
 
     $(".star").on("click",function(){
   
-      $.post("control.php", {choice: 'rating', rating: $(this).val(), }, function(data){
+      $.post("control.php", {choice: 'rating', rating: $(this).val(), creatorid: <?=json_encode($_GET['cid']);?>, ratorid: <?=json_encode($_SESSION['userEmail']);?>}, function(data){
             alert(data);
         });
     });

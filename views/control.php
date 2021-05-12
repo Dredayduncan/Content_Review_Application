@@ -105,13 +105,26 @@
                 $rateNum = $row['numRates'] + 1;
                 $newRating = $rates / $rateNum;
 
-                // Insert the rating details into the Rating table
-                $raterTable = 'INSERT INTO Rating(creator_id, ratorid, rating) values 
-                                ("'.$creatorid.'", "'.$ratorid.'", "'.$rating.'") ';
+                // Check if the rator has already rated the creator 
+                $rateCheck = "SELECT rating FROM Rating WHERE ratorid ='". $_SESSION['userEmail'] . "' and creator_id =". $creatorid;
 
-                //execute the insert query
-                if(!mysqli_query($conn, $raterTable))
-                    die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
+                $res = mysqli_query($conn, $rateCheck);
+
+                if(mysqli_num_rows($res) != 0){
+                    $rateUpdate = "UPDATE Rating SET rating = ".$rating." WHERE ratorid ='". $_SESSION['userEmail'] . "' and creator_id =". $creatorid;
+
+                    //execute the insert query
+                    if(!mysqli_query($conn, $rateUpdate))
+                        die("ERROR: Could not able to execute $res. " . mysqli_error($conn));
+                }else{
+                    // Insert the rating details into the Rating table
+                    $raterTable = 'INSERT INTO Rating(creator_id, ratorid, rating) values 
+                    ("'.$creatorid.'", "'.$ratorid.'", "'.$rating.'") ';
+
+                    //execute the insert query
+                    if(!mysqli_query($conn, $raterTable))
+                        die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
+                }
 
                 // Update creator rating details 
                 $update = 'UPDATE Creators
@@ -123,6 +136,8 @@
             }else{
                 die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
             }
+
+            echo "The creator thanks you for your rating!";
 
             break;
         case 'search':
