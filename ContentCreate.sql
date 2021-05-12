@@ -81,6 +81,14 @@ create table SearchHistory(
     
 );
 
+create table resetpass(
+    id int auto_increment,
+    resetcode varchar(255),
+    email varchar(255),
+    primary key(id)
+);
+
+
 UPDATE Creators SET numClicks = 0 WHERE numClicks IS NULL;
 
 
