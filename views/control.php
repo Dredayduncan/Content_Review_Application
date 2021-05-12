@@ -44,7 +44,7 @@
 
             // Increase the number of clicks of the creator
             $query = "UPDATE Creators 
-            SET numclicks = (SELECT numclicks From Creators WHERE creator_id = ".$history_id.") + 1 
+            SET numClicks = (SELECT numClicks From Creators WHERE creator_id = ".$history_id.") + 1 
             WHERE creator_id =". $history_id;
 
             // execute query
