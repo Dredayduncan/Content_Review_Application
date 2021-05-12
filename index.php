@@ -308,7 +308,7 @@
    
     $.post("views/control.php", {choice: 'history',  email: <?=json_encode($_SESSION['userEmail']);?>, 
       creatorid: creator}, function(data){
-      alert(data);
+        window.location.replace("views/creator-details.php?cid=" + creator);
     });
   });
 

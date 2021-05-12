@@ -72,8 +72,10 @@
 
                             $.post("views/control.php", {choice: "history", email:"'.$_SESSION["userEmail"].'", 
                                 creatorid: creator}, function(data){
-                                alert(data);
-                            });g
+                                window.location.replace("views/creator-details.php?cid=" + creator);
+                            });
+
+                            return false;
                         });
 
                         </script>';
