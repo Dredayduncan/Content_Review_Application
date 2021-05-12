@@ -202,7 +202,7 @@
                 </div> <div class='row'>";
 
                 if (mysqli_num_rows($result) == 0) {
-                    echo "<div class='d-flex justify-content-center' ><h3 style='color: #ffffff;'>There are no results for your search</h3></div>";
+                    echo "<div class= text-center ><h3 style='color: #ffffff;'>There are no results for your search</h3></div>";
                 }
                 else{
                     while ($data = mysqli_fetch_array($result)){

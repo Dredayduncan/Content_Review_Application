@@ -36,13 +36,13 @@
                         <img src="../assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
 
                         <ul class="dropdown-menu" style="background-color: #060c22;">
-                      <form action="creator-details.php?cid='.$_SESSION["cid"].'" method="post">
-                        <button type="submit" class="list-group-item btn btn-outline-success ml-4 mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
-                      </form>
+                          <form action="creator-details.php?cid='.$_SESSION["cid"].'" method="post">
+                            <button type="submit" class="list-group-item btn btn-outline-success ml-4 mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
+                          </form>
 
-                      <form action="../index.php?logout=yes" method="post">
-                        <button type="submit" class="list-group-item btn btn-outline-success ml-4 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
-                      </form>
+                          <form action="../index.php?logout=yes" method="post">
+                            <button type="submit" class="list-group-item btn btn-outline-success ml-4 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
+                          </form>
                       </ul>
                         </div>
                         
@@ -148,7 +148,7 @@
                             <div class="card border-danger mb-3" style="max-height=100px; ">
                                 <div class="row g-0">
                                     <div class="col-md-4 img-div" >
-                                    <a href="creator-details.php?cid='.$data['creator_id'].'"><img  class="img-responsive img-fluid" src="../assets/avis/'.$data['avi'].'" alt="..."></a>
+                                    <a href="creator-details.php?cid='.$data['creator_id'].'"><img style="max-height:100%;"  class="img-responsive img-fluid rounded float-start" src="../assets/avis/'.$data['avi'].'" alt="..."></a>
                                     </div>
                                     <div class="col-md-8 text-break">
                                         <div class="card-body text-break" >

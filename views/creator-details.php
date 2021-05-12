@@ -71,17 +71,25 @@
             <li><a href="favorites.php">Favourites</a></li>';
 
     if ($_SESSION['role'] == 'creator'){
-      $info = '<li style="margin-top: -2%;"> <a> 
-        <div class="img-log-div">
-          <img src="../assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
-
+      $info = '<li style="margin-top: -2%;"><a> 
+      <div class="img-log-div dropdown">
+        <img src="../assets/avis/'.$_SESSION["avi"].'" alt="Profile picutre" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
+        
+      
           <ul class="dropdown-menu" style="background-color: #060c22;">
-            <form action="../index.php?logout=yes" method="post">
-              <button type="submit" class="list-group-item btn btn-outline-success ml-4 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
-            </form>
-            </ul>
-        </div>
-      </a></li>';
+
+          <form action="creator-details.php?cid='.$_SESSION["cid"].'" method="post">
+            <button type="submit" class="list-group-item btn btn-outline-success ml-4 mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
+          </form>
+
+          <form action="../index.php?logout=yes" method="post">
+            <button type="submit" class="list-group-item btn btn-outline-success ml-4 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
+          </form>
+
+          </ul>
+
+      </div>
+    </a></li>';
     }
     elseif ($_SESSION['role'] == 'user'){
       $info = '<li>
@@ -187,6 +195,7 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous"> -->
 
   <!-- =======================================================
   * Template Name: TheEvent - v2.3.1
