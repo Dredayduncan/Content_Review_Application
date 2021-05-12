@@ -8,18 +8,29 @@
             
             $email = $_POST['email'];
             $fav_id = $_POST['creatorid'];
-            //sql query to insert into the Favorites table
-            $sql = 'INSERT into Favorites (time, email, favorite_id)
-                  VALUES (CURRENT_TIMESTAMP, "'.$email.'", "'.$fav_id.'")';
 
-            // execute query
-            $result = mysqli_query($conn, $sql);
+            // Check if the creator has been favorited by the user 
+            $favCheck = "SELECT * FROM Favorites WHERE favorite_id ='". $fav_id . "' and email ='". $email ."'";
 
-            if ($result){
-                echo "Item has been added to favourites";
+            $res = mysqli_query($conn, $favCheck);
+
+            if(mysqli_num_rows($res) == 0){
+                //sql query to insert into the Favorites table
+                $sql = 'INSERT into Favorites (time, email, favorite_id)
+                VALUES (CURRENT_TIMESTAMP, "'.$email.'", "'.$fav_id.'")';
+
+                // execute query
+                $result = mysqli_query($conn, $sql);
+
+                if ($result){
+                    echo "Item has been added to favourites";
+                }
+                else{
+                    die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
+                }
             }
             else{
-                die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
+                echo "Creator is already in favorites";
             }
 
             break;
@@ -28,8 +39,6 @@
             $email = $_POST['email'];
             $history_id = $_POST['creatorid'];
 
-            
-           
             $sql = 'INSERT into SearchHistory (email, history_id, time)
                   VALUES ("'.$email.'", "'.$history_id.'", CURRENT_TIMESTAMP)';
 
@@ -44,7 +53,7 @@
 
             // Increase the number of clicks of the creator
             $query = "UPDATE Creators 
-            SET numclicks = (SELECT numclicks From Creators WHERE creator_id = ".$history_id.") + 1 
+            SET numClicks = (SELECT numClicks From Creators WHERE creator_id = ".$history_id.") + 1 
             WHERE creator_id =". $history_id;
 
             // execute query

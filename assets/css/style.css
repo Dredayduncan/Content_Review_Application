@@ -1702,3 +1702,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   border-radius: 3px; */
   text-align: center;
 }
+
+.card-body .card-text {
+  margin-bottom: 1%;
+}
