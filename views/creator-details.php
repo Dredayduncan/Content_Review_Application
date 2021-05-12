@@ -36,17 +36,17 @@
   if (isset($_SESSION['cid'])){
     if ($_SESSION['cid'] == $_GET['cid']){
       $editProfile = '<div class="col-2">
-                  <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" 
+                  <button id="profile" type="button" class="btn btn-outline-success" data-bs-toggle="modal" 
                   data-bs-target="#EditProfile">Edit Profile</button>
                   </div> ';
 
       $editGallery = '<div class="button d-flex justify-content-center mb-5">
-                      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Editgallery">
+                      <button id="galla" type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Editgallery">
                       Edit Gallery</button>
                       </div>';
 
       $editVideos = '<div class="button d-flex justify-content-center mb-5">
-                      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Editvids">Edit Videos</button>
+                      <button id="vods" type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Editvids">Edit Videos</button>
                       </div>';
 
       $rate = '';
@@ -230,7 +230,7 @@
             </div>
             <?php echo $editProfile; ?>
           </div>
-          <p>
+          <p id='cType'>
             <?php 
               $cType = $creator['fname'] . ' has not updated their type of content :(';
 
@@ -250,11 +250,11 @@
 
           <div class="col-md-6">
             <div class="details">
-              <h2><?php echo $creator['fname'] . " " . $creator['lname']; ?></h2>
+              <h2 id='name'><?php echo $creator['fname'] . " " . $creator['lname']; ?></h2>
               <?php 
                 echo socials1($creator['Twitch'], $creator['Facebook'], $creator['Youtube'], $creator['Twitter'], $creator['LinkedIn'], $creator['PWebsite1'], $creator['PWebsite2']); 
 
-                $prebio = '<p style="color: #6c757d;">';
+                $prebio = '<p id="bi" style="color: #6c757d;">';
                 $bio = $creator['fname'] . ' has not updated their bio :(';
                 $probio = '</p>';
 
@@ -283,7 +283,6 @@
                         <label class="col-md-4 col-form-label text-left" for="fname">First Name</label>
                         <div class="col-md-8">
                             <input type="text" id="fname" name="creatorfname" class="form-control">
-                            <input type="number" id="fnameID" name="fname" class="form-control" style="display:none;">
                         </div>
                       </div>
 
@@ -291,7 +290,6 @@
                         <label class="col-md-4 col-form-label text-left" for="lname">Last Name</label>
                         <div class="col-md-8">
                             <input type="text" id="lname" name="creatorlname" class="form-control">
-                            <input type="number" id="lnameID" name="lname" class="form-control" style="display:none;">
                         </div>
                       </div>
 
@@ -312,15 +310,13 @@
                           <option value="music">Music</option>
                           <option value="other">Other</option>
                         </select>
-                            <input type="number" id="lnameID" name="lname" class="form-control" style="display:none;">
                         </div>
                       </div>
 
                       <div class="form-group row no-gutters mb-4">
                         <label class="col-md-4 col-form-label text-left" for="bio">Bio</label>
                         <div class="col-md-8">
-                          <textarea name = "bio" cols="36" rows="5"></textarea>
-                          <input type="number" id="bioID" name="bio1" class="form-control" style="display:none;">
+                          <textarea id='bio' name = "bio" cols="36" rows="5"></textarea>
                         </div>
                       </div>
 
@@ -436,7 +432,6 @@
                   </div>
                   <div class="modal-body">
 
-                    <!-- <form action="creatorDetailsUpdate.php" id = "update" method="POST" enctype="multipart/form-data"> -->
                       <div id="image0" class="form-group row no-gutters mb-4">
                         <label class="col-md-4 col-form-label text-left" for="fname">image0</label>
                         <div class="col-md-8">
@@ -466,7 +461,6 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary saveImage">Save changes</button>
                       </div>
-                    <!-- </form> -->
                 </div>
               </div>
             </div> 
@@ -484,7 +478,7 @@
           </div>
 
           <?php
-            $creatorid = $_SESSION['cid'];
+            $creatorid = $_GET['cid'];
             $sql = "SELECT content from Content WHERE creator_id = ".$creatorid." and contentType = 'VIDEO' ";
             $result = mysqli_query($conn, $sql);
             if(!$result)
@@ -514,36 +508,6 @@
             }
 
           ?>
-
-          <!--<div class="container">
-            <div class="row">
-              <iframe class="embed-responsive-item col-lg-4 col-md-6" src="https://www.youtube.com/embed/PwGv6qhOlvI" style="margin-bottom: 2%; height: 20vw;" 
-                title="YouTube video player" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-              </iframe>
-
-              <iframe class="embed-responsive-item col-lg-4 col-md-6" src="https://www.youtube.com/embed/7eLfmimPs4E" style="margin-bottom: 2%; height: 20vw;" 
-                title="YouTube video player" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-              </iframe>
-
-              <iframe class="embed-responsive-item col-lg-4 col-md-6" src="https://www.youtube.com/embed/14TzFWrhsms" style="margin-bottom: 2%; height: 20vw;" 
-                title="YouTube video player" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-              </iframe>
-
-              <iframe class="embed-responsive-item col-lg-4 col-md-6" src="https://www.youtube.com/embed/cvV28xzjclA" style="margin-bottom: 2%; height: 20vw;" 
-                title="YouTube video player" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-              </iframe>
-    
-              <iframe class="embed-responsive-item col-lg-4 col-md-6" style="margin-bottom: 2%; height: 20vw;" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" src="https://www.dailymotion.com/embed/video/x8103m5"  allowfullscreen> 
-              </iframe> 
- 
-            </div>  
-          </div>-->
 
           <div class="container ">
           <?php echo $editVideos; ?>
@@ -820,12 +784,121 @@
         navigation : true
     });
 
+    // Rate the creator when the stars have been clicked  
     $(".star").on("click",function(){
   
       $.post("control.php", {choice: 'rating', rating: $(this).val(), creatorid: <?=json_encode($_GET['cid']);?>, ratorid: <?=json_encode($_SESSION['userEmail']);?>}, function(data){
             alert(data);
         });
     });
+
+    // Fill the profile inputs when the edit profile button has been clicked 
+    $('#profile').on('click', function(){
+      $('#fname').val($('.details h2').html().split(" ")[0]);
+      $('#lname').val($('.details h2').html().split(" ")[1]);
+      $('#pic').attr('src', $('.img-fluid').attr('src'));
+
+      var content = $('#cType').html().replace(/\s+/g, " ").trim().split(" ");
+
+      if (content.length == 1){
+        $('#content').val(content).change();
+      }
+      else{
+        $('#content').val(' ');
+      }
+
+      bio = $('#bi').html().replace(/\s+/g, " ").trim().split(" ");
+  
+      if (bio[0] !== $('.details h2').html().replace(/\s+/g, " ").trim().split(" ")[0] ){
+        $('#bio').val($('#bi').html());
+      }
+      else{
+        $('#bio').val('');
+      }
+
+      var links = $('.socials a');
+
+    });
+
+    // Fill the profile inputs when the edit images button has been clicked 
+    $('#galla').on('click', function(){
+  
+      // Get the images from the creator
+      var imgs = $('.item a');
+
+      // Get the links and store them in an array
+      var imgLinks = [];
+
+      for (var i = 0; i < imgs.length; i++){
+        imgLinks.push(imgs[i].getAttribute('href'));
+      }
+
+      // populate the modal with the slots for the images
+      var images = '';
+      for (var i = 0; i < imgLinks.length; i++){
+        var id = "image"+ (imgItem + 1);
+        var nonID = "img"+ (imgItem + 1);
+        
+        html = '<div id='+ id +' class="form-group row no-gutters mb-4 animated bounceInLeft">' +
+                  '<label class="col-md-4 col-form-label text-left" for="'+ id +'">'+ id +'</label>' +
+                  '<div class="col-md-8">' +
+                      '<input type="text" id='+ nonID +' name='+ nonID +' class="form-control gall" value="'+ imgLinks[i] +'">' +
+                  '</div>' +
+                '</div>';
+        
+        images += html;
+
+        imgItem++;
+      }
+
+      // Append the results to the images modal
+      $(images).insertAfter('#image0');
+
+      if (imgs.length > 1){
+        $('#image0').remove();
+      }
+      
+    });
+
+    // Fill the profile inputs when the edit videos button has been clicked 
+    $('#vods').on('click', function(){
+      // Get the images from the creator
+      var vids = $('.embed-responsive-item');
+
+      // Get the links and store them in an array
+      var vidLinks = [];
+
+      for (var i = 0; i < vids.length; i++){
+        vidLinks.push(vids[i].getAttribute('href'));
+      }
+
+      // populate the modal with the slots for the images
+      var videos = '';
+      for (var i = 0; i < vidLinks.length; i++){
+        var id = "video"+ (vidItem + 1);
+        var nonID = "vid"+ (vidItem + 1);
+        
+        html = '<div id='+ id +' class="form-group row no-gutters mb-4 animated bounceInLeft">' +
+                  '<label class="col-md-4 col-form-label text-left" for="'+ id +'">'+ id +'</label>' +
+                  '<div class="col-md-8">' +
+                      '<input type="text" id='+ nonID +' name='+ nonID +' class="form-control gall" value="'+ vidLinks[i] +'">' +
+                  '</div>' +
+                '</div>';
+        
+        videos += html;
+
+        vidItem++;
+      }
+
+      // Append the results to the videos modal
+      $(videos).insertAfter('#video0');
+
+      if (vids.length > 1){
+        $('#video0').remove();
+      }
+    });
+
+
 
 
     
