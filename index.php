@@ -256,7 +256,7 @@
 
                   echo '<div class="col-lg-4 col-md-6 mb-2">
                   <div class="speaker" data-aos="fade-up" data-aos-delay="200">
-                  <a href="views/creator-details.php?cid='.$data['creator_id'].'"><img src="assets/avis/'.$data['avi'].'" alt="Creator" class="img-fluid select"></a>
+                    <a href="views/creator-details.php?cid='.$data['creator_id'].'"><img src="assets/avis/'.$data['avi'].'" alt="Creator" class="img-fluid select"></a>
                     <div class="details">
                       <h3><a class="select" href="views/creator-details.php?cid='.$data['creator_id'].'">'.$data["fname"]. " ". $data["lname"].'</a></h3>
                       <p>'.$data['contentType'].'</p>
@@ -299,22 +299,29 @@
     $(".speaker .fav").on('click', function(){
 		var creator = $(this).parent().prev().html();
 		
-		$.post("views/control.php", {choice: 'favorite', email: <?=json_encode($_SESSION['userEmail']);?>,
-        creatorid: creator}, function(data){
-			  alert(data);
-		});
+    if (creator !== <?=json_encode($_SESSION['cid']);?>){
+        $.post("views/control.php", {choice: 'favorite', email: <?=json_encode($_SESSION['userEmail']);?>,
+          creatorid: creator}, function(data){
+          alert(data);
+      });
+    }
+		
 	});
 
 	// Add to history
 	$( ".select" ).click(function( event ) {
     var creator = $(this).parent().parent().find(".code").html();
-
-    console.log(creator);
    
-    $.post("views/control.php", {choice: 'history',  email: <?=json_encode($_SESSION['userEmail']);?>, 
-      creatorid: creator}, function(data){
-        window.location.replace("views/creator-details.php?cid=" + creator);
-    });
+    if ($(this).is('img')){
+      creator =  $(this).parent().next().find(".code").html();
+    }
+
+    if (creator !== <?=json_encode($_SESSION['cid']);?>){
+      $.post("views/control.php", {choice: 'history',  email: <?=json_encode($_SESSION['userEmail']);?>, 
+        creatorid: creator}, function(data){
+          window.location.replace("views/creator-details.php?cid=" + creator);
+      });
+    }
   });
 
   $('#searchButton').on("click", function(){

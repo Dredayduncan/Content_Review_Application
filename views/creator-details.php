@@ -156,7 +156,7 @@
     }
 
     if ($pw2 != null){
-        $socials .= '<a href="'.$pw2.'"><i class="fas fa-globe"></i></a>';
+        $socials .= '<a href="'.$pw2.'"><i class="fa fa-globe"></i></a>';
     }
 
     $socials .= '</div>';
@@ -400,7 +400,7 @@
             else{
                 
                 if(mysqli_num_rows($result)== 0){
-                  echo "<p>".$creator["fname"]. " does not have any images</p>";
+                  echo "<p>".$creator["fname"]. " does not have any images :(</p>";
                 }else{
 
                   $res = "";
@@ -492,7 +492,7 @@
             else{
                 
                 if(mysqli_num_rows($result)== 0){
-                  echo "<p>".$creator["fname"]. " does not have any videos</p>";
+                  echo "<p>".$creator["fname"]. " does not have any videos :(</p>";
                 }else{
                   echo "
                     <div class='container'>
