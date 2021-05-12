@@ -152,17 +152,42 @@
         case 'search':
             # Get search data
             $value = $_POST['value'];
+            $val = "(Users.fname like '%".$value."%' or Users.lname like '%".$value."%' )";
             $filter = $_POST['filter'];
 
-            if ($filter == 'any'){
-                $filter = '';
-            }
+            $filt = "Creators.contentType = '".$filter."'";
+            $where = "";
 
-            #Generate the query
-            $sql = "SELECT * FROM Users
+            $sql = "";
+
+            if ( !empty($value ) && $filter != 'Any' ){
+                $where = $val ." and ". $filt ;
+                #Generate the query
+                $sql = "SELECT * FROM Users
+                INNER JOIN Creators on Users.email = Creators.email
+                INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
+                WHERE ".$where ;
+            }
+            elseif ( !empty($value) && $filter == 'Any' ){
+                    #Generate the query
+                    $sql = "SELECT * FROM Users
                     INNER JOIN Creators on Users.email = Creators.email
                     INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
-                    WHERE Users.fname like '%".$value."%' or Users.lname like '%".$value."%' and Creators.contentType = '$filter'";
+                    WHERE ".$val ;
+                }
+            elseif (empty($value) && $filter != 'Any'){
+                #Generate the query
+                $sql = "SELECT * FROM Users
+                INNER JOIN Creators on Users.email = Creators.email
+                INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
+                WHERE ".$filt;         
+            }
+            else{
+                #Generate the query
+                $sql = "SELECT * FROM Users
+                INNER JOIN Creators on Users.email = Creators.email
+                INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id" ;
+            }
 
             // Execute the query 
             $result = mysqli_query($conn, $sql);

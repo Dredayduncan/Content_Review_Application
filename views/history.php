@@ -145,19 +145,15 @@
 					while ($data = mysqli_fetch_array($result)){
 
 						echo '<div class="row d-flex justify-content-center" data-aos="fade-up">
-                            <div class="card mb-3">
+                            <div class="card border-danger mb-3" style="max-height=100px; ">
                                 <div class="row g-0">
-                                    <div class="col-md-4">
-                                    <a href="creator-details.php?cid='.$data['creator_id'].'"><img class="img-responsive img-fluid" src="../assets/avis/'.$data['avi'].'" alt="..."></a>
+                                    <div class="col-md-4 img-div" >
+                                    <a href="creator-details.php?cid='.$data['creator_id'].'"><img  class="img-responsive img-fluid" src="../assets/avis/'.$data['avi'].'" alt="..."></a>
                                     </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body" >
+                                    <div class="col-md-8 text-break">
+                                        <div class="card-body text-break" >
                                             <h5><a class="select" href="creator-details.php?cid='.$data['creator_id'].'">'.$data["fname"]. " ". $data["lname"].'</a></h5>
-                                            <p class="card-text">'.$data['bio'].'
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                            Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, 
-                                            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                                            It has survived not only five centuries, </p>
+                                            <p class="card-text text-break">'.$data['bio'].'</p>
                                             <p class="card-text"><small class="text-muted">'.$data['time'].'</small></p>
                                             <p class="code" hidden>'.$data['creator_id'].'</p>
                                             <p class="card-text">'.$data['contentType'].'</p>

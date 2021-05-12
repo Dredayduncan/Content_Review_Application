@@ -142,7 +142,7 @@
             <input id='search' style="margin-right:10px; width:500px;" class="form-control " type="search" placeholder="Search" aria-label="Search">
             <div class="filter mr-2 mt-2">
               <select id="content" name="content">
-                <option value="">Any</option>
+                <option value="Any">Any</option>
                 <option value="gaming">Gaming</option>
                 <option value="photography">Photography</option>
                 <option value="videography">Videography</option>

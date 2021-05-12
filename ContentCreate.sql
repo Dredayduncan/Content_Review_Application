@@ -41,7 +41,7 @@ create table Rating(
     time timestamp
 );
 
--- Table that contains links to each creator's social media links as well as website links
+
 create table CreatorSocial(
     creator_id bigint,
     foreign key(creator_id) references Creators(creator_id),
@@ -54,7 +54,7 @@ create table CreatorSocial(
     Twitter varchar(255)
 );
 
--- Table that stores the content of each creator
+
 create table Content(
 	creator_id bigint,
     foreign key(creator_id) references Creators(creator_id),

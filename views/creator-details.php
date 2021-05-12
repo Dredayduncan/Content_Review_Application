@@ -71,7 +71,7 @@
             <li><a href="favorites.php">Favourites</a></li>';
 
     if ($_SESSION['role'] == 'creator'){
-      $info = '<li style="margin-top: -2%;"><a> 
+      $info = '<li style="margin-top: -2%;"> <a> 
         <div class="img-log-div">
           <img src="../assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
 
@@ -225,13 +225,14 @@
       <div class="container">
         <div class="section-header">
           <div class="row">
-            <div class=" col-10 d-flex justify-content-center mx-auto">
+            <div class=" col-10 d-flex justify-content-center" style="margin-left:100px;">
               <h2>Creator Details</h2>
             </div>
-            <?php echo $editProfile; ?>
+           
           </div>
-          <p>
+          <p >
             <?php 
+            
               $cType = $creator['fname'] . ' has not updated their type of content :(';
 
               if (!empty($creator['contentType'])){
@@ -247,6 +248,7 @@
           <div class="col-md-6">
             <img src="../assets/avis/<?php echo $creator['avi']; ?>" alt="Creator" class="img-fluid">
           </div>
+          
 
           <div class="col-md-6">
             <div class="details">
@@ -375,6 +377,11 @@
             </div>
           </div>
         </div>
+        <div class="container mt-5" style="margin-left:880px;">
+        <?php echo $editProfile; ?>
+        
+        </div>
+        
 
     </section>
 
@@ -389,7 +396,7 @@
             </div>
           </div>
           
-          <div id="owl-demo" class='owl-carousel owl-theme' data-aos='fade-up' data-aos-delay='100'>
+          <div id="owl-demo" class='owl-carousel owl-theme d-flex justify-content-center' data-aos='fade-up' data-aos-delay='100'>
           <?php
             $creatorid = $_GET['cid'];
             $sql = "SELECT content from Content WHERE creator_id = ".$creatorid." and contentType = 'IMAGE' ";
@@ -400,7 +407,7 @@
             else{
                 
                 if(mysqli_num_rows($result)== 0){
-                  echo "<p>".$creator["fname"]. " does not have any images :(</p>";
+                  echo "<p class=text-center>".$creator["fname"]. " does not have any images :(</p>";
                 }else{
 
                   $res = "";
@@ -492,7 +499,7 @@
             else{
                 
                 if(mysqli_num_rows($result)== 0){
-                  echo "<p>".$creator["fname"]. " does not have any videos :(</p>";
+                  echo "<p class=text-center>".$creator["fname"]. " does not have any videos :(</p>";
                 }else{
                   echo "
                     <div class='container'>
