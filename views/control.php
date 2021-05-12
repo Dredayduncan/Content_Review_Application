@@ -112,7 +112,7 @@
                 //Finding the average 
                 $rates = $row['totalRates'] + $rating;
                 $rateNum = $row['numRates'] + 1;
-                $newRating = $rates / $rateNum;
+                
 
                 // Check if the rator has already rated the creator 
                 $rateCheck = "SELECT rating FROM Rating WHERE ratorid ='". $_SESSION['userEmail'] . "' and creator_id =". $creatorid;
@@ -120,11 +120,17 @@
                 $res = mysqli_query($conn, $rateCheck);
 
                 if(mysqli_num_rows($res) != 0){
+                    $rateNum--;
+                    $old = mysqli_fetch_assoc($res);
+                    $oldrate = $old['rating'];
+                    $Nrating = $rating - $oldrate;
+                    $rates = ($rates-$rating) + $Nrating;
                     $rateUpdate = "UPDATE Rating SET rating = ".$rating." WHERE ratorid ='". $_SESSION['userEmail'] . "' and creator_id =". $creatorid;
 
                     //execute the insert query
                     if(!mysqli_query($conn, $rateUpdate))
                         die("ERROR: Could not able to execute $res. " . mysqli_error($conn));
+                    
                 }else{
                     // Insert the rating details into the Rating table
                     $raterTable = 'INSERT INTO Rating(creator_id, ratorid, rating) values 
@@ -135,13 +141,14 @@
                         die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
                 }
 
+                $newRating = $rates / $rateNum;
                 // Update creator rating details 
                 $update = 'UPDATE Creators
-                            SET totalRates = "'.$rates.'", numRates = "'.$rateNum.'", rating = "'.$newRating.'"  
-                            WHERE creator_id = "'.$creatorid.'" ';
+                            SET totalRates = '.$rates.', numRates = '.$rateNum.', rating = '.$newRating.'  
+                          WHERE creator_id = '.$creatorid ;
                 //execute the update query
                 if(!mysqli_query($conn, $update) )
-                    die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
+                    die("ERROR: Could not able to execute $update. " . mysqli_error($conn));
             }else{
                 die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
             }
