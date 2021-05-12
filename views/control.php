@@ -210,11 +210,8 @@
             case 'UpdateImages':
                 $img = json_decode($_POST['images']);
                 $creatorid = $_SESSION["cid"];
-               
                 for($i = 0; $i < count($img); $i++){
-
                     $insert = "INSERT INTO Content (creator_id, content,contentType) values ($creatorid ,'".$img[$i]. "', 'IMAGE')";
-
                     if(!mysqli_query($conn, $insert))
                         die("ERROR: Could not able to execute $insert. " . mysqli_error($conn));
                 }
@@ -222,12 +219,11 @@
 
             case 'UpdateVideos':
                 $video = json_decode($_POST['videos']);
+                print_r($video);
                 $creatorid = $_SESSION["cid"];
-
+                $video = updateVid($video);
                 for($i = 0; $i < count($video); $i++){
-
-                    $insert = "INSERT INTO Content (creator_id, content, contentType) values ($creatorid ,".$video[$i]. ", 'VIDEO')";
-
+                    $insert = "INSERT INTO Content (creator_id, content, contentType) values ($creatorid ,'".$video[$i]. "', 'VIDEO')";
                     if(!mysqli_query($conn, $insert))
                         die("ERROR: Could not able to execute $insert. " . mysqli_error($conn));
                 }
@@ -236,5 +232,20 @@
         default:
             # code...
             break;
+    }
+
+    function updateVid($videos){
+        $newVid = array();
+        for($i = 0; $i < count($videos); $i++){
+            if(strpos($videos[$i], 'youtube')){
+                $you = substr($videos[$i], 32);
+                $newVid[$i] = "https://www.youtube.com/embed/".$you;
+            }
+            elseif(strpos($videos[$i], 'youtu.be')){
+                $you = substr($videos[$i], 17);
+                $newVid[$i] = "https://www.youtube.com/embed/".$you;
+            }
+        }
+        return $newVid;
     }
 ?>

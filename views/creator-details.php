@@ -560,7 +560,7 @@
                   <div id="video0" class="form-group row no-gutters mb-4">
                     <label class="col-md-4 col-form-label text-left" for="vid0">video0</label>
                     <div class="col-md-8">
-                        <input type="text" id="vid0" name="vid0" class="form-control">
+                        <input type="text" id="vid0" name="vid0" class="form-control vids" >
                     </div>
                   </div>
 
@@ -792,6 +792,7 @@
 
         $.post("control.php", {choice: 'UpdateImages', images: JSON.stringify(imgs)}, function(data){
           window.location.replace("creator-details.php?cid=" + <?=json_encode($_SESSION['cid']);?>);
+         
         });
     });
 
@@ -808,8 +809,11 @@
         }
 
         $.post("control.php", {choice: 'UpdateVideos', videos: JSON.stringify(vids)}, function(data){
-          window.location.replace("creator-details.php?cid=" + <?=json_encode($_SESSION['cid']);?>);
+          //window.location.replace("creator-details.php?cid=" + <?=json_encode($_SESSION['cid']);?>);
+          alert(data);
+          
         });
+          return false;
     });
 
     // Manage owl carousel 
