@@ -54,12 +54,8 @@
                 if(in_array($fileType, $allowTypes)){
 
                     // Upload file to server
-                    if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-                        echo "true";
-                    }
-                    else{
-                        echo "false";
-                        die;
+                    if(!move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
+                        header('Location: signupBack.php?error=Image could not be uploaded');
                     }
                 }
 

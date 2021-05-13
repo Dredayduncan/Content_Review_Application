@@ -1,8 +1,8 @@
-<?php  
+<?php
     $servername = "localhost";  
-    $username = "root";  
-    $password = "";  
-    $dbname = "ContentCreate";
+    $username = "id16805841_admin";  
+    $password = "*(Z|l^0|rx]G%{}J";  
+    $dbname = "id16805841_contentcreate";
 
     //Establish the link to the database using mysqli_connect(server name, dbusername, dbpassword, dbname)
     $conn = mysqli_connect($servername, $username, $password, $dbname);

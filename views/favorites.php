@@ -97,7 +97,7 @@
           <li><a href="../index.php#hr">Highest Rated</a></li>
           <li><a href="../index.php#mr">Most Trending</a></li>
           <li><a href="history.php">History</a></li>
-          <li class="menu-active"><a href="favourites.php">Favourites</a></li>
+          <li class="menu-active"><a href="favorites.php">Favorites</a></li>
           <?php
             echo $info; 
           ?>
@@ -121,17 +121,16 @@
             </div>
 
             <?php
-                // Get the User History
+                // Get the User Favorites
                 $sql = "SELECT * FROM Creators
-                inner join Users
+				inner join Users
                 on Creators.email = Users.email
-                inner join Favorites
-                on Creators.creator_id = Favorites.favorite_id
                 INNER JOIN CreatorSocial 
                 on CreatorSocial.creator_id = Creators.creator_id
+                left join (SELECT * FROM Favorites WHERE email = '".$_SESSION['userEmail']."' order by time desc) as T
+                on T.favorite_id = Creators.creator_id
                 WHERE Creators.creator_id in 
-                (SELECT favorite_id FROM Favorites WHERE email = '".$_SESSION['userEmail']."')
-                order by time desc";
+                (SELECT favorite_id FROM Favorites WHERE email = '".$_SESSION['userEmail']."' order by time desc) order by T.time desc";
 
                 // execute query
                 $result = mysqli_query($conn, $sql);

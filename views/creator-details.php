@@ -5,6 +5,19 @@
   
   // Begin session
   session_start();
+  
+  $id = $_GET['cid'];
+
+  $em = "";
+  
+  if (isset($_SESSION['userEmail'])){
+    $em = $_SESSION['userEmail'];
+  }
+  
+  $cid = "";
+  if (isset($_SESSION['cid'])){
+    $cid = $_SESSION['cid'];
+  }
 
   // Get the items to display based on the role of the user 
   $editProfile = '';
@@ -12,9 +25,9 @@
   $editVideos = '';
   $menu = '';
   $info = '';
-  $rate = '<section id="rating">
+  $rate = '<section id="rating" class="'.$id.'">
 
-          <div class="container" data-aos="fade-up">
+          <div id="'.$em.'" class="container contan" data-aos="fade-up">
             <div class="section-header">
               <h2>Rate This Creator</h2>
               <p>Tell us what you think ?</p>
@@ -68,12 +81,12 @@
     }
 
     $menu = '<li><a href="history.php">History</a></li>
-            <li><a href="favorites.php">Favourites</a></li>';
+            <li><a href="favorites.php">Favorites</a></li>';
 
     if ($_SESSION['role'] == 'creator'){
       $info = '<li style="margin-top: -2%;"><a> 
       <div class="img-log-div dropdown">
-        <img src="../assets/avis/'.$_SESSION["avi"].'" alt="Profile picutre" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
+        <img id="'.$cid.'" src="../assets/avis/'.$_SESSION["avi"].'" alt="Profile picutre" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
         
       
           <ul class="dropdown-menu" style="background-color: #060c22;">
@@ -372,7 +385,7 @@
                       </div>
                       <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" form = "update" class="btn btn-primary">Save changes</button>
+                        <button id="saveChange" type="submit" form = "update" class="btn btn-primary">Save changes</button>
                       </div>
                     </div>
 
@@ -419,7 +432,7 @@
                   $i = 0;
                   while($data = mysqli_fetch_array($result)){
                     $res .= "
-                      <div class='item'><a href='".$data['content']."' class='venobox' id = ' img".$i." '><img src='".$data['content']."' alt=''></a></div>
+                      <div class='item'><a href='".$data['content']."' class='venobox' id = ' img".$i." '><img class='img-fluid' src='".$data['content']."' alt=''></a></div>
                     ";
 
                     $i++;
@@ -510,7 +523,6 @@
                     ";
                   while($data = mysqli_fetch_array($result)){
                     echo "
-                      <
                       <iframe class='embed-responsive-item col-lg-4 col-md-6' src='".$data['content']."' style='margin-bottom: 2%; height: 20vw;' 
                         title='YouTube video player' frameborder='0' 
                         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen>
@@ -771,6 +783,8 @@
     // Update the image table when save changes is clicked 
     $('.saveImage').on('click', function(){
         var images = $('.modal-body').find('.gall');
+        
+        var cid = $('.dropdown-toggle').attr('id');
 
         // create array of image links
         var imgs = [];
@@ -781,7 +795,7 @@
         }
 
         $.post("control.php", {choice: 'UpdateImages', images: JSON.stringify(imgs)}, function(data){
-          window.location.replace("creator-details.php?cid=" + <?=json_encode($_SESSION['cid']);?>);
+          window.location.replace("creator-details.php?cid=" + cid);
          
         });
     });
@@ -789,6 +803,8 @@
     // Update the video table when save changes is clicked 
     $('.saveVideo').on('click', function(){
         var videos = $('.modal-body').find('.vids');
+        
+        var cid = $('.dropdown-toggle').attr('id');
 
         // create array of image links
         var vids = [];
@@ -799,7 +815,7 @@
         }
 
         $.post("control.php", {choice: 'UpdateVideos', videos: JSON.stringify(vids)}, function(data){
-          window.location.replace("creator-details.php?cid=" + <?=json_encode($_SESSION['cid']);?>);
+          window.location.replace("creator-details.php?cid=" + cid);
         });
     });
 
@@ -813,8 +829,10 @@
 
     // Rate the creator when the stars have been clicked  
     $(".star").on("click",function(){
+        var id = $("#rating").attr('class');
+        var em = $("#rating .contan").attr('id');
   
-      $.post("control.php", {choice: 'rating', rating: $(this).val(), creatorid: <?=json_encode($_GET['cid']);?>, ratorid: <?=json_encode($_SESSION['userEmail']);?>}, function(data){
+        $.post("control.php", {choice: 'rating', rating: $(this).val(), creatorid: id, ratorid: em}, function(data){
             alert(data);
         });
     });
@@ -842,9 +860,6 @@
       else{
         $('#bio').val('');
       }
-
-      var links = $('.socials a');
-
     });
 
     // Fill the profile inputs when the edit images button has been clicked 
@@ -924,10 +939,6 @@
         $('#video0').remove();
       }
     });
-
-
-
-
     
   </script>
 
@@ -936,7 +947,7 @@
 
   <!-- Update the avi -->
   <script>
-		function pictureInput(event){
+	function pictureInput(event){
       var input = document.getElementById('picture');
 
       var reader = new FileReader();

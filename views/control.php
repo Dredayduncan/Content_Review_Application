@@ -49,8 +49,6 @@
                 die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
             }
 
-            echo "";
-
             // Increase the number of clicks of the creator
             $query = "UPDATE Creators 
             SET numClicks = (SELECT numClicks From Creators WHERE creator_id = ".$history_id.") + 1 
@@ -59,9 +57,14 @@
             // execute query
             $res = mysqli_query($conn, $query);
 
-            if (!$res){
+            if ($res){
+                return true;
+                
+            }
+            else{
                 die("ERROR: Could not able to execute $res. " . mysqli_error($conn));
             }
+
 
             break;
         case 'fav_delete':

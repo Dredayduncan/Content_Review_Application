@@ -98,7 +98,7 @@
           <li><a href="../index.php#hr">Highest Rated</a></li>
           <li><a href="../index.php#mr">Most Trending</a></li>
           <li class="menu-active"><a href="history.php">History</a></li>
-          <li><a href="favorites.php">Favourites</a></li>
+          <li><a href="favorites.php">Favorites</a></li>
           <?php
             echo $info; 
           ?>
@@ -127,13 +127,12 @@
 				$sql = "SELECT * FROM Creators
 				inner join Users
                 on Creators.email = Users.email
-                inner join SearchHistory
-                on Creators.creator_id = SearchHistory.history_id
                 INNER JOIN CreatorSocial 
                 on CreatorSocial.creator_id = Creators.creator_id
+                left join (SELECT * FROM SearchHistory WHERE email = '".$_SESSION['userEmail']."' order by time desc) as T
+                on T.history_id = Creators.creator_id
                 WHERE Creators.creator_id in 
-                (SELECT history_id FROM SearchHistory WHERE email = '".$_SESSION['userEmail']."')
-                order by time desc";
+                (SELECT history_id FROM SearchHistory WHERE email = '".$_SESSION['userEmail']."' order by time desc) order by T.time desc";
 
 				// execute query
 				$result = mysqli_query($conn, $sql);

@@ -53,6 +53,8 @@
             }
             
         }
+         //Reroute to main page
+        header("Location: ../index.php");
         
        
     }

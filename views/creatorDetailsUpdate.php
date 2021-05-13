@@ -49,43 +49,19 @@
         $pw2 = NULL;
 
     // Check for the avi input  
-    if(isset($_FILES["file"]["name"])){
-        //Get Image Upload path
-        $targetDir = "../assets/avis/";
-        $fileName = basename($_FILES["file"]["name"]);
-        $targetFilePath = $targetDir . $fileName;
-
-        //Get file type
-        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-
-        //Check if file is an image and upload it to the server
-        $allowTypes = array('jpg', 'JPG', 'png','jpeg','JPEG', 'PNG');
-
-        if(in_array($fileType, $allowTypes)){
-
-            // Upload file to server
-            if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-                //echo "true";
-                $innerjoin = "UPDATE Creators 
-                        INNER JOIN Content on Creators.creator_id = Content.creator_id 
-                        INNER JOIN Users on Users.email = Creators.email
-                        SET Creators.bio = '".$bio."', Creators.contentType = '".$content."', Creators.avi = '$fileName', fname = '$fname', lname = '$lname'
-                        WHERE Creators.creator_id = $creatorid ";
-
-                if(!mysqli_query($conn, $innerjoin)){
-                    die("ERROR: Could not able to execute $innerjoin " . mysqli_error($conn));
-                }
-                else{
-                    $_SESSION['avi'] = $fileName;
-                }
-                    
-            }
-            else{
-                echo "false";
-                die;
-            }
+    if(isset($_POST['creatorfname']) || isset($_POST['creatorlname'])){
+        
+        $innerjoin = "UPDATE Creators 
+                            INNER JOIN Content on Creators.creator_id = Content.creator_id 
+                            INNER JOIN Users on Users.email = Creators.email
+                            SET Creators.bio = '".$bio."', Creators.contentType = '".$content."', fname = '$fname', lname = '$lname'
+                            WHERE Creators.creator_id = $creatorid ";
+    
+        if(!mysqli_query($conn, $innerjoin)){
+            die("ERROR: Could not able to execute $innerjoin " . mysqli_error($conn));
         }
-
+        
+        // Update Socials
         $socials = "UPDATE CreatorSocial
                     SET PWebsite1 = '".$pw1."', PWebsite2 = '".$pw2."', LinkedIn = '".$linkedin."',Facebook = '".$fb."',Youtube = '".$yt."',Twitch = '".$twitch."' ,Twitter = '".$twitter."'
                     WHERE creator_id = $creatorid ";
@@ -93,9 +69,45 @@
         if(!mysqli_query($conn, $socials)){
             die("ERROR: Could not able to execute $socials. " . mysqli_error($conn));
         }
+        
+        if (isset($_FILES["file"]["name"])){
+            //Get Image Upload path
+            $targetDir = "../assets/avis/";
+            $fileName = basename($_FILES["file"]["name"]);
+            $targetFilePath = $targetDir . $fileName;
+    
+            //Get file type
+            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+    
+            //Check if file is an image and upload it to the server
+            $allowTypes = array('jpg', 'JPG', 'png','jpeg','JPEG', 'PNG');
+    
+            if(in_array($fileType, $allowTypes)){
+    
+                // Upload file to server
+                if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
+                    //echo "true";
+                    $join = "UPDATE Creators SET avi = '$fileName'
+                            WHERE creator_id = $creatorid ";
+    
+                    if(mysqli_query($conn, $join)){
+                        $_SESSION['avi'] = $fileName;
+                        header("Location: creator-details.php?cid=".$_SESSION['cid']);
+                        
+                    }
+                    else{
+                        die("ERROR: Could not able to execute $join " . mysqli_error($conn));
+                    }
+                        
+                }
+            }
+        
+        }
         else{
             header("Location: creator-details.php?cid=".$_SESSION['cid']);
         }
+        
+        header("Location: creator-details.php?cid=".$_SESSION['cid']);
     }
     else{
         header("Location: creator-details.php?error=Update Failed&cid=".$_SESSION['cid']);

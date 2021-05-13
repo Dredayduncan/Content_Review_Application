@@ -8,6 +8,18 @@
     session_destroy();
     header('Location: index.php');
   }
+  
+  $id = '';
+  
+  if (isset($_SESSION['cid'])){
+    $id = $_SESSION['cid'];
+  }
+
+  $em = "";
+  
+  if (isset($_SESSION['userEmail'])){
+    $em = $_SESSION['userEmail'];
+  }
 
   $menu = '';
   $fav = '';
@@ -23,15 +35,15 @@
               </a>';
 
     $menu = '<li><a href="views/history.php">History</a></li>
-    <li><a href="views/favorites.php">Favourites</a></li>';
+    <li><a href="views/favorites.php">Favorites</a></li>';
 
     if ($_SESSION['role'] == 'creator'){
       $info = '<li style="margin-top: -2%;"><a> 
                   <div class="img-log-div">
-                    <img src="assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
+                    <img id="'.$id.'" src="assets/avis/'.$_SESSION["avi"].'" alt="Speaker 1" class="img-fluid img-log dropdown-toggle" data-bs-toggle="dropdown">
                     
                   
-                      <ul class="dropdown-menu" style="background-color: #060c22;">
+                      <ul id="'.$em.'" class="dropdown-menu" style="background-color: #060c22;">
 
                       <form action="views/creator-details.php?cid='.$_SESSION["cid"].'" method="post">
                         <button type="submit" class="list-group-item btn btn-outline-success ml-4 mb-2 pt-1 pl-1 pr-1 pb-1">View Profile</button>
@@ -48,7 +60,7 @@
     }
     elseif($_SESSION['role'] == 'user'){
       $info = '<li>
-                <button type="button" class="btn btn-link dropdown-toggle" data-bs-toggle="dropdown">
+                <button id="'.$id.'" type="button" class="btn btn-link dropdown-toggle" data-bs-toggle="dropdown">
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" 
                     fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -58,7 +70,7 @@
                   </svg>
                 </button>
 
-                <ul class="dropdown-menu" style="background-color: #060c22;">
+                <ul id="'.$em.'" class="dropdown-menu" style="background-color: #060c22;">
                 <form action="index.php?logout=yes" method="post">
                   <button type="submit" class="list-group-item btn btn-outline-success ml-5 pt-1 pl-1 pr-1 pb-1">Sign Out</button>
                 </form>
@@ -187,7 +199,8 @@
                       INNER JOIN CreatorSocial on CreatorSocial.creator_id = Creators.creator_id
                       INNER JOIN Rating on Rating.creator_id = Creators.creator_id
                       WHERE Rating.time > now() - INTERVAL 7 day
-                      ORDER BY Creators.rating LIMIT 6";
+                      GROUP BY Creators.creator_id
+                      ORDER BY Creators.rating desc LIMIT 6";
 
             // execute query
 				    $result = mysqli_query($conn, $query);
@@ -208,7 +221,7 @@
                       <h3><a class="select" href="views/creator-details.php?cid='.$data['creator_id'].'">'.$data["fname"]. " ". $data["lname"].'</a></h3>
                       <p>'.$data['contentType'].'</p>
                       <p class="code" hidden>'.$data['creator_id'].'</p>
-                      '. socials($data['Twitch'], $data['Facebook'], $data['Youtube'], $data['Twitter'], $data['LinkedIn'], $data['PWebsite1'], $data['PWebsite2']).'
+                      '. socials($data["Twitch"], $data["Facebook"], $data["Youtube"], $data["Twitter"], $data["LinkedIn"], $data["PWebsite1"], $data["PWebsite2"]).'
                     </div>
                   </div>
                 </div>';
@@ -244,7 +257,7 @@
                       ORDER BY numClicks desc LIMIT 6";
 
             // execute query
-				    $result = mysqli_query($conn, $query);
+			$result = mysqli_query($conn, $query);
 
             // Check if the query is executed and perform the necessary actions
             if(!$result){
@@ -257,12 +270,12 @@
 
                   echo '<div class="col-lg-4 col-md-6 mb-2">
                   <div class="speaker" data-aos="fade-up" data-aos-delay="200">
-                    <a href="views/creator-details.php?cid='.$data['creator_id'].'"><img src="assets/avis/'.$data['avi'].'" alt="Creator" class="img-fluid select"></a>
+                    <a href="views/creator-details.php?cid='.$data["creator_id"].'"><img src="assets/avis/'.$data["avi"].'" alt="Creator" class="img-fluid select"></a>
                     <div class="details">
                       <h3><a class="select" href="views/creator-details.php?cid='.$data['creator_id'].'">'.$data["fname"]. " ". $data["lname"].'</a></h3>
-                      <p>'.$data['contentType'].'</p>
-                      <p class="code" hidden>'.$data['creator_id'].'</p>
-                      '. socials($data['Twitch'], $data['Facebook'], $data['Youtube'], $data['Twitter'], $data['LinkedIn'], $data['PWebsite1'], $data['PWebsite2']).'
+                      <p>'.$data["contentType"].'</p>
+                      <p class="code" hidden>'.$data["creator_id"].'</p>
+                      '. socials($data["Twitch"], $data["Facebook"], $data["Youtube"], $data["Twitter"], $data["LinkedIn"], $data["PWebsite1"], $data["PWebsite2"]).'
                     </div>
                   </div>
                 </div>';
@@ -299,30 +312,36 @@
     // Add item to favorites when favorites button has been clicked
     $(".speaker .fav").on('click', function(){
 		var creator = $(this).parent().prev().html();
-		
-    if (creator !== <?=json_encode($_SESSION['cid']);?>){
-        $.post("views/control.php", {choice: 'favorite', email: <?=json_encode($_SESSION['userEmail']);?>,
-          creatorid: creator}, function(data){
-          alert(data);
-      });
-    }
+        var id = $(".dropdown-toggle").attr('id');
+        var em = $(".dropdown-toggle").next().attr('id');
+       
+        if (creator !== id){
+            $.post("views/control.php", {choice: 'favorite', email: em,
+              creatorid: creator}, function(data){
+              alert(data);
+          });
+        }
 		
 	});
 
 	// Add to history
 	$( ".select" ).click(function( event ) {
-    var creator = $(this).parent().parent().find(".code").html();
-   
-    if ($(this).is('img')){
-      creator =  $(this).parent().next().find(".code").html();
-    }
-
-    if (creator !== <?=json_encode($_SESSION['cid']);?>){
-      $.post("views/control.php", {choice: 'history',  email: <?=json_encode($_SESSION['userEmail']);?>, 
-        creatorid: creator}, function(data){
-          window.location.replace("views/creator-details.php?cid=" + creator);
-      });
-    }
+        var creator = $(this).parent().parent().find(".code").html();
+        var id = $(".dropdown-toggle").attr('id');
+        var em = $(".dropdown-toggle").next().attr('id');
+       
+        if ($(this).is('img')){
+          creator =  $(this).parent().next().find(".code").html();
+        }
+    
+        if (creator !== id){
+          $.post("views/control.php", {choice: 'history',  email: em, 
+            creatorid: creator}, function(data){
+                alert(data);
+                window.location.replace("views/creator-details.php?cid=" + creator);
+          });
+         
+        }
   });
 
   $('#searchButton').on("click", function(){
